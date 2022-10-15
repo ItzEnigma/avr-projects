@@ -16,6 +16,7 @@
  *********************************************************************************************************************/
 
 #include "Dio_Types.h"
+#include "../MCU/Mcu_Hw.h"
 
 /**********************************************************************************************************************
  *  GLOBAL CONSTANT MACROS
@@ -35,7 +36,7 @@
 /**********************************************************************************************************************
  *  GLOBAL DATA PROTOTYPES
  *********************************************************************************************************************/
-extern const Port_strConfig Port_strPortConfig;
+PUBLIC const Port_strConfig Port_strPortConfig;
 
  
 /**********************************************************************************************************************
@@ -54,7 +55,7 @@ extern const Port_strConfig Port_strPortConfig;
 * Parameters (out): None                                                      
 * Return value:   : None                                
 *******************************************************************************/
-void               DIO_Init(const Port_strConfig* strConfigPtr);
+void PUBLIC               DIO_Init(const Port_strConfig* strConfigPtr);
 /**********************************************************************************************************************/
 
 
@@ -69,7 +70,7 @@ void               DIO_Init(const Port_strConfig* strConfigPtr);
 * Return value:   : DIO_PinLevel enum  0
 *                                       1
 ************************************************************************************/
-DIO_PinLevel_e      DIO_ReadChannel  ( DIO_Portx_e port, Port_Pinx_e channel );
+DIO_PinLevel_e PUBLIC      DIO_ReadChannel  ( DIO_Portx_e port, Port_Pinx_e channel );
 /**********************************************************************************************************************/
 
 /***********************************************************************************
@@ -82,7 +83,7 @@ DIO_PinLevel_e      DIO_ReadChannel  ( DIO_Portx_e port, Port_Pinx_e channel );
 * Parameters (out): None                                                      
 * Return value:   : None
 ************************************************************************************/
-void                DIO_WriteChannel ( DIO_Portx_e port, Port_Pinx_e channel, DIO_PinLevel_e level );
+void PUBLIC                DIO_WriteChannel ( DIO_Portx_e port, Port_Pinx_e channel, DIO_PinLevel_e level );
 /**********************************************************************************************************************/
 
 /***********************************************************************************
@@ -93,7 +94,7 @@ void                DIO_WriteChannel ( DIO_Portx_e port, Port_Pinx_e channel, DI
 * Parameters (out): None                                                      
 * Return value:   : None
 ************************************************************************************/
-void                DIO_ToggleChannel( DIO_Portx_e port, Port_Pinx_e channel );
+void PUBLIC                DIO_ToggleChannel( DIO_Portx_e port, Port_Pinx_e channel );
 /**********************************************************************************************************************/
 
 
@@ -107,7 +108,7 @@ void                DIO_ToggleChannel( DIO_Portx_e port, Port_Pinx_e channel );
 * Parameters (out): None                                                      
 * Return value:   : u08 ===> 0 : 255
 ************************************************************************************/
-void       Dio_ReadPort     ( DIO_Portx_e port, uint8_t *value);
+void PUBLIC       Dio_ReadPort     ( DIO_Portx_e port, uint8_t *value);
 /**********************************************************************************************************************/
 
 /***********************************************************************************
@@ -119,7 +120,7 @@ void       Dio_ReadPort     ( DIO_Portx_e port, uint8_t *value);
 * Parameters (out): None                                                      
 * Return value:   : None
 ************************************************************************************/
-void                DIO_WritePort    ( DIO_Portx_e port, DIO_PortLevel value );
+void PUBLIC                DIO_WritePort    ( DIO_Portx_e port, DIO_PortLevel value );
 /**********************************************************************************************************************/
 
 #endif  /* DIO_H */

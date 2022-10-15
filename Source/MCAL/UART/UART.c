@@ -54,16 +54,16 @@ void UART_Init  ( void )
 
 	/*            UART TX/RX Configuration              */
     #if UART_TRANSMITTER_ENANBLE == DISABLE
-        CLEAR_BIT(UCSRB->REG, 3);
+        UCSRB->N.b3 = 0;
     #elif   UART_TRANSMITTER_ENANBLE == ENABLE
-        SET_BIT(UCSRB->REG, 3);
+        UCSRB->N.b3 = 1;
     #else
         #error "Undefinied Transmitter State"
     #endif
     #if UART_RECEIVER_ENANBLE    == DISABLE
-        CLEAR_BIT(UCSRB->REG, 4);
+        UCSRB->N.b4 = 0;
     #elif   UART_RECEIVER_ENANBLE    == ENABLE
-        SET_BIT(UCSRB->REG, 4);
+        UCSRB->N.b4 = 1;
     #else
         #error "Undefinied Receiever State"
     #endif
@@ -72,23 +72,23 @@ void UART_Init  ( void )
 
 	/*          UART Interrupts Configuration            */
     #if UART_TX_INTERRUPT_ENABLE == DISABLE
-        CLEAR_BIT(UCSRB->REG, 6);
+        UCSRB->N.b6 = 0;
     #elif   UART_TX_INTERRUPT_ENABLE == ENABLE
-        SET_BIT(UCSRB->REG, 6);
+        UCSRB->N.b6 = 1;
     #else
         #error "Undefinied TX Interrupt State"
     #endif
     #if UART_RX_INTERRUPT_ENABLE == DISABLE
-        CLEAR_BIT(UCSRB->REG, 7);
+        UCSRB->N.b7 = 0;
     #elif   UART_RX_INTERRUPT_ENABLE == ENABLE
-        SET_BIT(UCSRB->REG, 7);
+        UCSRB->N.b7 = 1;
     #else
         #error "Undefinied RX Interrupt State"
     #endif
     #if UART_DATA_REGISTER_EMPTY_INTERRUPT_ENABLE == DISABLE
-        CLEAR_BIT(UCSRB->REG, 5);
+        UCSRB->N.b5 = 0;
     #elif   UART_DATA_REGISTER_EMPTY_INTERRUPT_ENABLE == ENABLE
-        SET_BIT(UCSRB->REG, 5);
+        UCSRB->N.b5 = 1;
     #else
         #error "Undefinied Data Register Empty Interrupt State"
     #endif
@@ -97,11 +97,11 @@ void UART_Init  ( void )
 
 	/*****          UART Frame Character Size Configuration           *****/
     /*The URSEL must be one when writing the UCSRC.*/
-	UCSRC->REG = 0x80;      /* Clear the UCSRC register */
-	UCSRC->REG |= (1 << 7);
+	UCSRC->REG	 = 0x80;      /* Clear the UCSRC register */
+	UCSRC->REG	|= (1 << 7);
     /*  5-bit : 8-bit Config    */
     /******** TO BE MODIFIED FOR 9-BITS **********/
-    UCSRC->REG = (FRAME_CHAR_SIZE << 1);
+    UCSRC->REG	|= (FRAME_CHAR_SIZE << 1);
     /**********************************************/
 
 
@@ -115,7 +115,7 @@ void UART_Init  ( void )
     #endif
     /**********************************************/
     /*          UART Parity Mode            */
-    UCSRC->REG = (PARITY_MODE << 4);
+    UCSRC->REG |= (PARITY_MODE << 4);
     /**********************************************/
     /*          UART Stop Bits           */
     #if FRAME_TWO_STOP_BITS == 0    /* 1-Bit */
@@ -130,7 +130,7 @@ void UART_Init  ( void )
     /**********************************************/
     /******          BAUD RATE           ******/
     CLEAR_BIT(UCSRC->REG, 7);
-    UCSRC->REG = (0 << 7) | (BAUD_RATE >> 8);
+    UBRRH->REG = (BAUD_RATE >> 8);
     UBRRL      = (u08) BAUD_RATE; 
 }
 
@@ -158,8 +158,9 @@ void UART_TransmitByte(u08 data)
 *******************************************************************************/
 void UART_ReceiveByte(u08 *data)
 {
+	*data = 0;
     while ( !(UCSRA->REG & (1<<7)) ); 
-	*data = UDR;
+	*data = (u08)UDR;
 }
 
 /**********************************************************************************************************************

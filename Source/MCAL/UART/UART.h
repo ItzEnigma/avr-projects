@@ -61,8 +61,8 @@ void UART_Init  ( void );
 * \Parameters (out): None                                                      
 * \Return value:   : None                                
 *******************************************************************************/
-void UART_TransmitByte(u08 data);
-/*******************************************************************************
+void PUBLIC  UART_TransmitByte(u08 data);
+/*******************************************************************************/
 
 /******************************************************************************
 * \Syntax          : void UART_ReceiveByte(u08 data)        
@@ -72,7 +72,7 @@ void UART_TransmitByte(u08 data);
 * \Parameters (out): None                                                      
 * \Return value:   : None                                
 *******************************************************************************/
-void UART_ReceiveByte(u08 *data);
+void PUBLIC  UART_ReceiveByte(u08 *data);
 /*******************************************************************************/
  
 #endif  /* UART_H */
