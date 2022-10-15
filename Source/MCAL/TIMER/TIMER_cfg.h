@@ -10,7 +10,7 @@
 /****************************************************/
 /*********************  TIMER0 **********************/
 /****************************************************/
-#define TIMER0_RESOLUTION 256
+#define TIMER0_RESOLUTION 255
 /*
     PRESCALER OPTIONS:
 
@@ -34,7 +34,7 @@
     WAVE_GENERATION_MODE_CTC
     WAVE_GENERATION_MODE_PWM_FAST
 */
-#define TIMER0_WAVE_GENERATION_MODE WAVE_GENERATION_MODE_CTC
+#define TIMER0_WAVE_GENERATION_MODE WAVE_GENERATION_MODE_PWM_FAST
 
 /*
     OCR_PIN_MODE :
@@ -45,12 +45,12 @@
     SET_COMPARE_MODE_INVERTING
  */
 
-#define TIMER0_OCR_PIN_MODE NORMAL_COMPARE_MODE
+#define TIMER0_OCR_PIN_MODE SET_COMPARE_MODE_INVERTING
 
 /****************************************************/
 /*********************  TIMER2 **********************/
 /****************************************************/
-#define TIMER2_RESOLUTION 256
+#define TIMER2_RESOLUTION 255
 /*
     PRESCALER OPTIONS:
 
@@ -63,8 +63,8 @@
     TIMER2_CLOCK_SOURCE_PRESSCALE_256
     TIMER2_CLOCK_SOURCE_PRESSCALE_1024
  */
-#define TIMER2_PRESCALE_MODE TIMER2_CLOCK_SOURCE_PRESSCALE_8
-#define TIMER2_PRESCALE_VALUE 8
+#define TIMER2_PRESCALE_MODE TIMER2_CLOCK_SOURCE_PRESSCALE_256
+#define TIMER2_PRESCALE_VALUE 256
 /*
     WAVE GENERATION OPTIONS :
 
