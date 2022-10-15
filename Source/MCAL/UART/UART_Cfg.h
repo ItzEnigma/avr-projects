@@ -1,71 +1,81 @@
-/**********************************************************************************************************************
-
- *  FILE DESCRIPTION
- *  -------------------------------------------------------------------------------------------------------------------
- *         File:  UART_Cfg.h
- *       Module:  -
+/*
+ * UART_cfg.h
  *
- *  Description:  <Write File DESCRIPTION here>     
- *  
- *********************************************************************************************************************/
-#ifndef UART_CFG_H
-#define UART_CFG_H
+ *  Created on: Sep 21, 2022
+ *      Author: Dell
+ */
 
-/**********************************************************************************************************************
- * INCLUDES
- *********************************************************************************************************************/
+#ifndef MCAL_UART_UART_CFG_H_
+#define MCAL_UART_UART_CFG_H_
 
-#include "../../COMMON/Std_Types.h"
-#include "UART_Types.h"
+/* BAUD RATE */
+#define BAUD_RATE 9600
+#define FCPU 8000000
+#define BAUD_RATE_PRESCALE ((FCPU * 1.0 / (16 * BAUD_RATE)) - 1)
 
-/**********************************************************************************************************************
- *  GLOBAL CONSTANT MACROS
- *********************************************************************************************************************/
+/*
+    EQU:
+    UBBR =  ((FCPU * 1.0 / (16 * BAUD_RATE)) - 1)
+    ---------------------------------------------
+    Baud RATE Options for 8MHZ
+    --------------------------
+    BAUD RATE |   UBBR
+    2400      |   207
+    4800      |   103
+    9600      |   51
+    14.4k     |   34
+    19.2k     |   25
+    28.8k     |   16
+    38.4k     |   12
+    57.6k     |   8
+    76.8k     |   6
+    115.2k    |   3
+    230.4k    |   1
+    0.5M      |   0
+ */
 
+#define UBBR_VALUE 51
+/*
+    Parity Options :
 
-/**********************************************************************************************************************
- *  GLOBAL FUNCTION MACROS
- *********************************************************************************************************************/
+    DISABLED
+    ENABLED_EVEN_PARITY
+    ENABLED_ODD_PARITY
+ */
+#define PARITY_MODE DISABLED
 
+/*
+    Stop Bit Options:
 
-/**********************************************************************************************************************
- *  Configuration
- *********************************************************************************************************************/
+    ONE_BIT
+    TWO_BIT
+ */
+#define STOP_BIT_MODE ONE_BIT
 
-#define     DOUBLE_TRANSMISSION_SPEED       DISABLE
-#define     MULTIPROC_COMMUNICATION_MODE    DISABLE
+/*
+    Data Format Options :
 
-#define     UART_TX_INTERRUPT_ENABLE        DISABLE
-#define     UART_RX_INTERRUPT_ENABLE        DISABLE
-#define     UART_DATA_REGISTER_EMPTY_INTERRUPT_ENABLE        DISABLE
-#define     UART_RECEIVER_ENANBLE           ENABLE
-#define     UART_TRANSMITTER_ENANBLE           ENABLE
+    CHAR_5_BIT_UCSRC
+    CHAR_6_BIT_UCSRC
+    CHAR_7_BIT_UCSRC
+    CHAR_8_BIT_UCSRC
+    CHAR_9_BIT_UCSRC
 
-/*  Selects the UART Character Size for TX/RX
- *   FRAME_5BIT
- *   FRAME_6BIT
- *   FRAME_7BIT
- *   FRAME_8BIT
- *   FRAME_9BIT       */
-#define     FRAME_CHAR_SIZE                                 FRAME_8BIT
+    CHAR_5_BIT_UCSRB
+    CHAR_6_BIT_UCSRB
+    CHAR_7_BIT_UCSRB
+    CHAR_8_BIT_UCSRB
+    CHAR_9_BIT_UCSRB
+ */
+#define DATA_FORMAT_UCSRB CHAR_8_BIT_UCSRB
+#define DATA_FORMAT_UCSRC CHAR_8_BIT_UCSRC
 
-#define     SYNCHRONOUS_MODE_SELECT                         0
+/* Async Sync MODE */
+/*
+    Optiosn:
 
-/*  Selects the UART Parity Mode for TX/RX
- *   PARITY_DISABLED
- *   PARITY_EVEN
- *   PARITY_ODD       */
-#define     PARITY_MODE                                     PARITY_DISABLED
-
-#define     FRAME_TWO_STOP_BITS                             0
-
-
-
-
-
-
-#endif  /* UART_CFG_H */
-
-/**********************************************************************************************************************
- *  END OF FILE: UART_Cfg.h
- *********************************************************************************************************************/
+    ASYNC
+    SYNC
+ */
+#define ASYNC_SYNC_MODE ASYNC
+#endif /* MCAL_UART_UART_CFG_H_ */
