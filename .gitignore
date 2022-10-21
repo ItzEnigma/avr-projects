@@ -7,3 +7,5 @@ AVR-COTS-Application.componentinfo.xml
 Debug
 Backup Of Simulation.pdsbak
 Last Loaded Simulation.pdsbak
+obj
+*.workspace
