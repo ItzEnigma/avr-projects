@@ -138,7 +138,7 @@ namespace CI_lab2
             // 
             // bar_fanSpeed
             // 
-            this.bar_fanSpeed.Location = new System.Drawing.Point(455, 343);
+            this.bar_fanSpeed.Location = new System.Drawing.Point(448, 381);
             this.bar_fanSpeed.Maximum = 9;
             this.bar_fanSpeed.Name = "bar_fanSpeed";
             this.bar_fanSpeed.Size = new System.Drawing.Size(220, 56);
@@ -149,7 +149,7 @@ namespace CI_lab2
             // 
             this.lbl_temp.AutoSize = true;
             this.lbl_temp.Font = new System.Drawing.Font("Montserrat", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_temp.Location = new System.Drawing.Point(521, 308);
+            this.lbl_temp.Location = new System.Drawing.Point(514, 346);
             this.lbl_temp.Name = "lbl_temp";
             this.lbl_temp.Size = new System.Drawing.Size(105, 24);
             this.lbl_temp.TabIndex = 11;
@@ -191,7 +191,7 @@ namespace CI_lab2
             this.txtBox_rTemp.Multiline = true;
             this.txtBox_rTemp.Name = "txtBox_rTemp";
             this.txtBox_rTemp.ReadOnly = true;
-            this.txtBox_rTemp.Size = new System.Drawing.Size(199, 75);
+            this.txtBox_rTemp.Size = new System.Drawing.Size(199, 115);
             this.txtBox_rTemp.TabIndex = 15;
             // 
             // lbl_read

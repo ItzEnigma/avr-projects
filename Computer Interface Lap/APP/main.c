@@ -6,6 +6,7 @@
  */ 
 
 #include "./LAB2/lab2_int.h"
+#include <avr/delay.h>
 
 
 int main(void)
@@ -14,6 +15,7 @@ int main(void)
     while (1) 
     {
 		lab2_vloop();
+		_delay_ms(500);
     }
 }
 

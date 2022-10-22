@@ -20,6 +20,7 @@ namespace CI_lab2
 
         private const int BAUD_RATE = 9600;
         private const int DATA_BITS = 8;
+        
         private const String STATUS_CONNECTED = "Connected";
         private const String STATUS_DISCONNECTED = "Disconnected";
         private const char LED_ON = '#';
@@ -31,6 +32,8 @@ namespace CI_lab2
         {
             InitializeComponent();
             lbl_status.ForeColor = Color.Red;
+            txtBox_rTemp.ScrollBars = ScrollBars.Vertical;
+
             /* bar_fanSpeed */
             bar_fanSpeed.Maximum = MAX_TEMP;
             bar_fanSpeed.TickFrequency = TICK_FREQ;
@@ -61,6 +64,7 @@ namespace CI_lab2
             serialPort.StopBits = StopBits.One;
             serialPort.BaudRate = BAUD_RATE;
             serialPort.DataBits = DATA_BITS;
+            /* serialPort.Parity = Parity.Even; */
         }
 
         private void connectPort()
@@ -169,9 +173,15 @@ namespace CI_lab2
                 start_Receive = false;
                 string current_time = DateTime.Now.ToString("hh:mm tt") + " : ";
                 /***** Invoking inside a handler thread *****/
-                txtBox_rTemp.Invoke((Action)(() => txtBox_rTemp.Text += current_time + data_rx + Environment.NewLine));
+                txtBox_rTemp.Invoke((Action)(() =>
+                {
+                    txtBox_rTemp.Text += current_time + data_rx + Environment.NewLine;
+                    txtBox_rTemp.SelectionStart = txtBox_rTemp.Text.Length;
+                    txtBox_rTemp.ScrollToCaret();
+                }));
                 current_time = "";
                 data_rx = "";
+
             }
             else
             {
