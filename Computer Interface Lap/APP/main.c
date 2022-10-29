@@ -5,17 +5,18 @@
  * Author : john
  */ 
 
-#include "./LAB2/lab2_int.h"
+#include <avr/io.h>
+#define F_CPU 8000000UL
 #include <avr/delay.h>
+#include "LAB3/LAB3_int.h"
 
 
 int main(void)
 {
-    lab2_vSetup();
+    LAB3_vInit();
     while (1) 
     {
-		lab2_vloop();
-		_delay_ms(500);
+		LAB3_vUpdate();
     }
 }
 
