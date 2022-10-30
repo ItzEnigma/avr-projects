@@ -1,0 +1,161 @@
+body,
+* {
+  margin: 0;
+  padding: 0;
+}
+body {
+  background-color: #2f3640;
+}
+.connect-section {
+  width: 100%;
+  padding: 20px;
+  margin-top: 30px;
+}
+h1 {
+  font-size: 25px;
+  padding-bottom: 10px;
+}
+.connect-section .content {
+  width: 50%;
+  margin: 0 auto;
+  background-color: #dcdde1;
+  padding: 40px;
+  border-radius: 10px;
+  border: 4px solid #dcdde1;
+}
+.connect-section .active {
+  width: 50%;
+  margin: 0 auto;
+  background-color: #dcdde1;
+  padding: 40px;
+  border-radius: 10px;
+  border: 4px solid #44bd32;
+}
+.connect-section .deactive {
+  width: 50%;
+  margin: 0 auto;
+  background-color: #dcdde1;
+  padding: 40px;
+  border-radius: 10px;
+  border: 4px solid #c23616;
+}
+.connect-section .content .actions {
+  margin-top: 20px;
+}
+
+.connect-section .content .actions button {
+  margin-top: 20px;
+  font-weight: 500;
+}
+
+/* ************************* */
+.send-section {
+  width: 100%;
+  padding: 20px;
+  margin-top: 20px;
+}
+.send-section .content {
+  width: 50%;
+  margin: 0 auto;
+  background-color: #dcdde1;
+  padding: 40px;
+  border-radius: 10px;
+  border: 3px solid #dcdde1;
+}
+.send-section .content .actions {
+  margin-top: 20px;
+}
+
+.send-section .content .actions button {
+  margin-top: 20px;
+  font-weight: 500;
+}
+/* ************************* */
+.read-section {
+  width: 100%;
+  padding: 20px;
+  margin-top: 20px;
+}
+.read-section .content {
+  width: 50%;
+  margin: 0 auto;
+  background-color: #dcdde1;
+  padding: 40px;
+  border-radius: 10px;
+  border: 3px solid #dcdde1;
+}
+.read-section .content p {
+  margin-top: 10px;
+  background-color: #1e272e;
+  padding: 5px;
+  color: white;
+  border-radius: 10px;
+  height: 200px;
+}
+.read-section .content .actions {
+  margin-top: 20px;
+}
+
+.read-section .content .actions button {
+  margin-top: 20px;
+  font-weight: 500;
+}
+
+/* ************************* */
+.write-section {
+  width: 100%;
+  padding: 20px;
+  margin-top: 20px;
+}
+.write-section .content {
+  width: 50%;
+  margin: 0 auto;
+  background-color: #dcdde1;
+  padding: 40px;
+  border-radius: 10px;
+  border: 3px solid #dcdde1;
+}
+.write-section .inputs {
+  display: flex;
+  justify-content: space-between;
+}
+.write-section .inputs input {
+  width: 48%;
+}
+.write-section .content .actions {
+  margin-top: 20px;
+}
+
+.write-section .content .actions button {
+  margin-top: 20px;
+  font-weight: 500;
+}
+/* ************************* */
+.flash-section {
+  width: 100%;
+  padding: 20px;
+  margin-top: 20px;
+}
+.flash-section .content {
+  width: 50%;
+  margin: 0 auto;
+  background-color: #dcdde1;
+  padding: 40px;
+  border-radius: 10px;
+  border: 3px solid #dcdde1;
+}
+.flash-section .inputs {
+  display: flex;
+  justify-content: space-between;
+}
+.flash-section .inputs input {
+  width: 48%;
+}
+.flash-section .content .actions {
+  margin-top: 20px;
+}
+
+.flash-section .content .actions button {
+  margin-top: 20px;
+  font-weight: 500;
+}
