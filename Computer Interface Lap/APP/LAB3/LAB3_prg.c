@@ -52,6 +52,8 @@ static void EEPROM_write(u16 uiAddress, u8 ucData)
 void LAB3_vUpdate(){
 	u16 L_u16Address = 0;
 	u8 L_u08Data = 0;
+	u8 L_u08FirstChar = 0;
+	u8 L_u08SecondChar = 0;
 	/*check if a command is received*/
 	if(!G_u8IsBufferReady){
 		
@@ -76,7 +78,31 @@ void LAB3_vUpdate(){
 			if		(G_u8Buffer[R_W_INDEX] == READ_OP)
 			{
 				L_u08Data = _MEM(L_u16Address);
-				UART_vSendData(L_u08Data);
+				L_u08FirstChar = L_u08Data & 0x0F;
+				L_u08SecondChar = (L_u08Data & 0xF0) >> 4;
+				switch(L_u08FirstChar){			/* Parsing the higher ASCII values for first char */
+					case 10: L_u08FirstChar = 'A'; break;
+					case 11: L_u08FirstChar = 'B'; break;
+					case 12: L_u08FirstChar = 'C'; break;
+					case 13: L_u08FirstChar = 'D'; break;
+					case 14: L_u08FirstChar = 'E'; break;
+					case 15: L_u08FirstChar = 'F'; break;
+					default: L_u08FirstChar += '0'; break;
+				}
+				switch(L_u08SecondChar){		/* Parsing the higher ASCII values for second char */
+					case 10: L_u08SecondChar = 'A'; break;
+					case 11: L_u08SecondChar = 'B'; break;
+					case 12: L_u08SecondChar = 'C'; break;
+					case 13: L_u08SecondChar = 'D'; break;
+					case 14: L_u08SecondChar = 'E'; break;
+					case 15: L_u08SecondChar = 'F'; break;
+					default: L_u08SecondChar += '0'; break;
+				}
+			/* Resetting Buffer in Back-end */
+				UART_vSendData('-');
+				UART_vSendData('+');
+				UART_vSendData(L_u08SecondChar);
+				UART_vSendData(L_u08FirstChar);
 				UART_vSendData('+');
 				L_u16Address = 0;
 			}
@@ -105,7 +131,33 @@ void LAB3_vUpdate(){
 		/* READ OPERATION */
 			if		(G_u8Buffer[R_W_INDEX] == READ_OP)
 			{
-				UART_vSendData(EEPROM_read(L_u16Address));
+				L_u08Data = EEPROM_read(L_u16Address);	/* Reading EEPROM Data */
+				
+				L_u08FirstChar = L_u08Data & 0x0F;
+				L_u08SecondChar = (L_u08Data & 0xF0) >> 4;
+				switch(L_u08FirstChar){			/* Parsing the higher ASCII values for first char */
+					case 10: L_u08FirstChar = 'A'; break;
+					case 11: L_u08FirstChar = 'B'; break;
+					case 12: L_u08FirstChar = 'C'; break;
+					case 13: L_u08FirstChar = 'D'; break;
+					case 14: L_u08FirstChar = 'E'; break;
+					case 15: L_u08FirstChar = 'F'; break;
+					default: L_u08FirstChar += '0'; break;
+				}
+				switch(L_u08SecondChar){		/* Parsing the higher ASCII values for second char */
+					case 10: L_u08SecondChar = 'A'; break;
+					case 11: L_u08SecondChar = 'B'; break;
+					case 12: L_u08SecondChar = 'C'; break;
+					case 13: L_u08SecondChar = 'D'; break;
+					case 14: L_u08SecondChar = 'E'; break;
+					case 15: L_u08SecondChar = 'F'; break;
+					default: L_u08SecondChar += '0'; break;
+				}
+				/* Resetting Buffer in Back-end */
+				UART_vSendData('-');
+				UART_vSendData('+');
+				UART_vSendData(L_u08SecondChar);
+				UART_vSendData(L_u08FirstChar);
 				UART_vSendData('+');
 				L_u16Address = 0;
 			}

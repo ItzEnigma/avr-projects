@@ -66,8 +66,8 @@ const readDataFromPort = () => {
       const data = res.data;
       let recData = "";
       if (data != "") {
-        console.log("0x" + data.charCodeAt(0).toString(16));
-        recData = "0x" + data.charCodeAt(0).toString(16);
+        console.log("0x" + data);
+        recData = "0x" + data;
       }
       consolePort.innerHTML = recData;
     },
@@ -101,10 +101,11 @@ refresh.addEventListener("click", () => {
 });
 
 writeDataBtn.addEventListener("click", () => {
-  const data = "0" + data_write.value;
+  let data = data_write.value.toUpperCase();
   let address = address_write.value;
   address = address.replace("0x", "").toUpperCase();
   while (address.length < 4) address = "0" + address;
+  while (data.length < 2) data = "0" + data;
   const selectedMem = selectMem.value;
   let frame;
   if (selectedMem === "RAM") {
