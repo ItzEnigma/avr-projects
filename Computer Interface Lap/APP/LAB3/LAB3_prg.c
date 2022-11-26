@@ -36,6 +36,7 @@ static u8 EEPROM_read(u16 uiAddress)
 }
 
 static void EEPROM_write(u16 uiAddress, u8 ucData)
+
 {
 	/* Wait for completion of previous write */
 	while(EECR & (1<<EEWE))
