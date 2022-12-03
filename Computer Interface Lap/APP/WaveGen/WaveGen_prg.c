@@ -86,11 +86,11 @@ static void stopWave(){
 void WaveGen_vUpdate(){
 
 	switch(G_u8Buffer[0] - '0'){
-		case SINEWAVE_ID:		displaySineWave(G_u8Buffer[1], G_u8Buffer[2]); break;
-		case TRIANGEWAVE_ID:	displayTriangleWave(G_u8Buffer[1], G_u8Buffer[2]); break;
-		case SQUAREWAVE_ID:		displaySquareWave(G_u8Buffer[1], G_u8Buffer[2]); break;
-		case STAIRCASE_ID:		displayStaircaseWave(G_u8Buffer[1], G_u8Buffer[2]); break;
-		default:				stopWave(G_u8Buffer[1], G_u8Buffer[2]); break;
+		case SINEWAVE_ID:		displaySineWave(G_u8Buffer[1]-'0', G_u8Buffer[2]-'0'); break;
+		case TRIANGEWAVE_ID:	displayTriangleWave(G_u8Buffer[1]-'0', G_u8Buffer[2]-'0'); break;
+		case SQUAREWAVE_ID:		displaySquareWave(G_u8Buffer[1]-'0', G_u8Buffer[2]-'0'); break;
+		case STAIRCASE_ID:		displayStaircaseWave(G_u8Buffer[1]-'0', G_u8Buffer[2]-'0'); break;
+		default:				stopWave(); break;
 	}
 }
 
