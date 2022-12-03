@@ -5,18 +5,17 @@
  * Author : john
  */ 
 
-#include <avr/io.h>
 #define F_CPU 8000000UL
 #include <avr/delay.h>
-#include "LAB3/LAB3_int.h"
+#include "WaveGen/WaveGen_int.h"
 
 
 int main(void)
 {
-    LAB3_vInit();
+    WaveGen_vInit();
     while (1) 
     {
-		LAB3_vUpdate();
+		WaveGen_vUpdate();
     }
 }
 

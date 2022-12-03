@@ -11,6 +11,8 @@
 
 
 
+void WaveGen_vInit();
+void WaveGen_vUpdate();
 
 
 #endif /* WAVEGEN_INT_H_ */
