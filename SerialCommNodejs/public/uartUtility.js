@@ -52,6 +52,30 @@ const readDataFromPort = () => {
     },
   });
 };
+const readOscData = (returnData) => {
+  /* get request to get data*/
+  $.ajax({
+    url: `${url}/oscData`,
+    type: 'GET',
+    success: function (res) {
+      console.log(res);
+      const data = res.data;
+      returnData(data);
+    },
+  });
+};
+const readLogicData = (returnData) => {
+  /* get request to get data*/
+  $.ajax({
+    url: `${url}/logicData`,
+    type: 'GET',
+    success: function (res) {
+      // console.log(res);
+      const data = res.data;
+      returnData(data);
+    },
+  });
+};
 const disconnect = () => {
   /* get request to close port*/
   $.ajax({

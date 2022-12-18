@@ -35,6 +35,8 @@ LINKER_SCRIPT_DEP:=
 SUBDIRS :=  \
 ../APP/LAB2 \
 ../APP/LAB3 \
+../APP/LogicAnalyzer/ \
+../APP/Osc \
 ../APP/WaveGen \
 ../HAL/LCD \
 ../HAL/TEMPS \
@@ -57,7 +59,9 @@ SUBDIRS :=  \
 C_SRCS +=  \
 ../APP/LAB2/lab2_prg.c \
 ../APP/LAB3/LAB3_prg.c \
+../APP/LogicAnalyzer/LogicAnalyzer_prg.c \
 ../APP/main.c \
+../APP/Osc/Osc.c \
 ../APP/WaveGen/WaveGen_prg.c \
 ../HAL/LCD/LCD_prg.c \
 ../HAL/TEMPS/TEMPS_prg.c \
@@ -81,7 +85,9 @@ ASM_SRCS +=
 OBJS +=  \
 APP/LAB2/lab2_prg.o \
 APP/LAB3/LAB3_prg.o \
+APP/LogicAnalyzer/LogicAnalyzer_prg.o \
 APP/main.o \
+APP/Osc/Osc.o \
 APP/WaveGen/WaveGen_prg.o \
 HAL/LCD/LCD_prg.o \
 HAL/TEMPS/TEMPS_prg.o \
@@ -98,7 +104,9 @@ MCAL/WDT/WDT_prg.o
 OBJS_AS_ARGS +=  \
 APP/LAB2/lab2_prg.o \
 APP/LAB3/LAB3_prg.o \
+APP/LogicAnalyzer/LogicAnalyzer_prg.o \
 APP/main.o \
+APP/Osc/Osc.o \
 APP/WaveGen/WaveGen_prg.o \
 HAL/LCD/LCD_prg.o \
 HAL/TEMPS/TEMPS_prg.o \
@@ -115,7 +123,9 @@ MCAL/WDT/WDT_prg.o
 C_DEPS +=  \
 APP/LAB2/lab2_prg.d \
 APP/LAB3/LAB3_prg.d \
+APP/LogicAnalyzer/LogicAnalyzer_prg.d \
 APP/main.d \
+APP/Osc/Osc.d \
 APP/WaveGen/WaveGen_prg.d \
 HAL/LCD/LCD_prg.d \
 HAL/TEMPS/TEMPS_prg.d \
@@ -132,7 +142,9 @@ MCAL/WDT/WDT_prg.d
 C_DEPS_AS_ARGS +=  \
 APP/LAB2/lab2_prg.d \
 APP/LAB3/LAB3_prg.d \
+APP/LogicAnalyzer/LogicAnalyzer_prg.d \
 APP/main.d \
+APP/Osc/Osc.d \
 APP/WaveGen/WaveGen_prg.d \
 HAL/LCD/LCD_prg.d \
 HAL/TEMPS/TEMPS_prg.d \
@@ -174,7 +186,21 @@ APP/LAB3/LAB3_prg.o: ../APP/LAB3/LAB3_prg.c
 	@echo Finished building: $<
 	
 
+APP/LogicAnalyzer/LogicAnalyzer_prg.o: ../APP/LogicAnalyzer/LogicAnalyzer_prg.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\Atmel\ATmega_DFP\2.0.401\include"  -Os -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\Atmel\ATmega_DFP\2.0.401\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
 APP/main.o: ../APP/main.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\Atmel\ATmega_DFP\2.0.401\include"  -Os -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\Atmel\ATmega_DFP\2.0.401\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+APP/Osc/Osc.o: ../APP/Osc/Osc.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\Atmel\ATmega_DFP\2.0.401\include"  -Os -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\Atmel\ATmega_DFP\2.0.401\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 

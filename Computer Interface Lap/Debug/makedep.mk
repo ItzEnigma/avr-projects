@@ -6,7 +6,11 @@ APP\LAB2\lab2_prg.c
 
 APP\LAB3\LAB3_prg.c
 
+APP\LogicAnalyzer\LogicAnalyzer_prg.c
+
 APP\main.c
+
+APP\Osc\Osc.c
 
 APP\WaveGen\WaveGen_prg.c
 

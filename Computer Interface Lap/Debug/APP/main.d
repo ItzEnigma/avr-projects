@@ -6,7 +6,8 @@ APP/main.d APP/main.o: ../APP/main.c \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdint.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay_basic.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\math.h \
- ../APP/WaveGen/WaveGen_int.h
+ ../APP/../LIB/std_types.h ../APP/LogicAnalyzer/LogicAnalyzer_int.h \
+ ../APP/Osc/Osc.h
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\delay.h:
 
@@ -22,4 +23,8 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\math.h:
 
-../APP/WaveGen/WaveGen_int.h:
+../APP/../LIB/std_types.h:
+
+../APP/LogicAnalyzer/LogicAnalyzer_int.h:
+
+../APP/Osc/Osc.h:

@@ -20,6 +20,8 @@ void TIMER_vSetOCR1AWValue(u16 A_u16OcrValue);
 void TIMER_vSetOCR1BWValue(u16 A_u16OcrValue);
 void TIMER_vSetICR1WValue(u16 A_u16OcrValue);
 
+u16 TIMER_u16GetTCNT1W();
+
 void TIMER_vPWMSignal(u8 A_u8TIMERID, f32 A_f32DutyCycle);
 void TIMER_vDelayMS(u8 A_u8TIMERID, f32 A_f32Delay, FUNC_PTR_IV_OV A_FPtr);
 

@@ -10,7 +10,7 @@
 
 #define PORTA *((u8 *) 0x3B) //the content of this address and u8 because it's 8 bit
 #define DDRA *(( u8 *) 0X3A)
-#define PINA *((volatile u8 *) 0x3A)
+#define PINA *((volatile u8 *) 0x39)
 
 #define PORTB *((u8 *) 0x38) //the content of this address and u8 because it's 8 bit
 #define DDRB *(( u8 *) 0X37)

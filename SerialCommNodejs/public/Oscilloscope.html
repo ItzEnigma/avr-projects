@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+      integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="./style.css" />
+    <title>CI</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Computer Interface</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/public/"
+                >Home</a
+              >
+            </li>
+
+            <!-- <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+              </li> -->
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Labs
+              </a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a class="dropdown-item" href="ReadWrite.html">Lab 3</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="WaveGenerator.html">Lab 4</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="Oscilloscope.html">Lab 5</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="LogicAnalyzer.html">Lab 6</a>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link active"
+                aria-current="page"
+                href="/public/FinalProject.html"
+                >Final Project</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <section class="connect-section">
+      <div class="content deactive" id="connectContainer">
+        <select
+          class="form-select"
+          aria-label="Default select example"
+          id="port-list"
+        >
+          <option selected>Select Port</option>
+          <option value="COM1">COM1</option>
+          <option value="COM2">COM2</option>
+          <option value="COM3">COM3</option>
+          <option value="COM4">COM4</option>
+          <option value="COM5">COM5</option>
+          <option value="COM6">COM6</option>
+          <option value="COM7">COM7</option>
+        </select>
+
+        <div class="actions">
+          <button type="button" class="btn btn-success" id="connectBtn">
+            Connect
+            <i class="fa-solid fa-plug"></i>
+          </button>
+          <button type="button" class="btn btn-danger" id="disconnectBtn">
+            Disconnect
+            <i class="fa-solid fa-plug-circle-xmark"></i>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Write With address -->
+
+    <section class="write-section oscilloscope">
+      <div class="content">
+        <h1>Oscilloscope</h1>
+        <canvas id="myChart"></canvas>
+        <div class="options">
+          <div class="option-osc">
+            Avg Freq (HZ)<span id="avg-freq">1</span>
+          </div>
+          <div class="option-osc">
+            Pulse Width (ms) <span id="pulse-width">1</span>
+          </div>
+          <div class="option-osc">
+            Average Volt (V) <span id="avg-volt">1</span>
+          </div>
+          <div class="option-osc">
+            Peak Voltage (V)<span id="peak-volt">1</span>
+          </div>
+        </div>
+        <div class="actions">
+          <button type="button" class="btn btn-dark" id="startBtn">
+            Start
+            <i class="fa-solid fa-play"></i>
+          </button>
+          <button type="button" class="btn btn-danger" id="stopBtn">
+            Stop
+            <i class="fa-solid fa-stop"></i>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.1.3/axios.min.js"
+      integrity="sha512-0qU9M9jfqPw6FKkPafM3gy2CBAvUWnYVOfNPDYKVuRTel1PrciTj+a9P3loJB+j0QmN2Y0JYQmkBBS8W+mbezg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+    <!-- Scripts -->
+    <script src="connectAndDis.js"></script>
+    <script src="./uartUtility.js"></script>
+    <script src="./calcOptions.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="./lab5.js"></script>
+  </body>
+</html>

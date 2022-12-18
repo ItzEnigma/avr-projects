@@ -135,7 +135,28 @@
     <Compile Include="APP\LAB3\LAB3_pri.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="APP\LogicAnalyzer\LogicAnalyzer_cfg.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="APP\LogicAnalyzer\LogicAnalyzer_int.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="APP\LogicAnalyzer\LogicAnalyzer_prg.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="APP\LogicAnalyzer\LogicAnalyzer_pri.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="APP\main.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="APP\Osc\Osc.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="APP\Osc\Osc.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="APP\Osc\Osc_pri.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="APP\WaveGen\WaveGen_prg.c">
@@ -304,6 +325,8 @@
   <ItemGroup>
     <Folder Include="APP\LAB2" />
     <Folder Include="APP\LAB3" />
+    <Folder Include="APP\LogicAnalyzer\" />
+    <Folder Include="APP\Osc" />
     <Folder Include="APP\WaveGen" />
     <Folder Include="HAL\LCD" />
     <Folder Include="HAL\TEMPS" />
