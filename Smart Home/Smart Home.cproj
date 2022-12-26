@@ -123,6 +123,42 @@
     <Compile Include="APP\main.c">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="HAL\HC\HC_cfg.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="HAL\HC\HC_int.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="HAL\HC\HC_prg.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="HAL\HC\HC_pri.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="HAL\KeyPad\KeyPad_cfg.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="HAL\KeyPad\KeyPad_int.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="HAL\KeyPad\KeyPad_prg.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="HAL\KeyPad\KeyPad_pri.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="HAL\LCD\LCD_cfg.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="HAL\LCD\LCD_int.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="HAL\LCD\LCD_prg.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="HAL\LCD\LCD_pri.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="HAL\LDR\LDR_cfg.h">
       <SubType>compile</SubType>
     </Compile>
@@ -157,9 +193,6 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="LIB\STD_TYPES.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="main.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="MCAL\ADC\ADC_cfg.h">
@@ -295,6 +328,9 @@
   <ItemGroup>
     <Folder Include="APP\" />
     <Folder Include="HAL\" />
+    <Folder Include="HAL\HC\" />
+    <Folder Include="HAL\KeyPad\" />
+    <Folder Include="HAL\LCD\" />
     <Folder Include="HAL\LDR\" />
     <Folder Include="HAL\SERVO\" />
     <Folder Include="HAL\TEMPS\" />

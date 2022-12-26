@@ -16,7 +16,7 @@ void LDR_vInit(){
 }
 
 /*LDR resistance decreases by increasing the light intensity*/
-u16 LDR_u8GetValue(){
+u16 LDR_u16GetValue(){
 	u16 L_u8DigitalVal = ADC_u16ReadDigitalSync(LDR_CHANNEL);
 
 	u32 L_u8AnalogVal = ( (L_u8DigitalVal * 5000UL) / 1023 ); /*in mV*/

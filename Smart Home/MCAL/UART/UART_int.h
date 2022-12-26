@@ -11,7 +11,14 @@
 
 
 /*Available baud rates, in 8MHZ FCPU*/
-#define UART_BAUD_RATE_9600		51
+#define UART_8MHZ_BAUD_RATE_115200		3
+#define UART_8MHZ_BAUD_RATE_57600		8
+#define UART_8MHZ_BAUD_RATE_38400		12
+#define UART_8MHZ_BAUD_RATE_19200		25
+#define UART_8MHZ_BAUD_RATE_9600		51
+#define UART_8MHZ_BAUD_RATE_4800		103
+#define UART_8MHZ_BAUD_RATE_2400		207
+#define UART_8MHZ_BAUD_RATE_1200		415	
 
 
 
@@ -47,6 +54,13 @@ void UART_vSendStringSync(u8 *A_u8Str);
  * Inputs      : void
  ***********************************************************************************************************/
 u16 UART_u16ReceiveDataSync();
+
+/**********************************************************************************************************
+ * Description : Interface Function to receive a string
+ * Outputs     : the data received
+ * Inputs      : string
+ ***********************************************************************************************************/
+void UART_vReceiveStringSync(u8 *A_str);
 
 
 /**********************************************************************************************************

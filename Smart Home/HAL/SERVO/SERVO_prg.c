@@ -8,7 +8,7 @@
 
 #include "../../LIB/STD_TYPES.h"
 #include "../../LIB/BIT_MATH.h"
-#include "../../MCAL/TIMER/TIMER_int.h"
+#include "../../MCAL/TIM1/TIM1_int.h"
 #include "SERVO_cfg.h"
 #include "SERVO_int.h"
 
@@ -20,7 +20,7 @@
  ***********************************************************************************************************/
 
 void SERVO_vInit(){
-	TIMER_vInit();
+	TIM1_vInit();
 }
 
 /**********************************************************************************************************
@@ -30,7 +30,7 @@ void SERVO_vInit(){
  ***********************************************************************************************************/
 
 void SERVO_vTurnOn(){
-	TIMER_vTurnOn(TIMER1_ID);
+	TIM1_vTurnOn();
 }
 
 /**********************************************************************************************************
@@ -39,7 +39,7 @@ void SERVO_vTurnOn(){
  * Inputs      : void
  ***********************************************************************************************************/
 void SERVO_vTurnOff(){
-	TIMER_vTurnOff(TIMER1_ID);
+	TIM1_vTurnOff();
 }
 
 /**********************************************************************************************************
@@ -54,5 +54,5 @@ void SERVO_vSetAngle(u8 A_u8Angle){
 	if(A_u8Angle < 180)
 		L_u8CompareVal = SERVO_ANGLE_EQN ;
 
-	TIMER_vSetIcr1Val(L_u8CompareVal);
+	TIM1_vSetIcr1Val(L_u8CompareVal);
 }

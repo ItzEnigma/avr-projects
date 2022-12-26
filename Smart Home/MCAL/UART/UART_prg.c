@@ -15,7 +15,6 @@
 #include "../../MCAL/UART/UART_int.h"
 
 
-
 /**********************************************************************************************************
  * Description : Interface Function to setup the UART based on the configuration
  * Outputs     : void
@@ -138,6 +137,19 @@ u16 UART_u16ReceiveDataSync(){
 	L_u16Data = UDR;
 
 	return L_u16Data;
+}
+
+/**********************************************************************************************************
+ * Description : Interface Function to receive a string
+ * Outputs     : the data received
+ * Inputs      : string
+ ***********************************************************************************************************/
+void UART_vReceiveStringSync(u8 *A_str){
+	for(u8 i=0; ; i++){
+		A_str[i] = (u8)UART_u16ReceiveDataSync();
+		if(A_str[i] == '\0')
+			break;
+	}
 }
 
 /**********************************************************************************************************

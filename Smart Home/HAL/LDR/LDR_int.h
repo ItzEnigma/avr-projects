@@ -9,6 +9,6 @@
 #define HAL_LDR_LDR_INT_H_
 
 void LDR_vInit();
-u16 LDR_u8GetValue();
+u16 LDR_u16GetValue();
 
 #endif /* HAL_LDR_LDR_INT_H_ */
