@@ -20,10 +20,10 @@
     <OverrideVtor>false</OverrideVtor>
     <CacheFlash>true</CacheFlash>
     <ProgFlashFromRam>true</ProgFlashFromRam>
-    <RamSnippetAddress />
+    <RamSnippetAddress>0x20000000</RamSnippetAddress>
     <UncachedRange />
     <preserveEEPROM>true</preserveEEPROM>
-    <OverrideVtorValue />
+    <OverrideVtorValue>exception_table</OverrideVtorValue>
     <BootSegment>2</BootSegment>
     <ResetRule>0</ResetRule>
     <eraseonlaunchrule>0</eraseonlaunchrule>
@@ -40,6 +40,19 @@
         </dependencies>
       </framework-data>
     </AsfFrameworkConfig>
+    <avrtool>com.atmel.avrdbg.tool.simulator</avrtool>
+    <avrtoolserialnumber />
+    <avrdeviceexpectedsignature>0x1E9502</avrdeviceexpectedsignature>
+    <com_atmel_avrdbg_tool_simulator>
+      <ToolOptions xmlns="">
+        <InterfaceProperties>
+        </InterfaceProperties>
+      </ToolOptions>
+      <ToolType xmlns="">com.atmel.avrdbg.tool.simulator</ToolType>
+      <ToolNumber xmlns="">
+      </ToolNumber>
+      <ToolName xmlns="">Simulator</ToolName>
+    </com_atmel_avrdbg_tool_simulator>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <ToolchainSettings>
@@ -120,231 +133,249 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="APP\main.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="HAL\HC\HC_cfg.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="HAL\HC\HC_int.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="HAL\HC\HC_prg.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="HAL\HC\HC_pri.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="HAL\KeyPad\KeyPad_cfg.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="HAL\KeyPad\KeyPad_int.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="HAL\KeyPad\KeyPad_prg.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="HAL\KeyPad\KeyPad_pri.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="HAL\LCD\LCD_cfg.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="HAL\LCD\LCD_int.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="HAL\LCD\LCD_prg.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="HAL\LCD\LCD_pri.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="HAL\LDR\LDR_cfg.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="HAL\LDR\LDR_int.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="HAL\LDR\LDR_prg.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="HAL\SERVO\SERVO_cfg.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="HAL\SERVO\SERVO_int.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="HAL\SERVO\SERVO_prg.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="HAL\TEMPS\TEMPS_cfg.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="HAL\TEMPS\TEMPS_int.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="HAL\TEMPS\TEMPS_prg.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="HAL\TEMPS\TEMPS_pri.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="LIB\BIT_MATH.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="LIB\STD_TYPES.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="MCAL\ADC\ADC_cfg.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="MCAL\ADC\ADC_int.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="MCAL\ADC\ADC_prg.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="MCAL\ADC\ADC_pri.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="MCAL\ADC\ADC_reg.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="MCAL\DIO\DIO_cfg.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="MCAL\DIO\DIO_int.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="MCAL\DIO\DIO_prg.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="MCAL\DIO\DIO_pri.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="MCAL\DIO\DIO_reg.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="MCAL\EXTI\EXTI_cfg.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="MCAL\EXTI\EXTI_int.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="MCAL\EXTI\EXTI_prg.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="MCAL\EXTI\EXTI_pri.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="MCAL\EXTI\EXTI_reg.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="MCAL\GIE\GIE_int.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="MCAL\GIE\GIE_prg.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="MCAL\GIE\GIE_reg.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="MCAL\TIM0\TIM0_cfg.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="MCAL\TIM0\TIM0_int.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="MCAL\TIM0\TIM0_prg.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="MCAL\TIM0\TIM0_pri.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="MCAL\TIM0\TIM0_reg.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="MCAL\TIM1\TIM1_cfg.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="MCAL\TIM1\TIM1_int.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="MCAL\TIM1\TIM1_prg.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="MCAL\TIM1\TIM1_pri.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="MCAL\TIM1\TIM1_reg.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="MCAL\TIM2\TIM2_cfg.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="MCAL\TIM2\TIM2_int.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="MCAL\TIM2\TIM2_prg.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="MCAL\TIM2\TIM2_pri.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="MCAL\TIM2\TIM2_reg.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="MCAL\UART\UART_cfg.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="MCAL\UART\UART_int.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="MCAL\UART\UART_prg.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="MCAL\UART\UART_pri.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="MCAL\UART\UART_reg.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="MCAL\WDT\WDT_cfg.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="MCAL\WDT\WDT_int.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="MCAL\WDT\WDT_prg.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="MCAL\WDT\WDT_pri.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="MCAL\WDT\WDT_reg.h">
-      <SubType>compile</SubType>
-    </Compile>
+    <Folder Include="Source\" />
+    <Folder Include="Source\APP\" />
+    <Folder Include="Source\APP\APPSYS\" />
+    <Folder Include="Source\HAL\" />
+    <Folder Include="Source\HAL\HC\" />
+    <Folder Include="Source\HAL\KeyPad\" />
+    <Folder Include="Source\HAL\LCD\" />
+    <Folder Include="Source\HAL\LDR\" />
+    <Folder Include="Source\HAL\SERVO\" />
+    <Folder Include="Source\HAL\TEMPS\" />
+    <Folder Include="Source\LIB\" />
+    <Folder Include="Source\MCAL\" />
+    <Folder Include="Source\MCAL\ADC\" />
+    <Folder Include="Source\MCAL\DIO\" />
+    <Folder Include="Source\MCAL\EXTI\" />
+    <Folder Include="Source\MCAL\GIE\" />
+    <Folder Include="Source\MCAL\MCU\" />
+    <Folder Include="Source\MCAL\TIM0\" />
+    <Folder Include="Source\MCAL\TIM1\" />
+    <Folder Include="Source\MCAL\TIM2\" />
+    <Folder Include="Source\MCAL\UART\" />
+    <Folder Include="Source\MCAL\WDT\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="APP\" />
-    <Folder Include="HAL\" />
-    <Folder Include="HAL\HC\" />
-    <Folder Include="HAL\KeyPad\" />
-    <Folder Include="HAL\LCD\" />
-    <Folder Include="HAL\LDR\" />
-    <Folder Include="HAL\SERVO\" />
-    <Folder Include="HAL\TEMPS\" />
-    <Folder Include="LIB\" />
-    <Folder Include="MCAL\" />
-    <Folder Include="MCAL\ADC\" />
-    <Folder Include="MCAL\DIO\" />
-    <Folder Include="MCAL\EXTI\" />
-    <Folder Include="MCAL\GIE\" />
-    <Folder Include="MCAL\TIM0\" />
-    <Folder Include="MCAL\TIM1\" />
-    <Folder Include="MCAL\TIM2\" />
-    <Folder Include="MCAL\UART\" />
-    <Folder Include="MCAL\WDT\" />
+    <Compile Include="Source\APP\APPSYS\APPSYS.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\APP\APPSYS\APPSYS.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\APP\main.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\HAL\HC\HC_cfg.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\HAL\HC\HC_int.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\HAL\HC\HC_prg.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\HAL\HC\HC_pri.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\HAL\KeyPad\KeyPad_cfg.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\HAL\KeyPad\KeyPad_int.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\HAL\KeyPad\KeyPad_prg.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\HAL\KeyPad\KeyPad_pri.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\HAL\LCD\LCD_cfg.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\HAL\LCD\LCD_int.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\HAL\LCD\LCD_prg.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\HAL\LCD\LCD_pri.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\HAL\LDR\LDR_cfg.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\HAL\LDR\LDR_int.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\HAL\LDR\LDR_prg.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\HAL\SERVO\SERVO_cfg.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\HAL\SERVO\SERVO_int.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\HAL\SERVO\SERVO_prg.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\HAL\SERVO\SERVO_pri.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\HAL\TEMPS\TEMPS_cfg.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\HAL\TEMPS\TEMPS_int.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\HAL\TEMPS\TEMPS_prg.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\HAL\TEMPS\TEMPS_pri.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\LIB\BIT_MATH.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\LIB\STD_TYPES.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\MCAL\ADC\ADC_cfg.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\MCAL\ADC\ADC_int.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\MCAL\ADC\ADC_prg.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\MCAL\ADC\ADC_pri.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\MCAL\ADC\ADC_reg.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\MCAL\DIO\DIO_cfg.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\MCAL\DIO\DIO_int.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\MCAL\DIO\DIO_prg.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\MCAL\DIO\DIO_pri.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\MCAL\DIO\DIO_reg.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\MCAL\EXTI\EXTI_cfg.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\MCAL\EXTI\EXTI_int.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\MCAL\EXTI\EXTI_prg.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\MCAL\EXTI\EXTI_pri.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\MCAL\EXTI\EXTI_reg.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\MCAL\GIE\GIE_int.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\MCAL\GIE\GIE_prg.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\MCAL\GIE\GIE_reg.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\MCAL\MCU\MCU.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\MCAL\MCU\MCU.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\MCAL\TIM0\TIM0_cfg.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\MCAL\TIM0\TIM0_int.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\MCAL\TIM0\TIM0_prg.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\MCAL\TIM0\TIM0_pri.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\MCAL\TIM0\TIM0_reg.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\MCAL\TIM1\TIM1_cfg.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\MCAL\TIM1\TIM1_int.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\MCAL\TIM1\TIM1_prg.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\MCAL\TIM1\TIM1_pri.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\MCAL\TIM1\TIM1_reg.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\MCAL\TIM2\TIM2_cfg.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\MCAL\TIM2\TIM2_int.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\MCAL\TIM2\TIM2_prg.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\MCAL\TIM2\TIM2_pri.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\MCAL\TIM2\TIM2_reg.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\MCAL\UART\UART_cfg.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\MCAL\UART\UART_int.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\MCAL\UART\UART_prg.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\MCAL\UART\UART_pri.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\MCAL\UART\UART_reg.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\MCAL\WDT\WDT_cfg.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\MCAL\WDT\WDT_int.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\MCAL\WDT\WDT_prg.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\MCAL\WDT\WDT_pri.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\MCAL\WDT\WDT_reg.h">
+      <SubType>compile</SubType>
+    </Compile>
   </ItemGroup>
   <Import Project="$(AVRSTUDIO_EXE_PATH)\\Vs\\Compiler.targets" />
 </Project>
