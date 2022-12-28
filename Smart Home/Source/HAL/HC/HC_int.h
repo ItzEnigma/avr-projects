@@ -53,7 +53,7 @@ void HC_vSendData(u8 A_u8Data);
  * Outputs     : void
  * Inputs      : Data
  ***********************************************************************************************************/
-void HC_vSendString(u8 A_u8Data);
+void HC_vSendString(u8 *A_u8Data);
 
 /**********************************************************************************************************
  * Description : Interface Function to receive data async
