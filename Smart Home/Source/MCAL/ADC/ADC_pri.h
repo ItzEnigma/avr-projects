@@ -17,7 +17,8 @@
 #define PRE_SCALE_64  6
 #define PRE_SCALE_128 7
 
-#define ADC_PRESCALE_BIT_MASK 0b11111000
+#define		 ADC_PRESCALE_BIT_MASK	0b11111000
+#define     _ADC_CHANNEL_MASK		0b11100000
 
 /*Vref select. 2 is reserved by the MCU*/
 #define ADC_AVCC     1
@@ -31,6 +32,11 @@
 void __vector_16 (void) __attribute__((signal));
 
 /*ISR variable*/
-ptr_func_Iu16_Ov G_ISR_ADC = ADDRESS_NULL;
+static ptr_func_t G_ISR_ADC = ADDRESS_NULL;
+static ptr_func_t ISR_ADCCHAINPTR;
+
+/* ISR Conversion Mode */
+#define     _ADC_ISR_SINGLECONVERSION       200
+#define     _ADC_ISR_MULTICONVERSION        201
 
 #endif /* MCAL_ADC_ADC_PRI_H_ */

@@ -7,6 +7,7 @@
 /***********		Updated: 17 Sep 2022	**************/
 /*********************************************************/
 
+#include <math.h>
 #include "../../LIB/STD_TYPES.h"
 #include "../../LIB/BIT_MATH.h"
 #include "../DIO/DIO_int.h"
@@ -14,6 +15,10 @@
 #include "TIM0_pri.h"
 #include "TIM0_cfg.h"
 #include "TIM0_int.h"
+
+
+static u16 G_u16ISRCounter = 0;
+
 
 /**********************************************************************************************************
  * Description : Interface Function to 1-prescaler select, 2-Timer0 mode select, 3-Set OC0 Pin state
@@ -132,6 +137,52 @@ void TIM0_vSetDutyCycleOC0 (u8 A_u8DutyCycle){
 	#endif
 }
 
+/**
+ * Description : Interface Function to set a delay for a specific timer
+ * Outputs     : void
+ * Inputs      : Timer ID, required delay in milliseconds, the function to be executed
+ * NOTES       : still need some work!
+ **/
+void  TIM0_vDelayMilli (u16 A_u16DelayMs, u8 A_u8TimerId, ptr_func_t ptr){
+    u16 L_u16PrescaleVal = 1;
+    f32 L_f32TimeOverFlow;
+    f32 L_f32TickTime;
+    u16 L_u16OverFlowCounts = 0;
+    u16 L_u8PreloadVal = 0;
+	/* Resetting the ISR Counter */
+	G_u16ISRCounter = 0;
+
+    switch(TIMER0_CLK_SELECT){
+        case TIMER0_PRESCALER_8:    L_u16PrescaleVal = 8;     break;
+        case TIMER0_PRESCALER_64:   L_u16PrescaleVal = 16;    break;
+        case TIMER0_PRESCALER_256:  L_u16PrescaleVal = 256;	  break;
+        case TIMER0_PRESCALER_1024: L_u16PrescaleVal = 1024;  break;
+    }
+
+    /* Tick time Calculation */
+    L_f32TickTime = (f32)L_u16PrescaleVal / TIMER0_InputFreq;
+
+    /* Time required for complete 1 over flow */
+    L_f32TimeOverFlow = (TIMER0_MAX_COUNT + 1) * (L_f32TickTime * ((u16)1000));
+
+    /* Over flow needed by this delay */
+    L_u16OverFlowCounts = (u16) ceil(( ((f32)A_u16DelayMs /L_f32TimeOverFlow) ));
+
+    /* Calculating OverFlow counts & preload value */
+    L_u8PreloadVal = (f32)L_u16OverFlowCounts - ((f32)A_u16DelayMs /L_f32TimeOverFlow);
+    G_u16Timer0_Cov = L_u16OverFlowCounts;
+
+
+#if  TIMER0_WGM_MODE == TIMER0_WGM_CTC_MODE
+        TIM0_vSetOcr0Val((TIMER0_MAX_COUNT - L_u8PreloadVal));
+        G_PTRF_TIM0_CTC = ptr;
+#elif TIMER0_WGM_MODE == TIMER0_WGM_NORMAL_MODE
+        G_PTRF_TIM0_OVF = ptr;
+		TCNT0 = L_u8PreloadVal;
+#endif
+
+}
+
 
 
 /**************   TIMER0 mode functions   **************/
@@ -214,11 +265,21 @@ void __vector_10(void){
 	}
 }
 
-/*TIMER0 OVF*/
-void __vector_11(void){
-	if(G_PTRF_TIM0_OVF != ADDRESS_NULL){
+/* TIMER0 OVF */
+void __vector_11(void)
+{
+	if(G_PTRF_TIM0_OVF != ADDRESS_NULL)
+	{
+		if(G_u16ISRCounter == G_u16Timer0_Cov)
+		{
+			G_u16ISRCounter = 0;
 			G_PTRF_TIM0_OVF();
+			TCNT0 = G_u8Timer0_Preload_Val;
+		 } else {
+			G_u16ISRCounter++;
+			}
 	} else {
-		/*Handle callback error*/
-	}
+		/* Handle callback error */
+	  }
+	return;
 }

@@ -37,7 +37,7 @@
 /*ADCL*/
 #define ADCL  *( (volatile u8*) 0x24)
 /*ADCW*/
-#define ADCW  *( (volatile u16*) 0x24)/*used to read the 10 bits of the result*/
+#define ADCW  *( (volatile u16*) 0x24) /*used to read the 10 bits of the result*/
 
 /*SFIOR*/
 #define SFIOR *( (u8*) 0x50)

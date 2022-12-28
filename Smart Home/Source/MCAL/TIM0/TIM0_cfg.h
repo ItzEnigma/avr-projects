@@ -20,7 +20,7 @@
  * 3- TIMER0_WGM_CTC_MODE
  * 4- TIMER0_WGM_FAST_PWM_MODE
  * */
-#define TIMER0_WGM_MODE TIMER0_WGM_CTC_MODE
+#define TIMER0_WGM_MODE TIMER0_WGM_NORMAL_MODE
 
 /* Compare Match Output Mode (OC0 Pin)  CTC
  *
@@ -44,7 +44,7 @@
  * 7- TIMER0_EXT_CLK_FALLING_EDGE
  * 8- TIMER0_EXT_CLK_RISING_EDGE
  * */
-#define TIMER0_CLK_SELECT TIMER0_PRESCALER_64
+#define TIMER0_CLK_SELECT TIMER0_PRESCALER_1024
 
 
 /* Timers state
@@ -61,8 +61,8 @@
  * 1- INT_ENABLE
  * 2- INT_DISABLE
  * */
-#define TIMER0_OVF_INT_STATE	INT_DISABLE
-#define TIMER0_CTC_INT_STATE	INT_ENABLE
+#define TIMER0_OVF_INT_STATE	INT_ENABLE
+#define TIMER0_CTC_INT_STATE	INT_DISABLE
 
 /* TIMER0 PWM mode
  *
@@ -90,7 +90,9 @@
  *	Options:
  *	user specify the frequency
  * */
-#define TIMER0_InputFreq 8000000UL
+#ifndef TIMER0_InputFreq
+	#define TIMER0_InputFreq 8000000UL
+#endif
 
 /* OC0 Pin Configuration */
 #define OC0_PORT PORTB_ID

@@ -11,4 +11,6 @@
 void LDR_vInit();
 u16 LDR_u16GetValue();
 
+u16 LDR_ConvertValue(u16);
+
 #endif /* HAL_LDR_LDR_INT_H_ */

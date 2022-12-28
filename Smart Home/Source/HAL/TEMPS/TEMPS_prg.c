@@ -22,3 +22,9 @@ u8 TEMPS_u8GetTemp(){
 	u16 L_u16DigitalVal = ADC_u16ReadDigitalSync(TEMPS_PIN);
 	return (L_u16DigitalVal * 500UL)/1023 ;
 }
+
+
+u8 TEMPS_ConvertValue(u16 ADC_Data)
+{
+	return (ADC_Data * 500UL)/1023 ;
+}

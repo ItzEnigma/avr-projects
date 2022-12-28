@@ -11,4 +11,6 @@
 void TEMPS_vInit();
 u8 TEMPS_u8GetTemp();
 
+u8 TEMPS_ConvertValue(u16);
+
 #endif /* TEMPS_TEMPS_INT_H_ */

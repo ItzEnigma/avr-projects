@@ -31,10 +31,26 @@ typedef enum {
 	ADC7_ID
 };
 
+/* ADC Chain Struct */
+typedef struct{
+	u8* channels;
+	u16* channelValues;
+	u8* chainSize;
+	ptr_func_t chainNotification;
+}ADC_stChain;
+
+
+
 void ADC_vInit();
 void ADC_vSetPreScale(u8 A_u8PreScaleVal);
 void ADC_vTurnOff();
 void ADC_vReadDigitalAsync(ptr_func_Iu16_Ov ptr, u8 A_u8ADCId);
 u16 ADC_u16ReadDigitalSync(u8 A_u8ADCId);
+
+/******************************************************************************
+* \Syntax          : void ADC_StartChain(struct[chain])
+* \Description     : Setting a channels chain and setting their ISR conversion
+*******************************************************************************/
+void ADC_StartChain  ( ADC_stChain* chain );
 
 #endif /* MCAL_ADC_ADC_INT_H_ */

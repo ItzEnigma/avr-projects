@@ -74,6 +74,14 @@ void TIM0_vCallBack_OCF0 (ptr_func_t ptr);
 void TIM0_vCallBack_OVF	(ptr_func_t ptr);
 
 /**********************************************************************************************************
+ * Description : Interface Function to set a delay for a specific timer
+ * Outputs     : void
+ * Inputs      : Timer ID, required delay in milliseconds, the function to be executed
+ * NOTES       : still need some work!
+ ***********************************************************************************************************/
+void  TIM0_vDelayMilli (u16 A_u16DelayMs, u8 A_u8TimerId, ptr_func_t ptr);
+
+/**********************************************************************************************************
  * Description : interface Function to setup the OC0 pin duty cycle if in PWM mode
  * Outputs     : void
  * Inputs      : void
