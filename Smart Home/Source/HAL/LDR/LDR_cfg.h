@@ -8,7 +8,5 @@
 #ifndef HAL_LDR_LDR_CFG_H_
 #define HAL_LDR_LDR_CFG_H_
 
-#define LDR_PORT     ADC_PORT
-#define LDR_CHANNEL  ADC1_ID
 
 #endif /* HAL_LDR_LDR_CFG_H_ */

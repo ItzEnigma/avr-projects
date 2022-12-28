@@ -135,6 +135,7 @@
   <ItemGroup>
     <Folder Include="Source\" />
     <Folder Include="Source\APP\" />
+    <Folder Include="Source\APP\APPSYS\" />
     <Folder Include="Source\HAL\" />
     <Folder Include="Source\HAL\HC\" />
     <Folder Include="Source\HAL\KeyPad\" />
@@ -148,6 +149,7 @@
     <Folder Include="Source\MCAL\DIO\" />
     <Folder Include="Source\MCAL\EXTI\" />
     <Folder Include="Source\MCAL\GIE\" />
+    <Folder Include="Source\MCAL\MCU\" />
     <Folder Include="Source\MCAL\TIM0\" />
     <Folder Include="Source\MCAL\TIM1\" />
     <Folder Include="Source\MCAL\TIM2\" />
@@ -155,6 +157,12 @@
     <Folder Include="Source\MCAL\WDT\" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Source\APP\APPSYS\APPSYS.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\APP\APPSYS\APPSYS.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="Source\APP\main.c">
       <SubType>compile</SubType>
     </Compile>
@@ -210,6 +218,9 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Source\HAL\SERVO\SERVO_prg.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\HAL\SERVO\SERVO_pri.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Source\HAL\TEMPS\TEMPS_cfg.h">
@@ -282,6 +293,12 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Source\MCAL\GIE\GIE_reg.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\MCAL\MCU\MCU.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\MCAL\MCU\MCU.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Source\MCAL\TIM0\TIM0_cfg.h">

@@ -19,7 +19,7 @@
  * Inputs      : void
  * Notes	   : timer is initially off
  ***********************************************************************************************************/
-void TIM2_vInitTimer2 ();
+void TIM2_vInit ();
 
 /**********************************************************************************************************
  * Description : Interface Function to Turn on a timer
@@ -55,6 +55,13 @@ void TIMER_vSetOcr2Val (u8 A_u8OcrVal);
  * Inputs      : pointer to function
  ***********************************************************************************************************/
 void TIMER_vCallBack_OCF2 (ptr_func_t ptr);
+
+/**********************************************************************************************************
+ * Description : Interface Function to set the call back function that will be executed during OVF
+ * Outputs     : void
+ * Inputs      : pointer to function
+ ***********************************************************************************************************/
+void TIM2_vCallBack_OVF2 (ptr_func_t ptr);
 
 /**********************************************************************************************************
  * Description : interface Function to setup the OC2 pin duty cycle if in PWM mode

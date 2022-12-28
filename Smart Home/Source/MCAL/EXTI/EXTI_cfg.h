@@ -18,7 +18,7 @@
 /*INT0 abstraction*/
 #define INT0_PORT 			PORTD_ID
 #define INT0_PIN  			PIN2_ID
-#define INT0_SENSE_CONTROL  FALLING_EDGE
+#define INT0_SENSE_CONTROL  RISING_EDGE
 
 /*INT1 abstraction*/
 #define INT1_PORT 			PORTD_ID

@@ -19,7 +19,7 @@
  * Inputs      : void
  * Notes	   : timer is initially off
  ***********************************************************************************************************/
-void TIM2_vInitTimer2 (){
+void TIM2_vInit (){
 	#if TIMER2_STATE == TIMER_ENABLE
 		/*Step 1: Choose timer mode*/
 		#if TIMER2_WGM_MODE == TIMER2_WGM_NORMAL_MODE
@@ -80,7 +80,7 @@ void TIM2_vSetPreload (u8 A_u8PreloadVal){
  * Outputs     : void
  * Inputs      : OCR value
  ***********************************************************************************************************/
-void TIMER_vSetOcr2Val (u8 A_u8OcrVal){
+void TIM2_vSetOcr2Val (u8 A_u8OcrVal){
 	OCR2 = A_u8OcrVal;
 }
 
@@ -89,8 +89,17 @@ void TIMER_vSetOcr2Val (u8 A_u8OcrVal){
  * Outputs     : void
  * Inputs      : pointer to function
  ***********************************************************************************************************/
-void TIMER_vCallBack_OCF2 (ptr_func_t ptr){
+void TIM2_vCallBack_OCF2 (ptr_func_t ptr){
 	G_PTRF_TIM2_CTC = ptr;
+}
+
+/**********************************************************************************************************
+ * Description : Interface Function to set the call back function that will be executed during OVF
+ * Outputs     : void
+ * Inputs      : pointer to function
+ ***********************************************************************************************************/
+void TIM2_vCallBack_OVF2 (ptr_func_t ptr){
+	G_PTRF_TIM2_OVF = ptr;
 }
 
 /**********************************************************************************************************
@@ -100,9 +109,9 @@ void TIMER_vCallBack_OCF2 (ptr_func_t ptr){
  ***********************************************************************************************************/
 void TIMER_vSetDutyCycleOC2 (u8 A_u8DutyCycle){
 	#if TIMER2_PWM_MODE == PWM_NON_INVERTING
-		TIMER_vSetOcr2Val( ( (TIMER2_MAX_COUNT + 1) * A_u8DutyCycle ) /100);
+		TIM2_vSetOcr2Val( ( (TIMER2_MAX_COUNT + 1) * A_u8DutyCycle ) /100);
 	#elif TIMER2_PWM_MODE == PWM_INVERTING
-		TIMER_vSetOcr1aVal( ( -( (A_u8DutyCycle/100) - 1) ) * (TIMER2_MAX_COUNT + 1);
+		TIM2_vSetOcr2Val( ( -( (A_u8DutyCycle/100) - 1) ) * (TIMER2_MAX_COUNT + 1);
 	#endif
 }
 

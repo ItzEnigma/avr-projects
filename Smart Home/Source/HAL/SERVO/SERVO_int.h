@@ -17,6 +17,9 @@ typedef enum {
 	SERVO_ANGLE_180
 };
 
+#define STATE_0		0
+#define STATE_180	1
+
 /**********************************************************************************************************
  * Description : Interface Function to setup the Servo_Motor
  * Outputs     : void
@@ -47,5 +50,9 @@ void SERVO_vTurnOff();
  * 				 with TOP ICR1 of 19999
  ***********************************************************************************************************/
 void SERVO_vSetAngle(u8 A_u8Angle);
+
+
+
+void SERVO_vSetState(u8 A_u8State);
 
 #endif /* HAL_SERVO_SERVO_INT_H_ */
