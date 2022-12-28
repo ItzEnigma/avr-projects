@@ -99,6 +99,15 @@ void HC_u8ReceiveDataAsync(ptr_func_Iu16_Ov ptr){
 }
 
 /**********************************************************************************************************
+ * Description : Interface Function to send data through HC-12
+ * Outputs     : void
+ * Inputs      : Data
+ ***********************************************************************************************************/
+void HC_vSendString(u8 *A_u8Data){
+	UART_vSendStringSync(&A_u8Data);
+}
+
+/**********************************************************************************************************
  * Description : Interface Function to Receive data sync
  * Outputs     : void
  * Inputs      : void
@@ -107,8 +116,6 @@ void HC_u8ReceiveDataAsync(ptr_func_Iu16_Ov ptr){
 u8 HC_u8ReceiveDataSync(){
 	return (u8) UART_u16ReceiveDataSync();
 }
-
-
 
 /**********************************************************************************************************
  * Description : Interface Function to test the module

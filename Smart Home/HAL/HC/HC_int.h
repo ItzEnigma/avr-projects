@@ -49,6 +49,13 @@ void HC_vWakeUp();
 void HC_vSendData(u8 A_u8Data);
 
 /**********************************************************************************************************
+ * Description : Interface Function to send data through HC-12
+ * Outputs     : void
+ * Inputs      : Data
+ ***********************************************************************************************************/
+void HC_vSendString(u8 A_u8Data);
+
+/**********************************************************************************************************
  * Description : Interface Function to receive data async
  * Outputs     : void
  * Inputs      : the function of input u16
