@@ -5,17 +5,25 @@ const cors = require('cors');
 const serialController = require('./controllers/serialController');
 const fs = require('fs/promises');
 let localBuffer = 'Empty';
+let dataType = '0';
 let portObjTemp;
 const statusObj = {
-  outdoorTemp: '34°',
-  outdoorHum: '10%',
-  indoorTemp: '31°',
+  outdoorTemp: '16°',
+  outdoorHum: '67%',
+  indoorTemp: '18°',
+  homeStatus: true,
   doorStatus: 'Closed',
-  lightIIntensityStatus: '70%',
+  fanStatus: false,
+  autoFanStatus: false,
+  lightStatus: false,
+  autoLightStatus: false,
+  deviceStatus: false,
+  lightIIntensityStatus: '50%',
 };
 const hexToDecimal = (hex) => {
   return parseInt(hex, 16);
 };
+// Weather
 const getWeather = async () => {
   const response = await superagent.get(
     'http://api.weatherapi.com/v1/current.json?key=1e2e153b52cc4f3ca55212643222812&q=Cairo&aqi=no'
@@ -30,18 +38,65 @@ getWeather();
 setInterval(() => {
   getWeather();
 }, 10000);
-const saveData = async (data) => {};
-/*
-const logIT = (data) => {
-  console.log('from local ' + data);
-};
-const { message: openStatus, PortObj: portObj } = serialController.Open('COM3');
-console.log(openStatus);
-const writeStatus = serialController.sendData('HI From Express', portObj);
-console.log(writeStatus);
+// status handler
+const statusHandler = (data) => {
+  let dataArray = data.split(',');
+  // dataArray = ['00', '0f', '00', '00', 'F1F0', '01', '01', '01', '01'];
+  // homeStatus , temp , fanStatus ,  autoFanStatus , light intensity , light status, autoLightMode , doorStatus , deviceStatus
+  statusObj.homeStatus = hexToDecimal(dataArray[0]);
+  statusObj.indoorTemp = hexToDecimal(dataArray[1]) + '°';
 
-serialController.readData(portObj, logIT);
-*/
+  if (hexToDecimal(dataArray[2]) === 0) {
+    statusObj.fanStatus = false;
+  } else {
+    statusObj.fanStatus = true;
+  }
+  if (hexToDecimal(dataArray[3]) === 0) {
+    statusObj.autoFanStatus = false;
+  } else {
+    statusObj.autoFanStatus = true;
+  }
+  statusObj.lightIIntensityStatus =
+    Math.abs((hexToDecimal(dataArray[4]) / 50000) * 100 - 100) + '%';
+  console.log(statusObj.lightIIntensityStatus);
+  if (hexToDecimal(dataArray[5]) === 0) {
+    statusObj.lightStatus = false;
+  } else {
+    statusObj.lightStatus = true;
+  }
+  if (hexToDecimal(dataArray[6]) === 0) {
+    statusObj.autoLightStatus = false;
+  } else {
+    statusObj.autoLightStatus = true;
+  }
+  if (hexToDecimal(dataArray[7]) === 0) {
+    statusObj.doorStatus = 'Closed';
+  } else {
+    statusObj.doorStatus = 'Opened';
+  }
+  if (hexToDecimal(dataArray[8]) === 0) {
+    statusObj.deviceStatus = false;
+  } else {
+    statusObj.deviceStatus = true;
+  }
+};
+// save data
+const saveData = async (data) => {
+  console.log(data);
+  if (data === 'S') {
+    dataType = data;
+  } else {
+    switch (dataType) {
+      case 'S':
+        statusHandler(data);
+        break;
+
+      default:
+        localBuffer = data;
+        break;
+    }
+  }
+};
 const readingPort = () => {
   if (portObjTemp) {
   }

@@ -11,7 +11,7 @@ const lightBar = document.querySelector('#intensity-bar-progress');
 const incLightBtn = document.querySelector('#plus-light');
 const decLightBtn = document.querySelector('#minus-light');
 const ligthBarValue = document.querySelector('#light-inten-value');
-
+let lightIIntensityStatus = '70%';
 let currentLightIntensity = lightIIntensityStatus;
 let lightStatus = false;
 let autoLightStatus = false;
@@ -66,11 +66,13 @@ toggleBtnLight('light');
 toggleBtnLight('auto-light');
 updateLigthControl();
 const updateLightStatus = () => {
+  let frame;
   if (lightStatus) {
-    // frame on
+    frame = '#rld;';
   } else {
-    // frame off
+    frame = '#sld;';
   }
+  sendDataToPort(frame);
   toggleBtnLight('light');
   toggleBtnLight('auto-light');
 };
@@ -81,7 +83,13 @@ lightOnBtn.addEventListener('click', () => {
 autoLightBtn.addEventListener('click', () => {
   autoLightStatus = !autoLightStatus;
   toggleBtnLight('auto-light');
-  //   frame
+  let frame;
+  if (autoLightStatus) {
+    frame = '#rle;';
+  } else {
+    frame = '#rld;';
+  }
+  sendDataToPort(frame);
 });
 
 incLightBtn.addEventListener('click', () => {

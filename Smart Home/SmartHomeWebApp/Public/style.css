@@ -307,7 +307,7 @@ body {
   background: linear-gradient(to bottom, #da4453, #89216b);
 }
 .mic-btn-active {
-  background: linear-gradient(to bottom, #89216b, #89216b);
+  background: linear-gradient(to right, #da4453, #89216b);
   border: 1px solid #faf4f4;
   width: 27px;
   height: 25px;

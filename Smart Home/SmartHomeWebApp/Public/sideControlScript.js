@@ -50,19 +50,23 @@ toggleSideBtn('door');
 toggleSideBtn('device');
 
 const updateDoorStatus = (doorStatus) => {
+  let frame;
   if (doorStatus) {
-    // frame on
+    frame = '#rgd;';
   } else {
-    // frame off
+    frame = '#sgd;';
   }
+  sendDataToPort(frame);
   toggleSideBtn('door');
 };
 const updateDeviceStatus = (deviceStatus) => {
+  let frame;
   if (deviceStatus) {
-    // frame on
+    frame = '#rcd;';
   } else {
-    // frame off
+    frame = '#scd;';
   }
+  sendDataToPort(frame);
   toggleSideBtn('device');
 };
 DoorOnBtn.addEventListener('click', () => {
@@ -87,39 +91,61 @@ MicOnBtn.addEventListener('click', () => {
   recognition.onspeechend = () => {
     console.log('stopped listening');
     recognition.stop();
+    MicOnBtn.classList.remove('mic-btn-active');
+    MicOnBtn.classList.add('mic-btn');
   };
   recognition.onresult = (result) => {
     let value = result.results[0][0].transcript;
     VoiceValueElem.innerHTML = value + '..';
     MicOnBtn.classList.remove('mic-btn-active');
     MicOnBtn.classList.add('mic-btn');
+    let done = true;
     if (value === 'turn on device') {
       currentDeviceStatus = true;
       updateDeviceStatus(currentDeviceStatus);
+      speak('Device is on');
     } else if (value === 'turn off device') {
       currentDeviceStatus = false;
       updateDeviceStatus(currentDeviceStatus);
+      speak('Device is off');
     } else if (value === 'open door') {
       currentDoorStatus = true;
       updateDoorStatus(currentDoorStatus);
+      speak('door is opened');
     } else if (value === 'close door') {
       currentDoorStatus = false;
       updateDoorStatus(currentDoorStatus);
+      speak('door is closed');
     } else if (value === 'turn on lights') {
       lightStatus = true;
       updateLightStatus();
+      speak('lights are on');
     } else if (value === 'turn off lights') {
       lightStatus = false;
       updateLightStatus();
+      speak('lights are off');
     } else if (value === 'turn on fan') {
       fanStatus = true;
-      updateFandStatus();
+      updateFanStatus();
+      speak('fan is on');
     } else if (value === 'turn off fan') {
       fanStatus = false;
-      updateFandStatus();
+      updateFanStatus();
+      speak('fan is off');
+    } else if (value.includes('hi') || value.includes('hello')) {
+      speak(`hello sir`);
+    } else if (value.includes('bye')) {
+      speak(`bye bye sir have a nice day`);
+    } else if (value.includes('night')) {
+      speak(`good night sir`);
+    } else {
+      speak(`i don't understand`);
+      done = false;
     }
     // sende frame
-    speak('Okay');
+    if (done) {
+      // speak('Okay');
+    }
     setTimeout(() => {
       VoiceValueElem.innerHTML = 'Say Something..';
     }, 1000);

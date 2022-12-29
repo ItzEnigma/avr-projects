@@ -11,14 +11,33 @@ let outdoorTemp = '16°';
 let outdoorHum = '20%';
 let indoorTemp = '21°';
 let doorStatus = 'Closed';
-let lightIIntensityStatus = '70%';
 
+let homeStatus = true;
 const getStatusDataAPi = (data) => {
   outdoorTemp = data.outdoorTemp;
   outdoorHum = data.outdoorHum;
   indoorTemp = data.indoorTemp;
+  homeStatus = data.homeStatus;
   doorStatus = data.doorStatus;
+  if (doorStatus === 'Closed') {
+    currentDoorStatus = false;
+  } else {
+    currentDoorStatus = true;
+  }
+  fanStatus = data.fanStatus;
+  autoFanStatus = data.autoFanStatus;
+  lightStatus = data.lightStatus;
+  autoLightStatus = data.autoLightStatus;
+  currentDeviceStatus = data.deviceStatus;
   lightIIntensityStatus = data.lightIIntensityStatus;
+  currentLightIntensity = data.lightIIntensityStatus;
+  toggleSideBtn('door');
+  toggleSideBtn('device');
+  toggleBtn('fan');
+  toggleBtn('auto-fan');
+  toggleBtnLight('light');
+  toggleBtnLight('auto-light');
+  updateLigthControl();
 };
 const updateStatusSection = () => {
   // get the data
