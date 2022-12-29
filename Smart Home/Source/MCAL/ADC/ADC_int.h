@@ -1,12 +1,14 @@
 /*********************************************************/
 /***********		Author: TaqiEldeen	 	**************/
 /***********		Layer: HAL			 	**************/
-/***********		Component: LCD	 		**************/
+/***********		Component: ADC	 		**************/
 /***********		Version: 1.00		 	**************/
 /***********		Date: 31 Aug 2022	 	**************/
 /*********************************************************/
 #ifndef MCAL_ADC_ADC_INT_H_
 #define MCAL_ADC_ADC_INT_H_
+
+
 /*
  *
  * Error enum that will be in the STD_TYPES
@@ -40,7 +42,8 @@ typedef struct{
 }ADC_stChain;
 
 
-
+void ADC_vDisable();
+void ADC_vEnable();
 void ADC_vInit();
 void ADC_vSetPreScale(u8 A_u8PreScaleVal);
 void ADC_vTurnOff();

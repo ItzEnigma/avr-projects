@@ -25,7 +25,11 @@
 #define         MCU_SLEEP()      {MCUCR |= ((1<<7));\ 
 								  asm volatile("sleep");\
 								  }				  
-#define         MCU_WAKEUP()     MCUCR &= ~( (1<<7) | (1<<5) )
+#define         MCU_WAKEUP()     {\
+								  MCUCR &= ~( (1<<7) | (1<<5) );\
+								 }
+
+
 
 
 /**********************************************************************************************************************
@@ -37,3 +41,4 @@
 * \Description     : Initialization for whole peripherals of the
 *******************************************************************************/
 void Mcu_Init(void);
+

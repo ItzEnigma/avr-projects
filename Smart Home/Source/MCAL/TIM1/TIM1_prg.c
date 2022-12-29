@@ -13,6 +13,9 @@
 #include "TIM1_cfg.h"
 #include "TIM1_int.h"
 
+static u16 G_u16ISRCounter = 0;
+
+
 /**********************************************************************************************************
  * Description : Interface Function to 1-prescaler select, 2-Timer1 mode select, 3-Set OC0 Pin state
  * Outputs     : void
@@ -27,7 +30,6 @@ void TIM1_vInit(){
 
 		CLR_BIT(TCCR1A, FOC1B);
 		CLR_BIT(TCCR1A, FOC1A);
-
 	#else
 
 	#endif
@@ -60,6 +62,7 @@ void TIM1_vTurnOff	(){
  ***********************************************************************************************************/
 void TIM1_vSetPreload (u16 A_u16PreloadVal){
 	TCNT1 = A_u16PreloadVal;
+	G_u16Timer1_Preload_Val = A_u16PreloadVal;
 }
 
 /**********************************************************************************************************
@@ -566,7 +569,51 @@ static void TIMER_vTimer1_setupWGM() {
 
 	#endif
 }
+/**
+ * Description : Interface Function to set a delay for a specific timer
+ * Outputs     : void
+ * Inputs      :required delay in milliseconds, the function to be executed
+ * NOTES       : still need some work!
+ **/
+void  TIM1_vDelayMilli (u16 A_u16DelayMs, ptr_func_t ptr){
+    u16 L_u16PrescaleVal = 1;
+    f32 L_f32TimeOverFlow;
+    f32 L_f32TickTime;
+    u16 L_u16OverFlowCounts = 0;
+    f32 L_f32PreloadVal = 0;
+	/* Resetting the ISR Counter */
+	G_u16ISRCounter = 0;
 
+    switch(TIMER1_CLK_SELECT){
+        case TIMER1_PRESCALER_8:    L_u16PrescaleVal = 8;     break;
+        case TIMER1_PRESCALER_64:   L_u16PrescaleVal = 64;    break;
+        case TIMER1_PRESCALER_256:  L_u16PrescaleVal = 256;	  break;
+        case TIMER1_PRESCALER_1024: L_u16PrescaleVal = 1024;  break;
+    }
+
+    /* Tick time Calculation */
+    L_f32TickTime = (f32)L_u16PrescaleVal / TIMER1_InputFreq;
+
+    /* Time required for complete 1 over flow */
+    L_f32TimeOverFlow = ((u32)TIMER1_MAX_COUNT + 1.0) * (L_f32TickTime * (1000UL));
+
+    /* Over flow needed by this delay */
+    L_u16OverFlowCounts = (u16) ceil(( ((f32)A_u16DelayMs /L_f32TimeOverFlow) ));
+
+    /* Calculating OverFlow counts & preload value */
+    L_f32PreloadVal = (f32)L_u16OverFlowCounts - ((f32)A_u16DelayMs /L_f32TimeOverFlow);
+    G_u16Timer1_Cov = (u16)L_u16OverFlowCounts;
+
+
+#if  TIMER1_WGM_MODE == TIMER1_WGM_CTC_MODE
+        //TIM1_vSetOcr1aVal((TIMER0_MAX_COUNT - L_u16PreloadVal));
+        //G_PTRF_TIM0_CTC = ptr;
+#elif TIMER1_WGM_MODE == TIMER1_WGM_NORMAL_MODE
+        G_PTRF_TIM1_OVF = ptr;
+		TIM1_vSetPreload( (u16)(L_f32PreloadVal))	;
+#endif
+
+}
 
 
 
@@ -601,9 +648,18 @@ void __vector_8(void){
 
 /*TIMER1 OVF*/
 void __vector_9(void){
-	if(G_PTRF_TIM1_OVF != ADDRESS_NULL) {
-		G_PTRF_TIM1_OVF();
-	} else {
-
+	if(G_PTRF_TIM1_OVF != ADDRESS_NULL)
+	{
+		if(G_u16ISRCounter == G_u16Timer1_Cov)
+		{
+			G_u16ISRCounter = 0;
+			G_PTRF_TIM1_OVF();
+			TCNT1 = G_u16Timer1_Preload_Val;
+			} else {
+			G_u16ISRCounter++;
+		}
+		} else {
+		/* Handle callback error */
 	}
+	return;
 }

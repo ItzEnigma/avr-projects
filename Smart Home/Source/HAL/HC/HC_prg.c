@@ -104,7 +104,7 @@ void HC_u8ReceiveDataAsync(ptr_func_Iu16_Ov ptr){
  * Inputs      : Data
  ***********************************************************************************************************/
 void HC_vSendString(u8 *A_u8Data){
-	UART_vSendStringSync(&A_u8Data);
+	UART_vSendStringSync(A_u8Data);
 }
 
 /**********************************************************************************************************

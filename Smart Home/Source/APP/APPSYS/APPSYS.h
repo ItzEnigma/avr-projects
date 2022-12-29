@@ -26,7 +26,16 @@
 
 #define		_HOME_LOCKDOWN_STATE	111
 
+#define		LDR_INDEX					1	 /*For Channels Array*/
+#define		TEMP_INDEX					0	 /*For Channels Array*/
 
+#define		DOOR_STATUS_INDEX			0	 /*For HomeStatus Array*/
+#define		HOME_STATUS_INDEX			1	 /*For HomeStatus Array*/
+#define		ELEC_STATUS_INDEX			2	 /*For HomeStatus Array*/
+#define		FAN_STATUS_INDEX			3	 /*For HomeStatus Array*/
+#define		AUTO_LIGHT_STATUS_INDEX		4	 /*For HomeStatus Array*/
+#define		AUTO_FAN_STATUS_INDEX		5	 /*For HomeStatus Array*/
+#define 	LIGHT_STATUS_INDEX			6	 /*For HomeStatus Array*/
 
 /**********************************************************************************************************************
  *  GLOBAL FUNCTION PROTOTYPES
@@ -51,6 +60,26 @@ void Animation1_LcdPassword();
 * \Description     : The API responsible for getting from keypad when triggered
 *******************************************************************************/
 void StartKeypad();
+
+
+/******************************************************************************
+* \Syntax          : void System_SendFrame(void)
+* \Description     : Sending the frame containing (Temp, LDR, LEDs) values, home
+					 status, door status, electrical device status and fan status
+*******************************************************************************/
+void System_SendFrame();
+
+
+static void toHex(u8 A_u8Data);
+
+/******************************************************************************
+* \Syntax          : void System_UartHandler(void)
+* \Description     :
+* \Parameters (in) : Character received
+* \Parameters (out): The Global Buffer (G_u8Buffer), G_u8IsBufferRdy = true;
+* \Return value:   : None
+*******************************************************************************/
+void System_UartHandler(u16 A_u8Data);
 
 /******************************************************************************
 * \Syntax          : void Timer0Elapsed_KeyOFF(void)        

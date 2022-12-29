@@ -140,4 +140,12 @@ void TIM1_vSetTriggering (u8 A_u8Trigger);
  ***********************************************************************************************************/
 u16 TIM1_vGetIcr1Val ();
 
+/**
+ * Description : Interface Function to set a delay for a specific timer
+ * Outputs     : void
+ * Inputs      :required delay in milliseconds, the function to be executed
+ * NOTES       : still need some work!
+ **/
+void  TIM1_vDelayMilli (u16 A_u16DelayMs, ptr_func_t ptr);
+
 #endif /* MCAL_TIM0_TIM0_INT_H_ */

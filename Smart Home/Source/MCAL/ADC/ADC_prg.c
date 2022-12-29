@@ -120,6 +120,13 @@ void ADC_StartChain  ( ADC_stChain* chain )
     ADCSRA |= ((1<<3) | (1<<6));       /* Enabling ADC Interrupt just in case and starting conversion */
 }
 
+void ADC_vDisable(){
+	ADCSRA &= ~ (1<<7);
+}
+void ADC_vEnable(){
+	ADCSRA |= (1<<7);
+}
+
 /*ISR for the ADC*/
 void __vector_16 (void){
 	if( gISR_conversionMode == _ADC_ISR_SINGLECONVERSION )

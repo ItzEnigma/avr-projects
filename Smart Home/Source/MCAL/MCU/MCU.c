@@ -18,6 +18,7 @@
 #include "../GIE/GIE_int.h"
 #include "../EXTI/EXTI_int.h"
 #include "../ADC/ADC_int.h"
+#include "../ADC/ADC_reg.h"
 #include "../TIM0/TIM0_int.h"
 
 /**********************************************************************************************************************
@@ -34,7 +35,8 @@
 *******************************************************************************/
 void Mcu_Init(void)
 {
-    //TEMPS_vInit();
+    TEMPS_vInit();
+	HC_vInit();
 	LCD_vInit();
 	KeyPad_vInit();
 	GIE_vEnableGlobaLInt();

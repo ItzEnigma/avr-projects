@@ -154,7 +154,7 @@ void  TIM0_vDelayMilli (u16 A_u16DelayMs, u8 A_u8TimerId, ptr_func_t ptr){
 
     switch(TIMER0_CLK_SELECT){
         case TIMER0_PRESCALER_8:    L_u16PrescaleVal = 8;     break;
-        case TIMER0_PRESCALER_64:   L_u16PrescaleVal = 16;    break;
+        case TIMER0_PRESCALER_64:   L_u16PrescaleVal = 64;    break;
         case TIMER0_PRESCALER_256:  L_u16PrescaleVal = 256;	  break;
         case TIMER0_PRESCALER_1024: L_u16PrescaleVal = 1024;  break;
     }
@@ -178,9 +178,8 @@ void  TIM0_vDelayMilli (u16 A_u16DelayMs, u8 A_u8TimerId, ptr_func_t ptr){
         G_PTRF_TIM0_CTC = ptr;
 #elif TIMER0_WGM_MODE == TIMER0_WGM_NORMAL_MODE
         G_PTRF_TIM0_OVF = ptr;
-		TCNT0 = L_u8PreloadVal;
+		TIM0_vSetPreload(L_u8PreloadVal);
 #endif
-
 }
 
 
