@@ -20,6 +20,7 @@
 #include "../ADC/ADC_int.h"
 #include "../ADC/ADC_reg.h"
 #include "../TIM0/TIM0_int.h"
+#include "../TIM1/TIM1_int.h"
 
 /**********************************************************************************************************************
  *  GLOBAL FUNCTIONS
@@ -42,4 +43,5 @@ void Mcu_Init(void)
 	GIE_vEnableGlobaLInt();
 	TIM0_vInit();
 	EXTI_vInitINT0();
+	TIM1_vInit();
 }

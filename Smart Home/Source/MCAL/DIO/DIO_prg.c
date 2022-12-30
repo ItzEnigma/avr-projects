@@ -54,18 +54,18 @@ void DIO_vPortVal_Maked		(u8 A_u8PortId, u8 A_u8Val, u8 u8Method)
 {
 	if(u8Method == SET_OPERATION){
 		switch(A_u8PortId){
-		case PORTA_ID: PORTA |= A_u8Val; break;
-		case PORTB_ID: PORTB |= A_u8Val; break;
-		case PORTC_ID: PORTC |= A_u8Val; break;
-		case PORTD_ID: PORTD |= A_u8Val; break;
+			case PORTA_ID: PORTA |= A_u8Val; break;
+			case PORTB_ID: PORTB |= A_u8Val; break;
+			case PORTC_ID: PORTC |= A_u8Val; break;
+			case PORTD_ID: PORTD |= A_u8Val; break;
 		}
 	}
 	else if(u8Method == CLEAR_OPERATION){
 		switch(A_u8PortId){
-		case PORTA_ID: PORTA &= A_u8Val; break;
-		case PORTB_ID: PORTB &= A_u8Val; break;
-		case PORTC_ID: PORTC &= A_u8Val; break;
-		case PORTD_ID: PORTD &= A_u8Val; break;
+			case PORTA_ID: PORTA &= A_u8Val; break;
+			case PORTB_ID: PORTB &= A_u8Val; break;
+			case PORTC_ID: PORTC &= A_u8Val; break;
+			case PORTD_ID: PORTD &= A_u8Val; break;
 		}
 	}
 	else; /* Do Nothing */

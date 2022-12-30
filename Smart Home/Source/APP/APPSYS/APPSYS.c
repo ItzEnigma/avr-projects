@@ -21,6 +21,7 @@
 #include "../../HAL/LDR/LDR_int.h"
 #include "../../HAL/TEMPS/TEMPS_int.h"
 #include "../../HAL/KeyPad/KeyPad_int.h"
+#include "../../HAL/SERVO/SERVO_int.h"
 #include "../../HAL/HC/HC_int.h"
 #include <string.h>
 #include <avr/delay.h>
@@ -178,7 +179,8 @@ void System_CommandsHandler( void )
 	switch(G_u8Buffer[COMMAND_OBJECT])
 	{
 		case 'g':	/* Door */ 
-			/* TODO */
+			G_u8Buffer[COMMAND_ACTION] == ON ? SERVO_vSetState(STATE_180) : SERVO_vSetState(STATE_0) ;
+			//SERVO_vTurnOff();
 		break;
 		
 		case 'c':	/* Device */
@@ -194,7 +196,8 @@ void System_CommandsHandler( void )
 			}
 			else{		/* Not Automatic */
 				G_u8LightsMode = MANUAL;
-				G_u8Buffer[COMMAND_ACTION] == ON ? DIO_vPortVal_Maked(PORTC_ID, 0x0E, SET_OPERATION) : DIO_vPortVal_Maked(PORTC_ID, 0xF1, CLEAR_OPERATION);
+				G_u8Buffer[COMMAND_ACTION] == ON ? DIO_vPortVal_Maked(PORTC_ID, 0x0E, SET_OPERATION) 
+													: DIO_vPortVal_Maked(PORTC_ID, 0xF1, CLEAR_OPERATION);
 			}
 		G_u8HomeSatus[LIGHT_STATUS_INDEX] = G_u8Buffer[COMMAND_ACTION];			/* Setting the new status */
 		break;
@@ -204,10 +207,12 @@ void System_CommandsHandler( void )
 		{
 			G_u8FanMode = AUTOMATIC;
 			/* TODO: Automate fan API */
+			FanSpeed_AutoControl();
 		}
 		else{		/* Not Automatic */
 			G_u8FanMode = MANUAL;
 			/* TODO: TURN FAN ON/OFF */
+			G_u8Buffer[COMMAND_ACTION] == ON ? DCM_vTurnOn() : DCM_vTurnOff();
 		}
 	}
 }
@@ -321,6 +326,10 @@ void System_Start()
 	/* Buzzer */
 	DIO_vSetPinDir(PORTC_ID, PIN0_ID, DIR_OUTPUT);	
 	DIO_vSetPinVal(PORTC_ID, PIN0_ID, VAL_LOW);
+	
+	/* Fan */
+	DIO_vSetPinDir(PORTA_ID, PIN2_ID, DIR_OUTPUT);
+	DIO_vSetPinVal(PORTA_ID, PIN2_ID, VAL_LOW);
 
 	/* Keypad Activiation LED */
 	DIO_vSetPinDir(PORTB_ID, PIN7_ID, DIR_OUTPUT);
@@ -333,6 +342,15 @@ void System_Start()
 	DIO_vSetPinDir(PORTC_ID, PIN1_ID, DIR_OUTPUT);	DIO_vSetPinVal(PORTC_ID, PIN1_ID, VAL_LOW);
 	DIO_vSetPinDir(PORTC_ID, PIN2_ID, DIR_OUTPUT);	DIO_vSetPinVal(PORTC_ID, PIN2_ID, VAL_LOW);
 	DIO_vSetPinDir(PORTC_ID, PIN3_ID, DIR_OUTPUT);	DIO_vSetPinVal(PORTC_ID, PIN3_ID, VAL_LOW);
+	
+	/* Servo */
+	SERVO_vInit();
+	SERVO_vTurnOn();			/* Enable servo */
+	SERVO_vSetState(STATE_0);	/* Initially Locked */
+	
+	/* DC motor*/
+	DCM_vInit();
+	DCM_vTurnOn();
 
 	EXTI_vReg_Func(&StartKeypad, INT0_ID);
 	HC_u8ReceiveDataAsync(&System_UartHandler);
@@ -422,7 +440,7 @@ void System_WakeUp()
 		else if(Home_State == _HOME_UNLOCKED)
 		{
 			ADC_StartChain(&chain);
-			_delay_ms(500);
+			_delay_ms(100);
 			/* LED INENSITY CONTROL IF AUTOMATIC */
 			LedIntensity_AutoControl();
 		}
@@ -441,13 +459,13 @@ void System_WakeUp()
 *******************************************************************************/
 void LedIntensity_AutoControl()
 {
-	if 		(channelsValues[LDR_CHANNEL] <= 3000)		/* Level 1: Sunny*/
+	if 		(channelsValues[LDR_CHANNEL] <= 2000)		/* Level 1: Sunny*/
 		DIO_vPortVal_Maked(PORTC_ID, 0xF1, CLEAR_OPERATION);
-	else if (channelsValues[LDR_CHANNEL] <= 4500){		/* Level 2 */
+	else if (channelsValues[LDR_CHANNEL] <= 3000){		/* Level 2 */
 		DIO_vPortVal_Maked(PORTC_ID, 0xF1, CLEAR_OPERATION);
 		DIO_vSetPinVal(PORTC_ID, PIN1_ID, VAL_HIGH);
 	}
-	else if (channelsValues[LDR_CHANNEL] <= 7500){		/* Level 3 */
+	else if (channelsValues[LDR_CHANNEL] <= 5000){		/* Level 3 */
 		DIO_vPortVal_Maked(PORTC_ID, 0xF1, CLEAR_OPERATION);
 		DIO_vSetPinVal(PORTC_ID, PIN2_ID, VAL_HIGH);
 		DIO_vSetPinVal(PORTC_ID, PIN3_ID, VAL_HIGH);
@@ -456,4 +474,20 @@ void LedIntensity_AutoControl()
 		DIO_vPortVal_Maked(PORTC_ID, 0x0E, SET_OPERATION);
 		
 	DIO_vTogPin(PORTB_ID, PIN7_ID);
+}
+
+
+/******************************************************************************
+* \Syntax          : void FanSpeed_AutoControl(void)
+* \Description     : Automatic control of the Fan based on the temprature
+*******************************************************************************/
+void FanSpeed_AutoControl(){
+	if(channelsValues[TEMP_INDEX] < 10)			DCM_vSetPWM(10);
+	else if(channelsValues[TEMP_INDEX] < 15)	DCM_vSetPWM(20);
+	else if(channelsValues[TEMP_INDEX] < 20)	DCM_vSetPWM(30);
+	else if(channelsValues[TEMP_INDEX] < 25)	DCM_vSetPWM(40);
+	else if(channelsValues[TEMP_INDEX] < 30)	DCM_vSetPWM(60);
+	else if(channelsValues[TEMP_INDEX] < 35)	DCM_vSetPWM(80);
+	else if(channelsValues[TEMP_INDEX] < 100)	DCM_vSetPWM(100);
+	else ;	/*UNDEFINED*/
 }

@@ -5,8 +5,8 @@
  *      Author: 20109
  */
 
-#ifndef MCAL_TIM0_TIM0_INT_H_
-#define MCAL_TIM0_TIM0_INT_H_
+#ifndef MCAL_TIM2_TIM2_INT_H_
+#define MCAL_TIM2_TIM2_INT_H_
 
 #define	TIMER_DUTY_CYCLE_25		25
 #define	TIMER_DUTY_CYCLE_50		50
@@ -70,4 +70,4 @@ void TIM2_vCallBack_OVF2 (ptr_func_t ptr);
  ***********************************************************************************************************/
 void TIMER_vSetDutyCycleOC2 (u8 A_u8DutyCycle);
 
-#endif /* MCAL_TIM0_TIM0_INT_H_ */
+#endif /* MCAL_TIM2_TIM2_INT_H_ */

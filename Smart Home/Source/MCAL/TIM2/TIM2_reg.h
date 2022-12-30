@@ -5,8 +5,8 @@
  *      Author: 20109
  */
 
-#ifndef MCAL_TIM0_TIM0_REG_H_
-#define MCAL_TIM0_TIM0_REG_H_
+#ifndef MCAL_TIM2_TIM2_REG_H_
+#define MCAL_TIM2_TIM2_REG_H_
 
 /**************   Timer2 Registers   **************/
 
@@ -47,4 +47,4 @@
 #define TOV2  6
 #define OCF2  7
 
-#endif /* MCAL_TIM0_TIM0_REG_H_ */
+#endif /* MCAL_TIM2_TIM2_REG_H_ */

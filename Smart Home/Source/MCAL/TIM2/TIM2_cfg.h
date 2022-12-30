@@ -5,8 +5,8 @@
  *      Author: 20109
  */
 
-#ifndef MCAL_TIM0_TIM0_CFG_H_
-#define MCAL_TIM0_TIM0_CFG_H_
+#ifndef MCAL_TIM2_TIM2_CFG_H_
+#define MCAL_TIM2_TIM2_CFG_H_
 
 /**************   TIMER2_config   **************/
 
@@ -95,4 +95,4 @@
 #define OC2_PORT PORTD_ID
 #define OC2_PIN	 PIN7_ID
 
-#endif /* MCAL_TIM0_TIM0_CFG_H_ */
+#endif /* MCAL_TIM2_TIM2_CFG_H_ */

@@ -5,8 +5,8 @@
  *      Author: 20109
  */
 
-#ifndef MCAL_TIM0_TIM0_PRI_H_
-#define MCAL_TIM0_TIM0_PRI_H_
+#ifndef MCAL_TIM2_TIM2_PRI_H_
+#define MCAL_TIM2_TIM2_PRI_H_
 
 /**************   TIMER2_private   **************/
 
@@ -77,4 +77,4 @@ static void TIMER_vTimer2_SetupPhaseCorrectPWM	();
 static u16 G_u16Timer2_Cov = 0;
 static u8 G_u8Timer2_Preload_Val = 0;
 static u8 G_u8Timer2_OcrVal = 0;
-#endif /* MCAL_TIM0_TIM0_PRI_H_ */
+#endif /* MCAL_TIM2_TIM2_PRI_H_ */

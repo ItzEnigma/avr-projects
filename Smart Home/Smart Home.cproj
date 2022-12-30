@@ -137,6 +137,7 @@
     <Folder Include="Source\APP\" />
     <Folder Include="Source\APP\APPSYS\" />
     <Folder Include="Source\HAL\" />
+    <Folder Include="Source\HAL\DCM\" />
     <Folder Include="Source\HAL\HC\" />
     <Folder Include="Source\HAL\KeyPad\" />
     <Folder Include="Source\HAL\LCD\" />
@@ -164,6 +165,15 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Source\APP\main.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\HAL\DCM\DCM_cfg.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\HAL\DCM\DCM_int.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\HAL\DCM\DCM_prg.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Source\HAL\HC\HC_cfg.h">

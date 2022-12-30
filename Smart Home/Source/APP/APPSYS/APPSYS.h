@@ -129,3 +129,10 @@ void System_WakeUp();
 * \Description     : Automatic control of the LEDs based on the intensity value
 *******************************************************************************/
 void LedIntensity_AutoControl();
+
+
+/******************************************************************************
+* \Syntax          : void FanSpeed_AutoControl(void)
+* \Description     : Automatic control of the Fan based on the temprature
+*******************************************************************************/
+void FanSpeed_AutoControl();

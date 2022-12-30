@@ -127,9 +127,9 @@ void TIMER_vCallBack_ICF1 (ptr_func_t ptr){
  ***********************************************************************************************************/
 void TIM1_vSetDutyCycleOC1A (u8 A_u8DutyCycle){
 	#if TIMER1_OC1A_PWM_MODE == PWM_NON_INVERTING
-		TIM1_vSetOcr1aVal( ( (TIMER1_MAX_COUNT + 1) * A_u8DutyCycle ) /100);
-	#elif TIMER1_PWM_MODE == PWM_INVERTING
-		TIM1_vSetOcr1aVal( ( -( (A_u8DutyCycle/100) - 1) ) * (TIMER1_MAX_COUNT + 1);
+		TIM1_vSetOcr1aVal( ( (0xFF + 1) * A_u8DutyCycle ) /100);
+	#elif TIMER1_OC1A_PWM_MODE == PWM_INVERTING
+		TIM1_vSetOcr1aVal( ( -( (A_u8DutyCycle/100) - 1) ) * (0xFF + 1) );
 	#endif
 }
 
@@ -140,9 +140,9 @@ void TIM1_vSetDutyCycleOC1A (u8 A_u8DutyCycle){
  ***********************************************************************************************************/
 void TIM1_vSetDutyCycleOC1B (u8 A_u8DutyCycle){
 	#if TIMER1_OC1B_PWM_MODE == PWM_NON_INVERTING
-		TIM1_vSetOcr1bVal( ( (TIMER1_MAX_COUNT + 1) * A_u8DutyCycle ) /100);
-	#elif TIMER1_PWM_MODE == PWM_INVERTING
-		TIM1_vSetOcr1bVal( ( -( (A_u8DutyCycle/100) - 1) ) * (TIMER1_MAX_COUNT + 1);
+		TIM1_vSetOcr1bVal( ( (0xFF + 1) * A_u8DutyCycle ) /100);
+	#elif TIMER1_OC1B_PWM_MODE == PWM_INVERTING
+		TIM1_vSetOcr1bVal( ( -( (A_u8DutyCycle/100) - 1) ) * (TIMER1_MAX_COUNT + 1) );
 	#endif
 }
 
@@ -226,9 +226,9 @@ static void TIMER_vTimer1_setupWGM() {
 		TCCR1A |= (TIMER1_OC1A_MODE << COM1A0);
 		TCCR1A |= (TIMER1_OC1B_MODE << COM1B0);
 
-	#if TIMER1_OVF_INT_STATE == INT_ENABLE
-		TIMSK |= (1<<TOIE1);
-	#endif
+		#if TIMER1_OVF_INT_STATE == INT_ENABLE
+			TIMSK |= (1<<TOIE1);
+		#endif
 
 		/*Set the pin direction*/
 		#if TIMER1_OC1A_MODE != TIMER1_OC1x_DISCONNECT
@@ -250,10 +250,10 @@ static void TIMER_vTimer1_setupWGM() {
 			TCCR1A &= ~(1<<COM1A0);
 			DIO_vSetPinVal(OC1A_PORT, OC1A_PIN, DIR_OUTPUT);
 		#elif TIMER1_OC1A_PWM_MODE == PWM_INVERTING
-			TCCR1A |= (1<<WGM1A1) | (1<<WGM1A0);
+			TCCR1A |= (1<<COM1A1) | (1<<COM1A0);
 			DIO_vSetPinVal(OC1A_PORT, OC1A_PIN, DIR_OUTPUT);
 		#elif TIMER1_OC1A_PWM_MODE == PWM_OFF
-			TCCR1A &= ~( (1<<WGM1A0) | (1<<WGM1A1) );
+			TCCR1A &= ~( (1<<COM1A0) | (1<<COM1A1) );
 		#endif
 
 		/*Setup the PWM state of OC1B*/
@@ -262,10 +262,10 @@ static void TIMER_vTimer1_setupWGM() {
 			TCCR1A &= ~(1<<COM1B0);
 			DIO_vSetPinVal(OC1B_PORT, OC1B_PIN, DIR_OUTPUT);
 		#elif TIMER1_OC1A_PWM_MODE == PWM_INVERTING
-			TCCR1A |= (1<<WGM1B1) | (1<<WGM1B0);
+			TCCR1A |= (1<<COM1B1) | (1<<COM1B0);
 			DIO_vSetPinVal(OC1B_PORT, OC1B_PIN, DIR_OUTPUT);
 		#elif TIMER1_OC1A_PWM_MODE == PWM_OFF
-			TCCR1A &= ~( (1<<WGM1B0) | (1<<WGM1B1) );
+			TCCR1A &= ~( (1<<COM1B0) | (1<<COM1B1) );
 		#endif
 
 	#elif TIMER1_WGM_MODE == TIMER1_WGM_PWM_PHASE_CORRECT_9BIT_MODE
@@ -279,10 +279,10 @@ static void TIMER_vTimer1_setupWGM() {
 			TCCR1A &= ~(1<<COM1A0);
 			DIO_vSetPinVal(OC1A_PORT, OC1A_PIN, DIR_OUTPUT);
 		#elif TIMER1_OC1A_PWM_MODE == PWM_INVERTING
-			TCCR1A |= (1<<WGM1A1) | (1<<WGM1A0);
+			TCCR1A |= (1<<COM1A1) | (1<<COM1A0);
 			DIO_vSetPinVal(OC1A_PORT, OC1A_PIN, DIR_OUTPUT);
 		#elif TIMER1_OC1A_PWM_MODE == PWM_OFF
-			TCCR1A &= ~( (1<<WGM1A0) | (1<<WGM1A1) );
+			TCCR1A &= ~( (1<<COM1A0) | (1<<COM1A1) );
 		#endif
 
 		/*Setup the PWM state of OC1B*/
@@ -291,10 +291,10 @@ static void TIMER_vTimer1_setupWGM() {
 			TCCR1A &= ~(1<<COM1B0);
 			DIO_vSetPinVal(OC1B_PORT, OC1B_PIN, DIR_OUTPUT);
 		#elif TIMER1_OC1A_PWM_MODE == PWM_INVERTING
-			TCCR1A |= (1<<WGM1B1) | (1<<WGM1B0);
+			TCCR1A |= (1<<COM1B1) | (1<<COM1B0);
 			DIO_vSetPinVal(OC1B_PORT, OC1B_PIN, DIR_OUTPUT);
 		#elif TIMER1_OC1A_PWM_MODE == PWM_OFF
-			TCCR1A &= ~( (1<<WGM1B0) | (1<<WGM1B1) );
+			TCCR1A &= ~( (1<<COM1B0) | (1<<COM1B1) );
 		#endif
 
 	#elif TIMER1_WGM_MODE == TIMER1_WGM_PWM_PHASE_CORRECT_10BIT_MODE
@@ -307,10 +307,10 @@ static void TIMER_vTimer1_setupWGM() {
 			TCCR1A &= ~(1<<COM1A0);
 			DIO_vSetPinVal(OC1A_PORT, OC1A_PIN, DIR_OUTPUT);
 		#elif TIMER1_OC1A_PWM_MODE == PWM_INVERTING
-			TCCR1A |= (1<<WGM1A1) | (1<<WGM1A0);
+			TCCR1A |= (1<<COM1A1) | (1<<COM1A0);
 			DIO_vSetPinVal(OC1A_PORT, OC1A_PIN, DIR_OUTPUT);
 		#elif TIMER1_OC1A_PWM_MODE == PWM_OFF
-			TCCR1A &= ~( (1<<WGM1A0) | (1<<WGM1A1) );
+			TCCR1A &= ~( (1<<COM1A0) | (1<<COM1A1) );
 		#endif
 
 		/*Setup the PWM state of OC1B*/
@@ -319,13 +319,13 @@ static void TIMER_vTimer1_setupWGM() {
 			TCCR1A &= ~(1<<COM1B0);
 			DIO_vSetPinVal(OC1B_PORT, OC1B_PIN, DIR_OUTPUT);
 		#elif TIMER1_OC1A_PWM_MODE == PWM_INVERTING
-			TCCR1A |= (1<<WGM1B1) | (1<<WGM1B0);
+			TCCR1A |= (1<<COM1B1) | (1<<COM1B0);
 			DIO_vSetPinVal(OC1B_PORT, OC1B_PIN, DIR_OUTPUT);
 		#elif TIMER1_OC1A_PWM_MODE == PWM_OFF
-			TCCR1A &= ~( (1<<WGM1B0) | (1<<WGM1B1) );
+			TCCR1A &= ~( (1<<COM1B0) | (1<<COM1B1) );
 		#endif
 
-	#elif TIMER1_WGM_MDOE == TIMER1_WGM_CTC_MODE
+	#elif TIMER1_WGM_MODE == TIMER1_WGM_CTC_MODE
 		TCCR1A &= ~( (1<<WGM10) | (1<<WGM11) );
 		TCCR1B |= (1<<WGM12);
 		TCCR1B &= ~(1<<WGM13);
@@ -333,7 +333,7 @@ static void TIMER_vTimer1_setupWGM() {
 		/*Setup the OC1x pin mode*/
 		TCCR1A &= TIMER1_COM1xx_MASK;
 		TCCR1A |= (TIMER1_OC1A_MODE << COM1A0);
-		TCCR1A |= (TIMER1_OC1B_MOE << COM1B0);
+		TCCR1A |= (TIMER1_OC1B_MODE << COM1B0);
 
 		/*Set the pin direction*/
 		#if TIMER1_OC1A_MODE != TIMER1_OC1x_DISCONNECT
@@ -356,10 +356,10 @@ static void TIMER_vTimer1_setupWGM() {
 			TCCR1A &= ~(1<<COM1A0);
 			DIO_vSetPinVal(OC1A_PORT, OC1A_PIN, DIR_OUTPUT);
 		#elif TIMER1_OC1A_PWM_MODE == PWM_INVERTING
-			TCCR1A |= (1<<WGM1A1) | (1<<WGM1A0);
+			TCCR1A |= (1<<COM1A1) | (1<<COM1A0);
 			DIO_vSetPinVal(OC1A_PORT, OC1A_PIN, DIR_OUTPUT);
 		#elif TIMER1_OC1A_PWM_MODE == PWM_OFF
-			TCCR1A &= ~( (1<<WGM1A0) | (1<<WGM1A1) );
+			TCCR1A &= ~( (1<<COM1A0) | (1<<COM1A1) );
 		#endif
 
 		/*Setup the PWM state of OC1B*/
@@ -368,10 +368,10 @@ static void TIMER_vTimer1_setupWGM() {
 			TCCR1A &= ~(1<<COM1B0);
 			DIO_vSetPinVal(OC1B_PORT, OC1B_PIN, DIR_OUTPUT);
 		#elif TIMER1_OC1A_PWM_MODE == PWM_INVERTING
-			TCCR1A |= (1<<WGM1B1) | (1<<WGM1B0);
+			TCCR1A |= (1<<COM1B1) | (1<<COM1B0);
 			DIO_vSetPinVal(OC1B_PORT, OC1B_PIN, DIR_OUTPUT);
 		#elif TIMER1_OC1A_PWM_MODE == PWM_OFF
-			TCCR1A &= ~( (1<<WGM1B0) | (1<<WGM1B1) );
+			TCCR1A &= ~( (1<<COM1B0) | (1<<COM1B1) );
 		#endif
 
 	#elif TIMER1_WGM_MODE == TIMER1_WGM_FAST_PWM_9BIT_MODE
@@ -386,10 +386,10 @@ static void TIMER_vTimer1_setupWGM() {
 			TCCR1A &= ~(1<<COM1A0);
 			DIO_vSetPinVal(OC1A_PORT, OC1A_PIN, DIR_OUTPUT);
 		#elif TIMER1_OC1A_PWM_MODE == PWM_INVERTING
-			TCCR1A |= (1<<WGM1A1) | (1<<WGM1A0);
+			TCCR1A |= (1<<COM1A1) | (1<<COM1A0);
 			DIO_vSetPinVal(OC1A_PORT, OC1A_PIN, DIR_OUTPUT);
 		#elif TIMER1_OC1A_PWM_MODE == PWM_OFF
-			TCCR1A &= ~( (1<<WGM1A0) | (1<<WGM1A1) );
+			TCCR1A &= ~( (1<<COM1A0) | (1<<COM1A1) );
 		#endif
 
 		/*Setup the PWM state of OC1B*/
@@ -398,10 +398,10 @@ static void TIMER_vTimer1_setupWGM() {
 			TCCR1A &= ~(1<<COM1B0);
 			DIO_vSetPinVal(OC1B_PORT, OC1B_PIN, DIR_OUTPUT);
 		#elif TIMER1_OC1A_PWM_MODE == PWM_INVERTING
-			TCCR1A |= (1<<WGM1B1) | (1<<WGM1B0);
+			TCCR1A |= (1<<COM1B1) | (1<<COM1B0);
 			DIO_vSetPinVal(OC1B_PORT, OC1B_PIN, DIR_OUTPUT);
 		#elif TIMER1_OC1A_PWM_MODE == PWM_OFF
-			TCCR1A &= ~( (1<<WGM1B0) | (1<<WGM1B1) );
+			TCCR1A &= ~( (1<<COM1B0) | (1<<COM1B1) );
 		#endif
 
 	#elif TIMER1_WGM_MODE == TIMER1_WGM_FAST_PWM_10BIT_MODE
@@ -415,10 +415,10 @@ static void TIMER_vTimer1_setupWGM() {
 			TCCR1A &= ~(1<<COM1A0);
 			DIO_vSetPinVal(OC1A_PORT, OC1A_PIN, DIR_OUTPUT);
 		#elif TIMER1_OC1A_PWM_MODE == PWM_INVERTING
-			TCCR1A |= (1<<WGM1A1) | (1<<WGM1A0);
+			TCCR1A |= (1<<COM1A1) | (1<<COM1A0);
 			DIO_vSetPinVal(OC1A_PORT, OC1A_PIN, DIR_OUTPUT);
 		#elif TIMER1_OC1A_PWM_MODE == PWM_OFF
-			TCCR1A &= ~( (1<<WGM1A0) | (1<<WGM1A1) );
+			TCCR1A &= ~( (1<<COM1A0) | (1<<COM1A1) );
 		#endif
 
 		/*Setup the PWM state of OC1B*/
@@ -427,10 +427,10 @@ static void TIMER_vTimer1_setupWGM() {
 			TCCR1A &= ~(1<<COM1B0);
 			DIO_vSetPinVal(OC1B_PORT, OC1B_PIN, DIR_OUTPUT);
 		#elif TIMER1_OC1A_PWM_MODE == PWM_INVERTING
-			TCCR1A |= (1<<WGM1B1) | (1<<WGM1B0);
+			TCCR1A |= (1<<COM1B1) | (1<<COM1B0);
 			DIO_vSetPinVal(OC1B_PORT, OC1B_PIN, DIR_OUTPUT);
 		#elif TIMER1_OC1A_PWM_MODE == PWM_OFF
-			TCCR1A &= ~( (1<<WGM1B0) | (1<<WGM1B1) );
+			TCCR1A &= ~( (1<<COM1B0) | (1<<COM1B1) );
 		#endif
 	#elif TIMER1_WGM_MODE == TIMER1_WGM_PWM_PHASE_CORRECT_TOP_ICR1
 		TCCR1A &= ~( (1<<WGM10) | (1<<WGM11) );
@@ -443,10 +443,10 @@ static void TIMER_vTimer1_setupWGM() {
 			TCCR1A &= ~(1<<COM1A0);
 			DIO_vSetPinVal(OC1A_PORT, OC1A_PIN, DIR_OUTPUT);
 		#elif TIMER1_OC1A_PWM_MODE == PWM_INVERTING
-			TCCR1A |= (1<<WGM1A1) | (1<<WGM1A0);
+			TCCR1A |= (1<<COM1A1) | (1<<COM1A0);
 			DIO_vSetPinVal(OC1A_PORT, OC1A_PIN, DIR_OUTPUT);
 		#elif TIMER1_OC1A_PWM_MODE == PWM_OFF
-			TCCR1A &= ~( (1<<WGM1A0) | (1<<WGM1A1) );
+			TCCR1A &= ~( (1<<COM1A0) | (1<<COM1A1) );
 		#endif
 
 		/*Setup the PWM state of OC1B*/
@@ -455,10 +455,10 @@ static void TIMER_vTimer1_setupWGM() {
 			TCCR1A &= ~(1<<COM1B0);
 			DIO_vSetPinVal(OC1B_PORT, OC1B_PIN, DIR_OUTPUT);
 		#elif TIMER1_OC1A_PWM_MODE == PWM_INVERTING
-			TCCR1A |= (1<<WGM1B1) | (1<<WGM1B0);
+			TCCR1A |= (1<<COM1B1) | (1<<COM1B0);
 			DIO_vSetPinVal(OC1B_PORT, OC1B_PIN, DIR_OUTPUT);
 		#elif TIMER1_OC1A_PWM_MODE == PWM_OFF
-			TCCR1A &= ~( (1<<WGM1B0) | (1<<WGM1B1) );
+			TCCR1A &= ~( (1<<COM1B0) | (1<<COM1B1) );
 		#endif
 
 	#elif TIMER1_WGM_MODE == TIMER1_WGM_PWM_PHASE_CORRECT_TOP_OCR1A
@@ -473,10 +473,10 @@ static void TIMER_vTimer1_setupWGM() {
 			TCCR1A &= ~(1<<COM1A0);
 			DIO_vSetPinVal(OC1A_PORT, OC1A_PIN, DIR_OUTPUT);
 		#elif TIMER1_OC1A_PWM_MODE == PWM_INVERTING
-			TCCR1A |= (1<<WGM1A1) | (1<<WGM1A0);
+			TCCR1A |= (1<<COM1A1) | (1<<COM1A0);
 			DIO_vSetPinVal(OC1A_PORT, OC1A_PIN, DIR_OUTPUT);
 		#elif TIMER1_OC1A_PWM_MODE == PWM_OFF
-			TCCR1A &= ~( (1<<WGM1A0) | (1<<WGM1A1) );
+			TCCR1A &= ~( (1<<COM1A0) | (1<<COM1A1) );
 		#endif
 
 		/*Setup the PWM state of OC1B*/
@@ -485,10 +485,10 @@ static void TIMER_vTimer1_setupWGM() {
 			TCCR1A &= ~(1<<COM1B0);
 			DIO_vSetPinVal(OC1B_PORT, OC1B_PIN, DIR_OUTPUT);
 		#elif TIMER1_OC1A_PWM_MODE == PWM_INVERTING
-			TCCR1A |= (1<<WGM1B1) | (1<<WGM1B0);
+			TCCR1A |= (1<<COM1B1) | (1<<COM1B0);
 			DIO_vSetPinVal(OC1B_PORT, OC1B_PIN, DIR_OUTPUT);
 		#elif TIMER1_OC1A_PWM_MODE == PWM_OFF
-			TCCR1A &= ~( (1<<WGM1B0) | (1<<WGM1B1) );
+			TCCR1A &= ~( (1<<COM1B0) | (1<<COM1B1) );
 		#endif
 	#elif TIMER1_WGM_MODE == TIMER1_WGM_CTC_TOP_ICR1
 		TCCR1A &= ~( (1<<WGM10) | (1<<WGM11) );
@@ -497,7 +497,7 @@ static void TIMER_vTimer1_setupWGM() {
 		/*Setup the OC1x pin mode*/
 		TCCR1A &= TIMER1_COM1xx_MASK;
 		TCCR1A |= (TIMER1_OC1A_MODE << COM1A0);
-		TCCR1A |= (TIMER1_OC1B_MOE << COM1B0);
+		TCCR1A |= (TIMER1_OC1B_MODE << COM1B0);
 
 		/*Set the pin direction*/
 		#if TIMER1_OC1A_MODE != TIMER1_OC1x_DISCONNECT
@@ -547,10 +547,10 @@ static void TIMER_vTimer1_setupWGM() {
 			TCCR1A &= ~(1<<COM1A0);
 			DIO_vSetPinVal(OC1A_PORT, OC1A_PIN, DIR_OUTPUT);
 		#elif TIMER1_OC1A_PWM_MODE == PWM_INVERTING
-			TCCR1A |= (1<<WGM1A1) | (1<<WGM1A0);
+			TCCR1A |= (1<<COM1A1) | (1<<COM1A0);
 			DIO_vSetPinVal(OC1A_PORT, OC1A_PIN, DIR_OUTPUT);
 		#elif TIMER1_OC1A_PWM_MODE == PWM_OFF
-			TCCR1A &= ~( (1<<WGM1A0) | (1<<WGM1A1) );
+			TCCR1A &= ~( (1<<COM1A0) | (1<<COM1A1) );
 		#endif
 
 		/*Setup the PWM state of OC1B*/
@@ -559,14 +559,14 @@ static void TIMER_vTimer1_setupWGM() {
 			TCCR1A &= ~(1<<COM1B0);
 			DIO_vSetPinVal(OC1B_PORT, OC1B_PIN, DIR_OUTPUT);
 		#elif TIMER1_OC1A_PWM_MODE == PWM_INVERTING
-			TCCR1A |= (1<<WGM1B1) | (1<<WGM1B0);
+			TCCR1A |= (1<<COM1B1) | (1<<COM1B0);
 			DIO_vSetPinVal(OC1B_PORT, OC1B_PIN, DIR_OUTPUT);
 		#elif TIMER1_OC1A_PWM_MODE == PWM_OFF
-			TCCR1A &= ~( (1<<WGM1B0) | (1<<WGM1B1) );
+			TCCR1A &= ~( (1<<COM1B0) | (1<<COM1B1) );
 		#endif
-
 	#endif
 }
+
 /**
  * Description : Interface Function to set a delay for a specific timer
  * Outputs     : void

@@ -25,7 +25,7 @@
 
 
 
-#define SERVO_PIN   PIN0_ID	
+#define SERVO_PIN   PIN3_ID	
 #define SERVO_PORT	PORTA_ID
 
 #endif /* HAL_SERVO_SERVO_CFG_H_ */
