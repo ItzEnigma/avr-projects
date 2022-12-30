@@ -12,6 +12,7 @@
 #include "TIM1_reg.h"
 #include "TIM1_cfg.h"
 #include "TIM1_int.h"
+#include <math.h>
 
 static u16 G_u16ISRCounter = 0;
 
@@ -207,9 +208,6 @@ void TIM1_vSetTriggering (u8 A_u8Trigger){
 u16 TIM1_vGetIcr1Val (){
 	return ICR1;
 }
-
-
-
 
 
 /**********************************************************************************************************
@@ -582,7 +580,7 @@ void  TIM1_vDelayMilli (u16 A_u16DelayMs, ptr_func_t ptr){
     u16 L_u16OverFlowCounts = 0;
     f32 L_f32PreloadVal = 0;
 	/* Resetting the ISR Counter */
-	G_u16ISRCounter = 0;
+	G_u16ISRCounter = 1;
 
     switch(TIMER1_CLK_SELECT){
         case TIMER1_PRESCALER_8:    L_u16PrescaleVal = 8;     break;
@@ -601,7 +599,7 @@ void  TIM1_vDelayMilli (u16 A_u16DelayMs, ptr_func_t ptr){
     L_u16OverFlowCounts = (u16) ceil(( ((f32)A_u16DelayMs /L_f32TimeOverFlow) ));
 
     /* Calculating OverFlow counts & preload value */
-    L_f32PreloadVal = (f32)L_u16OverFlowCounts - ((f32)A_u16DelayMs /L_f32TimeOverFlow);
+    L_f32PreloadVal = ( ( (f32)L_u16OverFlowCounts - ((f32)A_u16DelayMs / L_f32TimeOverFlow) )  * TIMER1_MAX_COUNT );
     G_u16Timer1_Cov = (u16)L_u16OverFlowCounts;
 
 
@@ -610,7 +608,7 @@ void  TIM1_vDelayMilli (u16 A_u16DelayMs, ptr_func_t ptr){
         //G_PTRF_TIM0_CTC = ptr;
 #elif TIMER1_WGM_MODE == TIMER1_WGM_NORMAL_MODE
         G_PTRF_TIM1_OVF = ptr;
-		TIM1_vSetPreload( (u16)(L_f32PreloadVal))	;
+		TIM1_vSetPreload( (u16) L_f32PreloadVal);
 #endif
 
 }
@@ -652,13 +650,13 @@ void __vector_9(void){
 	{
 		if(G_u16ISRCounter == G_u16Timer1_Cov)
 		{
-			G_u16ISRCounter = 0;
+			G_u16ISRCounter = 1;
 			G_PTRF_TIM1_OVF();
 			TCNT1 = G_u16Timer1_Preload_Val;
-			} else {
+		} else {
 			G_u16ISRCounter++;
 		}
-		} else {
+	} else {
 		/* Handle callback error */
 	}
 	return;
