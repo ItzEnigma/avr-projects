@@ -26,7 +26,8 @@ int main(void)
 	//DIO_vSetPinDir(PORTD_ID, PIN4_ID, DIR_OUTPUT);
 //	LCD_vInit();
 //	LCD_vDispStr("HELLO WORLD!");
-
+	 
+	 //DIO_vSetPinVal(PORTD_ID, PIN7_ID, VAL_HIGH);
     while (1) 
     {	
 		System_WakeUp();

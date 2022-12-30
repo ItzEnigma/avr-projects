@@ -37,6 +37,20 @@
 #define		AUTO_FAN_STATUS_INDEX		5	 /*For HomeStatus Array*/
 #define 	LIGHT_STATUS_INDEX			6	 /*For HomeStatus Array*/
 
+
+/* Received Frame From Web-Application */
+#define		COMMAND_ACTION				0	/* ON/OFF */
+#define		COMMAND_OBJECT				1	/* Object or Device to control */
+#define		COMMAND_MODE				2	/* Auto-mode ON/OFF (if the device has automatic mode) */
+
+/* Automatic/Manual Modes */
+#define		AUTOMATIC					50
+#define		MANUAL						51
+
+/* Device ON/OFF */
+#define		ON					    0x72
+#define		OFF						0x73
+
 /**********************************************************************************************************************
  *  GLOBAL FUNCTION PROTOTYPES
  *********************************************************************************************************************/
@@ -69,24 +83,31 @@ void StartKeypad();
 *******************************************************************************/
 void System_SendFrame();
 
-
+/******************************************************************************
+* \Syntax          : void toHex(void)
+* \Description     : The API responsible for sending the hex character of a value
+*******************************************************************************/
 static void toHex(u8 A_u8Data);
 
 /******************************************************************************
 * \Syntax          : void System_UartHandler(void)
 * \Description     :
-* \Parameters (in) : Character received
-* \Parameters (out): The Global Buffer (G_u8Buffer), G_u8IsBufferRdy = true;
-* \Return value:   : None
 *******************************************************************************/
 void System_UartHandler(u16 A_u8Data);
+
+
+/******************************************************************************
+* \Syntax          : void System_CommandsHandler(void)
+* \Description     : API responsible for handling the received commands from
+					 the web-application and changing status.
+*******************************************************************************/
+void System_CommandsHandler( void );
 
 /******************************************************************************
 * \Syntax          : void Timer0Elapsed_KeyOFF(void)        
 * \Description     : The API responsible for turning OFF keypad & LCD
 *******************************************************************************/
 void Timer0Elapsed_KeyOFF();
-
 
 
 /******************************************************************************
@@ -101,3 +122,10 @@ void System_Start();
 * \Description     : Waking the system-up and doing its functions
 *******************************************************************************/
 void System_WakeUp();
+
+
+/******************************************************************************
+* \Syntax          : void LedIntensity_AutoControl(void)        
+* \Description     : Automatic control of the LEDs based on the intensity value
+*******************************************************************************/
+void LedIntensity_AutoControl();

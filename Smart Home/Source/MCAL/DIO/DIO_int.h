@@ -8,6 +8,7 @@
 #ifndef MCAL_DIO_DIO_INT_H_
 #define MCAL_DIO_DIO_INT_H_
 
+
 /*ATmega 32 has 4 DIO ports*/
 typedef enum {
 	PORTA_ID,
@@ -36,11 +37,16 @@ typedef enum {
 #define DIR_OUTPUT 1
 #define DIR_INPUT  0
 
+/*Direction of the pin/port*/
+#define SET_OPERATION	 1
+#define CLEAR_OPERATION  0
+
 void DIO_vSetPinDir  (u8 A_u8PortId, u8 A_u8PinId, u8 A_u8Dir);
 void DIO_vSetPortDir (u8 A_u8PortId, u8 A_u8Dir);
 
-void DIO_vSetPinVal  (u8 A_u8PortId, u8 A_u8PinId, u8 A_u8Val);
-void DIO_vSetPortVal (u8 A_u8PortId, u8 A_u8Val);
+void DIO_vSetPinVal			(u8 A_u8PortId, u8 A_u8PinId, u8 A_u8Val);
+void DIO_vSetPortVal		(u8 A_u8PortId, u8 A_u8Val);
+void DIO_vPortVal_Maked		(u8 A_u8PortId, u8 A_u8Val, u8 u8Method);
 
 u8 DIO_u8GetPinVal   (u8 A_u8PortId, u8 A_u8PinId);
 u8 DIO_u8GetPortVal  (u8 A_u8PortId);

@@ -36,19 +36,23 @@ u8 trials = 4;
 
 /* Entry Password */
 u8 tempPassword[8] = {0};
-char password_i = 0;
+u8 password_i = 0;
 
 
 u16 channelsValues[2] = {0};
 u8 channels[2] = {TEMPS_PIN, LDR_CHANNEL};
 
-u8 Home_State = _HOME_LOCKED;
+u8 Home_State = _HOME_UNLOCKED;
 
 
 u8 G_u8HomeSatus [7];		/*Contains Door, Home, ELEC, Fan status*/
-u8 G_u8Buffer[40];			/*Buffer for Receiving Data from GUI */
+u8 G_u8Buffer[5];			/*Buffer for Receiving Data from GUI */
 u8 G_u8IsBufferRdy = 0;		/*Flag for reading buffer when ready*/
 
+
+/* Device Automatic Mode Variable */
+u8 G_u8FanMode		= MANUAL;
+u8 G_u8LightsMode	= MANUAL;
 
 
 /**********************************************************************************************************************
@@ -141,8 +145,13 @@ void System_UartHandler(u16 A_u8Data)
 		L_u8Flag = 0;
 		L_u8Counter = 0;
 		G_u8IsBufferRdy = 1;
+		
+		/* Handle the received command */
+		System_CommandsHandler();
+		/*****	 TODO: Remove these 2 lines		*****/
 		System_SendFrame();
 		DIO_vTogPin(PORTB_ID, PIN7_ID);
+		
 	}
 	if(L_u8Flag == 1 && A_u8Data != ' '){   /* Save Frame */
 		G_u8Buffer[L_u8Counter++] = A_u8Data;
@@ -152,6 +161,57 @@ void System_UartHandler(u16 A_u8Data)
 		G_u8IsBufferRdy = 0;
 	}
 }
+
+
+/******************************************************************************
+* \Syntax          : void System_CommandsHandler(void)
+* \Description     : API responsible for handling the received commands from
+					 the web-application and changing status.
+* \Parameters (in) : None
+* \Parameters (out): None
+* \Return value:   : None
+*******************************************************************************/
+void System_CommandsHandler( void )
+{
+	
+	/*****	 TODO: Implementation		*****/
+	switch(G_u8Buffer[COMMAND_OBJECT])
+	{
+		case 'g':	/* Door */ 
+			/* TODO */
+		break;
+		
+		case 'c':	/* Device */
+			G_u8Buffer[COMMAND_ACTION] == ON ? DIO_vSetPinVal(PORTD_ID, PIN7_ID, VAL_HIGH) : DIO_vSetPinVal(PORTD_ID, PIN7_ID, VAL_LOW);
+			G_u8HomeSatus[ELEC_STATUS_INDEX] = G_u8Buffer[COMMAND_ACTION];		/* Setting the new status */
+		break;
+		
+		case 'l':	/* Light */
+			if (G_u8Buffer[COMMAND_MODE] == 'e')	/* Automatic */
+			{
+				G_u8LightsMode = AUTOMATIC;
+				LedIntensity_AutoControl();
+			}
+			else{		/* Not Automatic */
+				G_u8LightsMode = MANUAL;
+				G_u8Buffer[COMMAND_ACTION] == ON ? DIO_vPortVal_Maked(PORTC_ID, 0x0E, SET_OPERATION) : DIO_vPortVal_Maked(PORTC_ID, 0xF1, CLEAR_OPERATION);
+			}
+		G_u8HomeSatus[LIGHT_STATUS_INDEX] = G_u8Buffer[COMMAND_ACTION];			/* Setting the new status */
+		break;
+		
+		case 'f':	/* Fan */
+		if (G_u8Buffer[COMMAND_MODE] == 'e')	/* Automatic */
+		{
+			G_u8FanMode = AUTOMATIC;
+			/* TODO: Automate fan API */
+		}
+		else{		/* Not Automatic */
+			G_u8FanMode = MANUAL;
+			/* TODO: TURN FAN ON/OFF */
+		}
+	}
+}
+
 
 /******************************************************************************
 * \Syntax          : void System_SendFrame(void)
@@ -184,6 +244,11 @@ void System_SendFrame() {
 	HC_vSendString("+-");
 }
 
+
+/******************************************************************************
+* \Syntax          : void toHex(void)
+* \Description     : The API responsible for sending the hex character of a value
+*******************************************************************************/
 static void toHex(u8 A_u8Data){
 	u8 L_u08FirstChar = A_u8Data & 0x0F;
 	u8 L_u08SecondChar = (A_u8Data & 0xF0) >> 4;
@@ -221,7 +286,7 @@ void Timer0Elapsed_KeyOFF()
 	if (Home_State == _HOME_LOCKDOWN_STATE);		/* Do Nothing */
 	else
 	{
-		DIO_vSetPinVal(PORTB_ID, PIN7_ID, VAL_LOW);
+		DIO_vSetPinVal(PORTB_ID, PIN7_ID, VAL_LOW);		/* Turn LED OFF */
 		Home_State = _HOME_LOCKED;	/* To be Handled */
 		TIM0_vTurnOff();
 		
@@ -253,9 +318,22 @@ void Timer0Elapsed_KeyOFF()
 *******************************************************************************/
 void System_Start()
 {
-	DIO_vSetPinDir(PORTC_ID, PIN0_ID, DIR_OUTPUT);	/* Buzzer */
-	DIO_vSetPinDir(PORTD_ID, PIN7_ID, DIR_OUTPUT);
+	/* Buzzer */
+	DIO_vSetPinDir(PORTC_ID, PIN0_ID, DIR_OUTPUT);	
+	DIO_vSetPinVal(PORTC_ID, PIN0_ID, VAL_LOW);
+
+	/* Keypad Activiation LED */
 	DIO_vSetPinDir(PORTB_ID, PIN7_ID, DIR_OUTPUT);
+	DIO_vSetPinVal(PORTB_ID, PIN7_ID, VAL_LOW);
+	
+	/* Electrical Device Relay Pin */
+	DIO_vSetPinDir(PORTD_ID, PIN7_ID, DIR_OUTPUT);	
+	DIO_vSetPinVal(PORTD_ID, PIN7_ID, VAL_LOW);
+	/* LEDs Intensity Direction and Value */
+	DIO_vSetPinDir(PORTC_ID, PIN1_ID, DIR_OUTPUT);	DIO_vSetPinVal(PORTC_ID, PIN1_ID, VAL_LOW);
+	DIO_vSetPinDir(PORTC_ID, PIN2_ID, DIR_OUTPUT);	DIO_vSetPinVal(PORTC_ID, PIN2_ID, VAL_LOW);
+	DIO_vSetPinDir(PORTC_ID, PIN3_ID, DIR_OUTPUT);	DIO_vSetPinVal(PORTC_ID, PIN3_ID, VAL_LOW);
+
 	EXTI_vReg_Func(&StartKeypad, INT0_ID);
 	HC_u8ReceiveDataAsync(&System_UartHandler);
 }
@@ -274,7 +352,6 @@ void System_WakeUp()
 	u8 L_u8Char = NO_PRESSED_KEY;
 	while (1)
 	{
-		DIO_vTogPin(PORTD_ID, PIN7_ID);
 		ADC_stChain chain = { channels, channelsValues, 2, &DisplayOverLCD };
 
 		if (Home_State == _HOME_KEYPAD_STATE)
@@ -286,6 +363,7 @@ void System_WakeUp()
 				trials--;
 				if( strcmp(password, tempPassword) == 0)	/* Correct Password */
 				{
+					DIO_vSetPinVal(PORTB_ID, PIN7_ID, VAL_LOW);		/* Turn LED OFF */
 					TIM0_vTurnOff();
 					LCD_vClrDisp();
 					_delay_ms(100);
@@ -297,6 +375,15 @@ void System_WakeUp()
 				}
 				else{		/* Incorrect Password */
 					TIM0_vDelayMilli(8000, 0, &Timer0Elapsed_KeyOFF);
+					/*			Buzzer Beep			 */
+					DIO_vSetPinVal(PORTC_ID, PIN0_ID, VAL_HIGH);
+					_delay_ms(50);
+					DIO_vSetPinVal(PORTC_ID, PIN0_ID, VAL_LOW);
+					_delay_ms(50);
+					DIO_vSetPinVal(PORTC_ID, PIN0_ID, VAL_HIGH);
+					_delay_ms(50);
+					DIO_vSetPinVal(PORTC_ID, PIN0_ID, VAL_LOW);
+					
 					LCD_vClrDisp();
 					_delay_ms(100);
 					LCD_vDispStr("Wrong Password !");
@@ -306,7 +393,7 @@ void System_WakeUp()
 					{
 						LCD_vClrDisp();
 						_delay_ms(100);
-						DIO_vSetPinVal(PORTC_ID, PIN0_ID, VAL_HIGH);
+						DIO_vSetPinVal(PORTC_ID, PIN0_ID, VAL_HIGH);		/* Buzzer Warning */
 						LCD_vDispStr("System LockDown");
 						_delay_ms(2000);
 						/*	TODO: Send Warning Message */
@@ -323,6 +410,10 @@ void System_WakeUp()
 			else if(L_u8Char != NO_PRESSED_KEY)
 			{
 				TIM0_vDelayMilli(8000, 0, &Timer0Elapsed_KeyOFF);
+				/*			Buzzer Beep			 */
+				DIO_vSetPinVal(PORTC_ID, PIN0_ID, VAL_HIGH);
+				_delay_ms(25);
+				DIO_vSetPinVal(PORTC_ID, PIN0_ID, VAL_LOW);
 				tempPassword[password_i] = L_u8Char;
 				password_i++;
 				LCD_vDispChar('*');
@@ -332,7 +423,37 @@ void System_WakeUp()
 		{
 			ADC_StartChain(&chain);
 			_delay_ms(500);
+			/* LED INENSITY CONTROL IF AUTOMATIC */
+			LedIntensity_AutoControl();
 		}
 		else;	/* What State ??? */
 	}
+}
+
+
+
+/******************************************************************************
+* \Syntax          : void LedIntensity_AutoControl(void)        
+* \Description     : Automatic control of the LEDs based on the intensity value
+* \Parameters (in) : None
+* \Parameters (out): None                                                      
+* \Return value:   : None 
+*******************************************************************************/
+void LedIntensity_AutoControl()
+{
+	if 		(channelsValues[LDR_CHANNEL] <= 3000)		/* Level 1: Sunny*/
+		DIO_vPortVal_Maked(PORTC_ID, 0xF1, CLEAR_OPERATION);
+	else if (channelsValues[LDR_CHANNEL] <= 4500){		/* Level 2 */
+		DIO_vPortVal_Maked(PORTC_ID, 0xF1, CLEAR_OPERATION);
+		DIO_vSetPinVal(PORTC_ID, PIN1_ID, VAL_HIGH);
+	}
+	else if (channelsValues[LDR_CHANNEL] <= 7500){		/* Level 3 */
+		DIO_vPortVal_Maked(PORTC_ID, 0xF1, CLEAR_OPERATION);
+		DIO_vSetPinVal(PORTC_ID, PIN2_ID, VAL_HIGH);
+		DIO_vSetPinVal(PORTC_ID, PIN3_ID, VAL_HIGH);
+	}
+	else	/* Level 4: Night */
+		DIO_vPortVal_Maked(PORTC_ID, 0x0E, SET_OPERATION);
+		
+	DIO_vTogPin(PORTB_ID, PIN7_ID);
 }
