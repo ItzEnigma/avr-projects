@@ -148,6 +148,7 @@
     <Folder Include="Source\MCAL\" />
     <Folder Include="Source\MCAL\ADC\" />
     <Folder Include="Source\MCAL\DIO\" />
+    <Folder Include="Source\MCAL\EEPROM\" />
     <Folder Include="Source\MCAL\EXTI\" />
     <Folder Include="Source\MCAL\GIE\" />
     <Folder Include="Source\MCAL\MCU\" />
@@ -279,6 +280,18 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Source\MCAL\DIO\DIO_reg.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\MCAL\EEPROM\EEPROM_int.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\MCAL\EEPROM\EEPROM_prg.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\MCAL\EEPROM\EEPROM_pri.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\MCAL\EEPROM\EEPROM_reg.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Source\MCAL\EXTI\EXTI_cfg.h">

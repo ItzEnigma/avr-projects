@@ -2,107 +2,378 @@
 # Automatically-generated file. Do not edit!
 ################################################################################
 
--include ../makefile.init
-
+SHELL := cmd.exe
 RM := rm -rf
 
-# All of the sources participating in the build are defined here
--include sources.mk
--include MCAL/WDT/subdir.mk
--include MCAL/UART/subdir.mk
--include MCAL/TIM2/subdir.mk
--include MCAL/TIM1/subdir.mk
--include MCAL/TIM0/subdir.mk
--include MCAL/MCU/subdir.mk
--include MCAL/GIE/subdir.mk
--include MCAL/EXTI/subdir.mk
--include MCAL/DIO/subdir.mk
--include MCAL/ADC/subdir.mk
--include HAL/TEMPS/subdir.mk
--include HAL/SERVO/subdir.mk
--include HAL/LDR/subdir.mk
--include HAL/LCD/subdir.mk
--include HAL/KeyPad/subdir.mk
--include HAL/HC/subdir.mk
--include APP/APPSYS/subdir.mk
--include APP/subdir.mk
--include subdir.mk
--include objects.mk
+USER_OBJS :=
+
+LIBS := 
+PROJ := 
+
+O_SRCS := 
+C_SRCS := 
+S_SRCS := 
+S_UPPER_SRCS := 
+OBJ_SRCS := 
+ASM_SRCS := 
+PREPROCESSING_SRCS := 
+OBJS := 
+OBJS_AS_ARGS := 
+C_DEPS := 
+C_DEPS_AS_ARGS := 
+EXECUTABLES := 
+OUTPUT_FILE_PATH :=
+OUTPUT_FILE_PATH_AS_ARGS :=
+AVR_APP_PATH :=$$$AVR_APP_PATH$$$
+QUOTE := "
+ADDITIONAL_DEPENDENCIES:=
+OUTPUT_FILE_DEP:=
+LIB_DEP:=
+LINKER_SCRIPT_DEP:=
+
+# Every subdirectory with source files must be described here
+SUBDIRS :=  \
+../Source/ \
+../Source/APP/ \
+../Source/APP/APPSYS/ \
+../Source/HAL/ \
+../Source/HAL/DCM/ \
+../Source/HAL/HC/ \
+../Source/HAL/KeyPad/ \
+../Source/HAL/LCD/ \
+../Source/HAL/LDR/ \
+../Source/HAL/SERVO/ \
+../Source/HAL/TEMPS/ \
+../Source/LIB/ \
+../Source/MCAL/ \
+../Source/MCAL/ADC/ \
+../Source/MCAL/DIO/ \
+../Source/MCAL/EEPROM/ \
+../Source/MCAL/EXTI/ \
+../Source/MCAL/GIE/ \
+../Source/MCAL/MCU/ \
+../Source/MCAL/TIM0/ \
+../Source/MCAL/TIM1/ \
+../Source/MCAL/TIM2/ \
+../Source/MCAL/UART/ \
+../Source/MCAL/WDT/
+
+
+# Add inputs and outputs from these tool invocations to the build variables 
+C_SRCS +=  \
+../Source/APP/APPSYS/APPSYS.c \
+../Source/APP/main.c \
+../Source/HAL/DCM/DCM_prg.c \
+../Source/HAL/HC/HC_prg.c \
+../Source/HAL/KeyPad/KeyPad_prg.c \
+../Source/HAL/LCD/LCD_prg.c \
+../Source/HAL/LDR/LDR_prg.c \
+../Source/HAL/SERVO/SERVO_prg.c \
+../Source/HAL/TEMPS/TEMPS_prg.c \
+../Source/MCAL/ADC/ADC_prg.c \
+../Source/MCAL/DIO/DIO_prg.c \
+../Source/MCAL/EEPROM/EEPROM_prg.c \
+../Source/MCAL/EXTI/EXTI_prg.c \
+../Source/MCAL/GIE/GIE_prg.c \
+../Source/MCAL/MCU/MCU.c \
+../Source/MCAL/TIM0/TIM0_prg.c \
+../Source/MCAL/TIM1/TIM1_prg.c \
+../Source/MCAL/TIM2/TIM2_prg.c \
+../Source/MCAL/UART/UART_prg.c \
+../Source/MCAL/WDT/WDT_prg.c
+
+
+PREPROCESSING_SRCS += 
+
+
+ASM_SRCS += 
+
+
+OBJS +=  \
+Source/APP/APPSYS/APPSYS.o \
+Source/APP/main.o \
+Source/HAL/DCM/DCM_prg.o \
+Source/HAL/HC/HC_prg.o \
+Source/HAL/KeyPad/KeyPad_prg.o \
+Source/HAL/LCD/LCD_prg.o \
+Source/HAL/LDR/LDR_prg.o \
+Source/HAL/SERVO/SERVO_prg.o \
+Source/HAL/TEMPS/TEMPS_prg.o \
+Source/MCAL/ADC/ADC_prg.o \
+Source/MCAL/DIO/DIO_prg.o \
+Source/MCAL/EEPROM/EEPROM_prg.o \
+Source/MCAL/EXTI/EXTI_prg.o \
+Source/MCAL/GIE/GIE_prg.o \
+Source/MCAL/MCU/MCU.o \
+Source/MCAL/TIM0/TIM0_prg.o \
+Source/MCAL/TIM1/TIM1_prg.o \
+Source/MCAL/TIM2/TIM2_prg.o \
+Source/MCAL/UART/UART_prg.o \
+Source/MCAL/WDT/WDT_prg.o
+
+OBJS_AS_ARGS +=  \
+Source/APP/APPSYS/APPSYS.o \
+Source/APP/main.o \
+Source/HAL/DCM/DCM_prg.o \
+Source/HAL/HC/HC_prg.o \
+Source/HAL/KeyPad/KeyPad_prg.o \
+Source/HAL/LCD/LCD_prg.o \
+Source/HAL/LDR/LDR_prg.o \
+Source/HAL/SERVO/SERVO_prg.o \
+Source/HAL/TEMPS/TEMPS_prg.o \
+Source/MCAL/ADC/ADC_prg.o \
+Source/MCAL/DIO/DIO_prg.o \
+Source/MCAL/EEPROM/EEPROM_prg.o \
+Source/MCAL/EXTI/EXTI_prg.o \
+Source/MCAL/GIE/GIE_prg.o \
+Source/MCAL/MCU/MCU.o \
+Source/MCAL/TIM0/TIM0_prg.o \
+Source/MCAL/TIM1/TIM1_prg.o \
+Source/MCAL/TIM2/TIM2_prg.o \
+Source/MCAL/UART/UART_prg.o \
+Source/MCAL/WDT/WDT_prg.o
+
+C_DEPS +=  \
+Source/APP/APPSYS/APPSYS.d \
+Source/APP/main.d \
+Source/HAL/DCM/DCM_prg.d \
+Source/HAL/HC/HC_prg.d \
+Source/HAL/KeyPad/KeyPad_prg.d \
+Source/HAL/LCD/LCD_prg.d \
+Source/HAL/LDR/LDR_prg.d \
+Source/HAL/SERVO/SERVO_prg.d \
+Source/HAL/TEMPS/TEMPS_prg.d \
+Source/MCAL/ADC/ADC_prg.d \
+Source/MCAL/DIO/DIO_prg.d \
+Source/MCAL/EEPROM/EEPROM_prg.d \
+Source/MCAL/EXTI/EXTI_prg.d \
+Source/MCAL/GIE/GIE_prg.d \
+Source/MCAL/MCU/MCU.d \
+Source/MCAL/TIM0/TIM0_prg.d \
+Source/MCAL/TIM1/TIM1_prg.d \
+Source/MCAL/TIM2/TIM2_prg.d \
+Source/MCAL/UART/UART_prg.d \
+Source/MCAL/WDT/WDT_prg.d
+
+C_DEPS_AS_ARGS +=  \
+Source/APP/APPSYS/APPSYS.d \
+Source/APP/main.d \
+Source/HAL/DCM/DCM_prg.d \
+Source/HAL/HC/HC_prg.d \
+Source/HAL/KeyPad/KeyPad_prg.d \
+Source/HAL/LCD/LCD_prg.d \
+Source/HAL/LDR/LDR_prg.d \
+Source/HAL/SERVO/SERVO_prg.d \
+Source/HAL/TEMPS/TEMPS_prg.d \
+Source/MCAL/ADC/ADC_prg.d \
+Source/MCAL/DIO/DIO_prg.d \
+Source/MCAL/EEPROM/EEPROM_prg.d \
+Source/MCAL/EXTI/EXTI_prg.d \
+Source/MCAL/GIE/GIE_prg.d \
+Source/MCAL/MCU/MCU.d \
+Source/MCAL/TIM0/TIM0_prg.d \
+Source/MCAL/TIM1/TIM1_prg.d \
+Source/MCAL/TIM2/TIM2_prg.d \
+Source/MCAL/UART/UART_prg.d \
+Source/MCAL/WDT/WDT_prg.d
+
+OUTPUT_FILE_PATH +=Smart\ Home.elf
+
+OUTPUT_FILE_PATH_AS_ARGS +="Smart Home.elf"
+
+ADDITIONAL_DEPENDENCIES:=
+
+OUTPUT_FILE_DEP:= ./makedep.mk
+
+LIB_DEP+= 
+
+LINKER_SCRIPT_DEP+= 
+
+
+# AVR32/GNU C Compiler
+Source/APP/APPSYS/APPSYS.o: ../Source/APP/APPSYS/APPSYS.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)D:\Engineering\3rd year (computer dep.)\2nd term\AVR STUDIO\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DNDEBUG  -I"D:\Engineering\3rd year (computer dep.)\2nd term\AVR STUDIO\7.0\Packs\atmel\ATmega_DFP\1.6.364\include"  -Os -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -Wall -mmcu=atmega32 -B "D:\Engineering\3rd year (computer dep.)\2nd term\AVR STUDIO\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+Source/APP/main.o: ../Source/APP/main.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)D:\Engineering\3rd year (computer dep.)\2nd term\AVR STUDIO\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DNDEBUG  -I"D:\Engineering\3rd year (computer dep.)\2nd term\AVR STUDIO\7.0\Packs\atmel\ATmega_DFP\1.6.364\include"  -Os -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -Wall -mmcu=atmega32 -B "D:\Engineering\3rd year (computer dep.)\2nd term\AVR STUDIO\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+Source/HAL/DCM/DCM_prg.o: ../Source/HAL/DCM/DCM_prg.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)D:\Engineering\3rd year (computer dep.)\2nd term\AVR STUDIO\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DNDEBUG  -I"D:\Engineering\3rd year (computer dep.)\2nd term\AVR STUDIO\7.0\Packs\atmel\ATmega_DFP\1.6.364\include"  -Os -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -Wall -mmcu=atmega32 -B "D:\Engineering\3rd year (computer dep.)\2nd term\AVR STUDIO\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+Source/HAL/HC/HC_prg.o: ../Source/HAL/HC/HC_prg.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)D:\Engineering\3rd year (computer dep.)\2nd term\AVR STUDIO\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DNDEBUG  -I"D:\Engineering\3rd year (computer dep.)\2nd term\AVR STUDIO\7.0\Packs\atmel\ATmega_DFP\1.6.364\include"  -Os -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -Wall -mmcu=atmega32 -B "D:\Engineering\3rd year (computer dep.)\2nd term\AVR STUDIO\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+Source/HAL/KeyPad/KeyPad_prg.o: ../Source/HAL/KeyPad/KeyPad_prg.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)D:\Engineering\3rd year (computer dep.)\2nd term\AVR STUDIO\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DNDEBUG  -I"D:\Engineering\3rd year (computer dep.)\2nd term\AVR STUDIO\7.0\Packs\atmel\ATmega_DFP\1.6.364\include"  -Os -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -Wall -mmcu=atmega32 -B "D:\Engineering\3rd year (computer dep.)\2nd term\AVR STUDIO\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+Source/HAL/LCD/LCD_prg.o: ../Source/HAL/LCD/LCD_prg.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)D:\Engineering\3rd year (computer dep.)\2nd term\AVR STUDIO\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DNDEBUG  -I"D:\Engineering\3rd year (computer dep.)\2nd term\AVR STUDIO\7.0\Packs\atmel\ATmega_DFP\1.6.364\include"  -Os -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -Wall -mmcu=atmega32 -B "D:\Engineering\3rd year (computer dep.)\2nd term\AVR STUDIO\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+Source/HAL/LDR/LDR_prg.o: ../Source/HAL/LDR/LDR_prg.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)D:\Engineering\3rd year (computer dep.)\2nd term\AVR STUDIO\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DNDEBUG  -I"D:\Engineering\3rd year (computer dep.)\2nd term\AVR STUDIO\7.0\Packs\atmel\ATmega_DFP\1.6.364\include"  -Os -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -Wall -mmcu=atmega32 -B "D:\Engineering\3rd year (computer dep.)\2nd term\AVR STUDIO\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+Source/HAL/SERVO/SERVO_prg.o: ../Source/HAL/SERVO/SERVO_prg.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)D:\Engineering\3rd year (computer dep.)\2nd term\AVR STUDIO\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DNDEBUG  -I"D:\Engineering\3rd year (computer dep.)\2nd term\AVR STUDIO\7.0\Packs\atmel\ATmega_DFP\1.6.364\include"  -Os -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -Wall -mmcu=atmega32 -B "D:\Engineering\3rd year (computer dep.)\2nd term\AVR STUDIO\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+Source/HAL/TEMPS/TEMPS_prg.o: ../Source/HAL/TEMPS/TEMPS_prg.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)D:\Engineering\3rd year (computer dep.)\2nd term\AVR STUDIO\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DNDEBUG  -I"D:\Engineering\3rd year (computer dep.)\2nd term\AVR STUDIO\7.0\Packs\atmel\ATmega_DFP\1.6.364\include"  -Os -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -Wall -mmcu=atmega32 -B "D:\Engineering\3rd year (computer dep.)\2nd term\AVR STUDIO\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+Source/MCAL/ADC/ADC_prg.o: ../Source/MCAL/ADC/ADC_prg.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)D:\Engineering\3rd year (computer dep.)\2nd term\AVR STUDIO\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DNDEBUG  -I"D:\Engineering\3rd year (computer dep.)\2nd term\AVR STUDIO\7.0\Packs\atmel\ATmega_DFP\1.6.364\include"  -Os -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -Wall -mmcu=atmega32 -B "D:\Engineering\3rd year (computer dep.)\2nd term\AVR STUDIO\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+Source/MCAL/DIO/DIO_prg.o: ../Source/MCAL/DIO/DIO_prg.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)D:\Engineering\3rd year (computer dep.)\2nd term\AVR STUDIO\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DNDEBUG  -I"D:\Engineering\3rd year (computer dep.)\2nd term\AVR STUDIO\7.0\Packs\atmel\ATmega_DFP\1.6.364\include"  -Os -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -Wall -mmcu=atmega32 -B "D:\Engineering\3rd year (computer dep.)\2nd term\AVR STUDIO\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+Source/MCAL/EEPROM/EEPROM_prg.o: ../Source/MCAL/EEPROM/EEPROM_prg.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)D:\Engineering\3rd year (computer dep.)\2nd term\AVR STUDIO\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DNDEBUG  -I"D:\Engineering\3rd year (computer dep.)\2nd term\AVR STUDIO\7.0\Packs\atmel\ATmega_DFP\1.6.364\include"  -Os -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -Wall -mmcu=atmega32 -B "D:\Engineering\3rd year (computer dep.)\2nd term\AVR STUDIO\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+Source/MCAL/EXTI/EXTI_prg.o: ../Source/MCAL/EXTI/EXTI_prg.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)D:\Engineering\3rd year (computer dep.)\2nd term\AVR STUDIO\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DNDEBUG  -I"D:\Engineering\3rd year (computer dep.)\2nd term\AVR STUDIO\7.0\Packs\atmel\ATmega_DFP\1.6.364\include"  -Os -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -Wall -mmcu=atmega32 -B "D:\Engineering\3rd year (computer dep.)\2nd term\AVR STUDIO\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+Source/MCAL/GIE/GIE_prg.o: ../Source/MCAL/GIE/GIE_prg.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)D:\Engineering\3rd year (computer dep.)\2nd term\AVR STUDIO\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DNDEBUG  -I"D:\Engineering\3rd year (computer dep.)\2nd term\AVR STUDIO\7.0\Packs\atmel\ATmega_DFP\1.6.364\include"  -Os -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -Wall -mmcu=atmega32 -B "D:\Engineering\3rd year (computer dep.)\2nd term\AVR STUDIO\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+Source/MCAL/MCU/MCU.o: ../Source/MCAL/MCU/MCU.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)D:\Engineering\3rd year (computer dep.)\2nd term\AVR STUDIO\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DNDEBUG  -I"D:\Engineering\3rd year (computer dep.)\2nd term\AVR STUDIO\7.0\Packs\atmel\ATmega_DFP\1.6.364\include"  -Os -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -Wall -mmcu=atmega32 -B "D:\Engineering\3rd year (computer dep.)\2nd term\AVR STUDIO\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+Source/MCAL/TIM0/TIM0_prg.o: ../Source/MCAL/TIM0/TIM0_prg.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)D:\Engineering\3rd year (computer dep.)\2nd term\AVR STUDIO\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DNDEBUG  -I"D:\Engineering\3rd year (computer dep.)\2nd term\AVR STUDIO\7.0\Packs\atmel\ATmega_DFP\1.6.364\include"  -Os -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -Wall -mmcu=atmega32 -B "D:\Engineering\3rd year (computer dep.)\2nd term\AVR STUDIO\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+Source/MCAL/TIM1/TIM1_prg.o: ../Source/MCAL/TIM1/TIM1_prg.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)D:\Engineering\3rd year (computer dep.)\2nd term\AVR STUDIO\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DNDEBUG  -I"D:\Engineering\3rd year (computer dep.)\2nd term\AVR STUDIO\7.0\Packs\atmel\ATmega_DFP\1.6.364\include"  -Os -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -Wall -mmcu=atmega32 -B "D:\Engineering\3rd year (computer dep.)\2nd term\AVR STUDIO\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+Source/MCAL/TIM2/TIM2_prg.o: ../Source/MCAL/TIM2/TIM2_prg.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)D:\Engineering\3rd year (computer dep.)\2nd term\AVR STUDIO\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DNDEBUG  -I"D:\Engineering\3rd year (computer dep.)\2nd term\AVR STUDIO\7.0\Packs\atmel\ATmega_DFP\1.6.364\include"  -Os -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -Wall -mmcu=atmega32 -B "D:\Engineering\3rd year (computer dep.)\2nd term\AVR STUDIO\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+Source/MCAL/UART/UART_prg.o: ../Source/MCAL/UART/UART_prg.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)D:\Engineering\3rd year (computer dep.)\2nd term\AVR STUDIO\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DNDEBUG  -I"D:\Engineering\3rd year (computer dep.)\2nd term\AVR STUDIO\7.0\Packs\atmel\ATmega_DFP\1.6.364\include"  -Os -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -Wall -mmcu=atmega32 -B "D:\Engineering\3rd year (computer dep.)\2nd term\AVR STUDIO\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+Source/MCAL/WDT/WDT_prg.o: ../Source/MCAL/WDT/WDT_prg.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)D:\Engineering\3rd year (computer dep.)\2nd term\AVR STUDIO\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DNDEBUG  -I"D:\Engineering\3rd year (computer dep.)\2nd term\AVR STUDIO\7.0\Packs\atmel\ATmega_DFP\1.6.364\include"  -Os -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -Wall -mmcu=atmega32 -B "D:\Engineering\3rd year (computer dep.)\2nd term\AVR STUDIO\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+
+
+
+# AVR32/GNU Preprocessing Assembler
+
+
+
+# AVR32/GNU Assembler
+
+
+
 
 ifneq ($(MAKECMDGOALS),clean)
-ifneq ($(strip $(ASM_DEPS)),)
--include $(ASM_DEPS)
-endif
-ifneq ($(strip $(S_DEPS)),)
--include $(S_DEPS)
-endif
-ifneq ($(strip $(S_UPPER_DEPS)),)
--include $(S_UPPER_DEPS)
-endif
 ifneq ($(strip $(C_DEPS)),)
 -include $(C_DEPS)
 endif
 endif
 
--include ../makefile.defs
-
 # Add inputs and outputs from these tool invocations to the build variables 
-LSS += \
-SmartHome.lss \
-
-FLASH_IMAGE += \
-SmartHome.hex \
-
-EEPROM_IMAGE += \
-SmartHome.eep \
-
-SIZEDUMMY += \
-sizedummy \
-
 
 # All Target
-all: SmartHome.elf secondary-outputs
+all: $(OUTPUT_FILE_PATH) $(ADDITIONAL_DEPENDENCIES)
 
-# Tool invocations
-SmartHome.elf: $(OBJS) $(USER_OBJS)
-	@echo 'Building target: $@'
-	@echo 'Invoking: AVR C Linker'
-	avr-gcc -Wl,-Map,SmartHome.map -mmcu=atmega32 -o "SmartHome.elf" $(OBJS) $(USER_OBJS) $(LIBS)
-	@echo 'Finished building target: $@'
-	@echo ' '
+$(OUTPUT_FILE_PATH): $(OBJS) $(USER_OBJS) $(OUTPUT_FILE_DEP) $(LIB_DEP) $(LINKER_SCRIPT_DEP)
+	@echo Building target: $@
+	@echo Invoking: AVR/GNU Linker : 5.4.0
+	$(QUOTE)D:\Engineering\3rd year (computer dep.)\2nd term\AVR STUDIO\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE) -o$(OUTPUT_FILE_PATH_AS_ARGS) $(OBJS_AS_ARGS) $(USER_OBJS) $(LIBS) -Wl,-Map="Smart Home.map" -Wl,--start-group -Wl,-lm  -Wl,--end-group -Wl,--gc-sections -mmcu=atmega32 -B "D:\Engineering\3rd year (computer dep.)\2nd term\AVR STUDIO\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32"  
+	@echo Finished building target: $@
+	"D:\Engineering\3rd year (computer dep.)\2nd term\AVR STUDIO\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-objcopy.exe" -O ihex -R .eeprom -R .fuse -R .lock -R .signature -R .user_signatures  "Smart Home.elf" "Smart Home.hex"
+	"D:\Engineering\3rd year (computer dep.)\2nd term\AVR STUDIO\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-objcopy.exe" -j .eeprom  --set-section-flags=.eeprom=alloc,load --change-section-lma .eeprom=0  --no-change-warnings -O ihex "Smart Home.elf" "Smart Home.eep" || exit 0
+	"D:\Engineering\3rd year (computer dep.)\2nd term\AVR STUDIO\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-objdump.exe" -h -S "Smart Home.elf" > "Smart Home.lss"
+	"D:\Engineering\3rd year (computer dep.)\2nd term\AVR STUDIO\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-objcopy.exe" -O srec -R .eeprom -R .fuse -R .lock -R .signature -R .user_signatures "Smart Home.elf" "Smart Home.srec"
+	"D:\Engineering\3rd year (computer dep.)\2nd term\AVR STUDIO\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-size.exe" "Smart Home.elf"
+	
+	
 
-SmartHome.lss: SmartHome.elf
-	@echo 'Invoking: AVR Create Extended Listing'
-	-avr-objdump -h -S SmartHome.elf  >"SmartHome.lss"
-	@echo 'Finished building: $@'
-	@echo ' '
 
-SmartHome.hex: SmartHome.elf
-	@echo 'Create Flash image (ihex format)'
-	-avr-objcopy -R .eeprom -R .fuse -R .lock -R .signature -O ihex SmartHome.elf  "SmartHome.hex"
-	@echo 'Finished building: $@'
-	@echo ' '
 
-SmartHome.eep: SmartHome.elf
-	@echo 'Create eeprom image (ihex format)'
-	-avr-objcopy -j .eeprom --no-change-warnings --change-section-lma .eeprom=0 -O ihex SmartHome.elf  "SmartHome.eep"
-	@echo 'Finished building: $@'
-	@echo ' '
 
-sizedummy: SmartHome.elf
-	@echo 'Invoking: Print Size'
-	-avr-size --format=avr --mcu=atmega32 SmartHome.elf
-	@echo 'Finished building: $@'
-	@echo ' '
 
 # Other Targets
 clean:
-	-$(RM) $(FLASH_IMAGE)$(ELFS)$(OBJS)$(ASM_DEPS)$(EEPROM_IMAGE)$(S_DEPS)$(SIZEDUMMY)$(S_UPPER_DEPS)$(LSS)$(C_DEPS) SmartHome.elf
-	-@echo ' '
-
-secondary-outputs: $(LSS) $(FLASH_IMAGE) $(EEPROM_IMAGE) $(SIZEDUMMY)
-
-.PHONY: all clean dependents
-.SECONDARY:
-
--include ../makefile.targets
+	-$(RM) $(OBJS_AS_ARGS) $(EXECUTABLES)  
+	-$(RM) $(C_DEPS_AS_ARGS)   
+	rm -rf "Smart Home.elf" "Smart Home.a" "Smart Home.hex" "Smart Home.lss" "Smart Home.eep" "Smart Home.map" "Smart Home.srec" "Smart Home.usersignatures"
+	

@@ -43,7 +43,7 @@ u8 password_i = 0;
 u16 channelsValues[2] = {0};
 u8 channels[2] = {TEMPS_PIN, LDR_CHANNEL};
 
-u8 Home_State = _HOME_UNLOCKED;
+u8 Home_State = _HOME_LOCKED;
 
 
 u8 G_u8HomeSatus [7];		/*Contains Door, Home, ELEC, Fan status*/
@@ -174,7 +174,7 @@ void System_UartHandler(u16 A_u8Data)
 *******************************************************************************/
 void System_CommandsHandler( void )
 {
-	
+	u8 L_u8PasswordBuffIndex = 1;
 	/*****	 TODO: Implementation		*****/
 	switch(G_u8Buffer[COMMAND_OBJECT])
 	{
@@ -213,6 +213,21 @@ void System_CommandsHandler( void )
 			G_u8FanMode = MANUAL;
 			/* TODO: TURN FAN ON/OFF */
 			G_u8Buffer[COMMAND_ACTION] == ON ? DCM_vTurnOn() : DCM_vTurnOff();
+		}
+	}
+	if(G_u8Buffer[COMMAND_ACTION] == 'p'){	/*Password*/
+		while(G_u8Buffer[L_u8PasswordBuffIndex] != 'q'){	/* q is the terminating char for pass */
+			password[L_u8PasswordBuffIndex - 1] = G_u8Buffer[L_u8PasswordBuffIndex];
+			L_u8PasswordBuffIndex++;
+		}
+		for(u8 i=0; i< L_u8PasswordBuffIndex; i++){		/* save password in EEPROM */
+			EEPROM_vWrite(i, password[i]);
+		}
+		EEPROM_vWrite(L_u8PasswordBuffIndex, 'q');		/* Terminating character*/
+
+		/* TODO: Remove it*/
+		for(u8 i=0; i<L_u8PasswordBuffIndex; i++){
+			HC_vSendData(EEPROM_u8Read(i));
 		}
 	}
 }
@@ -343,6 +358,12 @@ void System_Start()
 	DIO_vSetPinDir(PORTC_ID, PIN2_ID, DIR_OUTPUT);	DIO_vSetPinVal(PORTC_ID, PIN2_ID, VAL_LOW);
 	DIO_vSetPinDir(PORTC_ID, PIN3_ID, DIR_OUTPUT);	DIO_vSetPinVal(PORTC_ID, PIN3_ID, VAL_LOW);
 	
+	/* EEPROM password Init */
+	for(u8 i=0; EEPROM_u8Read(i) != 'q'; i++){	/*Password terminated with q*/
+		password[i] = EEPROM_u8Read(i);
+		HC_vSendData(password[i]);
+	}
+	
 	/* Servo */
 	SERVO_vInit();
 	SERVO_vTurnOn();			/* Enable servo */
@@ -351,6 +372,7 @@ void System_Start()
 	/* DC motor*/
 	DCM_vInit();
 	DCM_vTurnOn();
+	DCM_vSetPWM();
 
 	EXTI_vReg_Func(&StartKeypad, INT0_ID);
 	HC_u8ReceiveDataAsync(&System_UartHandler);

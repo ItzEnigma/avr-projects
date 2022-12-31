@@ -140,9 +140,9 @@ void TIM1_vSetDutyCycleOC1A (u8 A_u8DutyCycle){
  ***********************************************************************************************************/
 void TIM1_vSetDutyCycleOC1B (u8 A_u8DutyCycle){
 	#if TIMER1_OC1B_PWM_MODE == PWM_NON_INVERTING
-		TIM1_vSetOcr1bVal( ( (0xFF + 1) * A_u8DutyCycle ) /100);
+		TIM1_vSetOcr1bVal( (u16)( ( (f32)( (TIMER1_MAX_COUNT) * A_u8DutyCycle ) ) /100.0) ) ;
 	#elif TIMER1_OC1B_PWM_MODE == PWM_INVERTING
-		TIM1_vSetOcr1bVal( ( -( (A_u8DutyCycle/100) - 1) ) * (TIMER1_MAX_COUNT + 1) );
+		TIM1_vSetOcr1bVal( ((A_u8DutyCycle*256)/100.0 - 1) );
 	#endif
 }
 

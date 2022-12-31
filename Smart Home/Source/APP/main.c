@@ -21,8 +21,8 @@
 
 int main(void)
 {
-	Mcu_Init();
-	System_Start();
+ 	Mcu_Init();
+ 	System_Start();
 	
 	//DIO_vSetPinDir(PORTD_ID, PIN4_ID, DIR_OUTPUT);
 //	LCD_vInit();
