@@ -18,9 +18,12 @@
 #include "../../MCAL/DIO/DIO_int.h"
 #include "../../MCAL/EXTI/EXTI_int.h"
 #include "../../MCAL/ADC/ADC_int.h"
+#include "../../MCAL/TIM0/TIM0_int.h"
+#include "../../MCAL/EEPROM/EEPROM_int.h"
 #include "../../HAL/LDR/LDR_int.h"
 #include "../../HAL/TEMPS/TEMPS_int.h"
 #include "../../HAL/KeyPad/KeyPad_int.h"
+#include "../../HAL/DCM/DCM_int.h"
 #include "../../HAL/SERVO/SERVO_int.h"
 #include "../../HAL/HC/HC_int.h"
 #include <string.h>
@@ -50,6 +53,8 @@ u8 G_u8HomeSatus [7];		/*Contains Door, Home, ELEC, Fan status*/
 u8 G_u8Buffer[5];			/*Buffer for Receiving Data from GUI */
 u8 G_u8IsBufferRdy = 0;		/*Flag for reading buffer when ready*/
 
+/* ADC Chain */
+ADC_stChain chain = { channels, channelsValues, 2, &System_SendFrame };
 
 /* Device Automatic Mode Variable */
 u8 G_u8FanMode		= MANUAL;
@@ -152,7 +157,6 @@ void System_UartHandler(u16 A_u8Data)
 		/*****	 TODO: Remove these 2 lines		*****/
 		System_SendFrame();
 		DIO_vTogPin(PORTB_ID, PIN7_ID);
-		
 	}
 	if(L_u8Flag == 1 && A_u8Data != ' '){   /* Save Frame */
 		G_u8Buffer[L_u8Counter++] = A_u8Data;
@@ -180,7 +184,7 @@ void System_CommandsHandler( void )
 	{
 		case 'g':	/* Door */ 
 			G_u8Buffer[COMMAND_ACTION] == ON ? SERVO_vSetState(STATE_180) : SERVO_vSetState(STATE_0) ;
-			//SERVO_vTurnOff();
+			G_u8HomeSatus[DOOR_STATUS_INDEX] = G_u8Buffer[COMMAND_ACTION];		/* Setting the new status */
 		break;
 		
 		case 'c':	/* Device */
@@ -193,11 +197,13 @@ void System_CommandsHandler( void )
 			{
 				G_u8LightsMode = AUTOMATIC;
 				LedIntensity_AutoControl();
+				G_u8HomeSatus[AUTO_LIGHT_STATUS_INDEX] = 'r';		/* Setting the new mode status */
 			}
 			else{		/* Not Automatic */
 				G_u8LightsMode = MANUAL;
 				G_u8Buffer[COMMAND_ACTION] == ON ? DIO_vPortVal_Maked(PORTC_ID, 0x0E, SET_OPERATION) 
 													: DIO_vPortVal_Maked(PORTC_ID, 0xF1, CLEAR_OPERATION);
+				G_u8HomeSatus[AUTO_LIGHT_STATUS_INDEX] = 's';		/* Setting the new mode status */
 			}
 		G_u8HomeSatus[LIGHT_STATUS_INDEX] = G_u8Buffer[COMMAND_ACTION];			/* Setting the new status */
 		break;
@@ -208,11 +214,14 @@ void System_CommandsHandler( void )
 			G_u8FanMode = AUTOMATIC;
 			/* TODO: Automate fan API */
 			FanSpeed_AutoControl();
+			G_u8HomeSatus[AUTO_FAN_STATUS_INDEX] = 'r';		/* Setting the new mode status */
 		}
 		else{		/* Not Automatic */
 			G_u8FanMode = MANUAL;
 			/* TODO: TURN FAN ON/OFF */
 			G_u8Buffer[COMMAND_ACTION] == ON ? DCM_vTurnOn() : DCM_vTurnOff();
+			G_u8HomeSatus[AUTO_FAN_STATUS_INDEX] = 's';		/* Setting the new mode status */
+			G_u8HomeSatus[FAN_STATUS_INDEX] = G_u8Buffer[COMMAND_ACTION];			/* Setting the new status */
 		}
 	}
 	if(G_u8Buffer[COMMAND_ACTION] == 'p'){	/*Password*/
@@ -220,15 +229,10 @@ void System_CommandsHandler( void )
 			password[L_u8PasswordBuffIndex - 1] = G_u8Buffer[L_u8PasswordBuffIndex];
 			L_u8PasswordBuffIndex++;
 		}
-		for(u8 i=0; i< L_u8PasswordBuffIndex; i++){		/* save password in EEPROM */
+		for(u8 i=0; i< L_u8PasswordBuffIndex-1; i++){		/* save password in EEPROM */
 			EEPROM_vWrite(i, password[i]);
 		}
-		EEPROM_vWrite(L_u8PasswordBuffIndex, 'q');		/* Terminating character*/
-
-		/* TODO: Remove it*/
-		for(u8 i=0; i<L_u8PasswordBuffIndex; i++){
-			HC_vSendData(EEPROM_u8Read(i));
-		}
+		EEPROM_vWrite(L_u8PasswordBuffIndex-1, 'q');		/* Terminating character*/
 	}
 }
 
@@ -240,10 +244,14 @@ void System_CommandsHandler( void )
 * \NOTES		   : Put values in G_u8HomeStatus array before calling
 *******************************************************************************/
 void System_SendFrame() {
+	/* Making the proper conversions */
+	channelsValues[0] = TEMPS_ConvertValue(channelsValues[0]);	/* Getting Temp Value */
+	channelsValues[1] = LDR_ConvertValue(channelsValues[1]);	/* Getting LDR Value */
+	
 	HC_vSendData('S');									/*Frame Start*/
 	HC_vSendData('+');									/*Frame Start*/
 	HC_vSendData('-');									/*Frame Start*/
-	toHex(G_u8HomeSatus[HOME_STATUS_INDEX]);			/*Home Satus*/
+	toHex(G_u8HomeSatus[HOME_STATUS_INDEX]);			/*Home Status*/
 	HC_vSendData(',');
 	toHex(channelsValues[TEMP_INDEX]);						/*Temperature value*/					
 	HC_vSendData(',');
@@ -358,10 +366,13 @@ void System_Start()
 	DIO_vSetPinDir(PORTC_ID, PIN2_ID, DIR_OUTPUT);	DIO_vSetPinVal(PORTC_ID, PIN2_ID, VAL_LOW);
 	DIO_vSetPinDir(PORTC_ID, PIN3_ID, DIR_OUTPUT);	DIO_vSetPinVal(PORTC_ID, PIN3_ID, VAL_LOW);
 	
+	/* ADC sending first chain */
+	ADC_StartChain(&chain);
+	
 	/* EEPROM password Init */
 	for(u8 i=0; EEPROM_u8Read(i) != 'q'; i++){	/*Password terminated with q*/
 		password[i] = EEPROM_u8Read(i);
-		HC_vSendData(password[i]);
+		//HC_vSendData(password[i]);
 	}
 	
 	/* Servo */
@@ -371,8 +382,7 @@ void System_Start()
 	
 	/* DC motor*/
 	DCM_vInit();
-	DCM_vTurnOn();
-	DCM_vSetPWM();
+	DCM_vTurnOff();
 
 	EXTI_vReg_Func(&StartKeypad, INT0_ID);
 	HC_u8ReceiveDataAsync(&System_UartHandler);
@@ -392,8 +402,6 @@ void System_WakeUp()
 	u8 L_u8Char = NO_PRESSED_KEY;
 	while (1)
 	{
-		ADC_stChain chain = { channels, channelsValues, 2, &DisplayOverLCD };
-
 		if (Home_State == _HOME_KEYPAD_STATE)
 		{
 			L_u8Char = KeyPad_u8GetPressedKey();
@@ -463,8 +471,12 @@ void System_WakeUp()
 		{
 			ADC_StartChain(&chain);
 			_delay_ms(100);
-			/* LED INENSITY CONTROL IF AUTOMATIC */
-			LedIntensity_AutoControl();
+			/* LED INTENSITY CONTROL IF AUTOMATIC */
+			if(G_u8LightsMode == AUTOMATIC)
+				LedIntensity_AutoControl();
+			else;	/* Do Nothing */
+			_delay_ms(1000);
+			
 		}
 		else;	/* What State ??? */
 	}
@@ -494,8 +506,6 @@ void LedIntensity_AutoControl()
 	}
 	else	/* Level 4: Night */
 		DIO_vPortVal_Maked(PORTC_ID, 0x0E, SET_OPERATION);
-		
-	DIO_vTogPin(PORTB_ID, PIN7_ID);
 }
 
 
@@ -504,7 +514,10 @@ void LedIntensity_AutoControl()
 * \Description     : Automatic control of the Fan based on the temprature
 *******************************************************************************/
 void FanSpeed_AutoControl(){
-	if(channelsValues[TEMP_INDEX] < 10)			DCM_vSetPWM(10);
+	if(channelsValues[TEMP_INDEX] < 10){
+		DCM_vSetPWM(0);
+		G_u8HomeSatus[FAN_STATUS_INDEX] = 's';		/* Setting the new status */
+	}
 	else if(channelsValues[TEMP_INDEX] < 15)	DCM_vSetPWM(20);
 	else if(channelsValues[TEMP_INDEX] < 20)	DCM_vSetPWM(30);
 	else if(channelsValues[TEMP_INDEX] < 25)	DCM_vSetPWM(40);
@@ -512,4 +525,6 @@ void FanSpeed_AutoControl(){
 	else if(channelsValues[TEMP_INDEX] < 35)	DCM_vSetPWM(80);
 	else if(channelsValues[TEMP_INDEX] < 100)	DCM_vSetPWM(100);
 	else ;	/*UNDEFINED*/
+	if(channelsValues[TEMP_INDEX] > 10)		/* Do Nothing */
+		G_u8HomeSatus[FAN_STATUS_INDEX] = 'r';
 }

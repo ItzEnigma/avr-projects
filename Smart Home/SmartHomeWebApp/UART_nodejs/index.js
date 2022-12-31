@@ -45,36 +45,36 @@ const statusHandler = (data) => {
   // homeStatus , temp , fanStatus ,  autoFanStatus , light intensity , light status, autoLightMode , doorStatus , deviceStatus
   statusObj.homeStatus = hexToDecimal(dataArray[0]);
   statusObj.indoorTemp = hexToDecimal(dataArray[1]) + '°';
-
-  if (hexToDecimal(dataArray[2]) === 0) {
+  console.log(dataArray);
+  if (dataArray[2] !== '72') {
     statusObj.fanStatus = false;
   } else {
     statusObj.fanStatus = true;
   }
-  if (hexToDecimal(dataArray[3]) === 0) {
+  if ((dataArray[3]) !== '72') {
     statusObj.autoFanStatus = false;
   } else {
     statusObj.autoFanStatus = true;
   }
   statusObj.lightIIntensityStatus =
-    Math.abs((hexToDecimal(dataArray[4]) / 50000) * 100 - 100) + '%';
+    Math.abs((hexToDecimal(dataArray[4]) / 255) * 100 - 100).toFixed(2) + '%';
   console.log(statusObj.lightIIntensityStatus);
-  if (hexToDecimal(dataArray[5]) === 0) {
+  if ((dataArray[5]) !== '72') {
     statusObj.lightStatus = false;
   } else {
     statusObj.lightStatus = true;
   }
-  if (hexToDecimal(dataArray[6]) === 0) {
+  if ((dataArray[6]) !== '72') {
     statusObj.autoLightStatus = false;
   } else {
     statusObj.autoLightStatus = true;
   }
-  if (hexToDecimal(dataArray[7]) === 0) {
+  if ((dataArray[7]) !== '72') {
     statusObj.doorStatus = 'Closed';
   } else {
     statusObj.doorStatus = 'Opened';
   }
-  if (hexToDecimal(dataArray[8]) === 0) {
+  if ((dataArray[8]) !== '72') {
     statusObj.deviceStatus = false;
   } else {
     statusObj.deviceStatus = true;
@@ -84,7 +84,7 @@ const statusHandler = (data) => {
 const saveData = async (data) => {
   console.log(data);
   if (data === 'S') {
-    dataType = data;
+    dataType = 'S';
   } else {
     switch (dataType) {
       case 'S':

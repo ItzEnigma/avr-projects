@@ -57,5 +57,5 @@ const updateStatusSection = () => {
 
 setInterval(() => {
   updateStatusSection();
-}, 1000);
+}, 500);
 // updateStatusSection();

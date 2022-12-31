@@ -30,7 +30,6 @@ const toggleBtnLight = (btn) => {
         lightOnBtnBack.style.background = '#faf4f4a2';
         lightControlOption.forEach((el, index) => {
           el.style.opacity = '50%';
-          autoLightStatus = false;
         });
       } else {
         lightOnBtn.style.order = 3;

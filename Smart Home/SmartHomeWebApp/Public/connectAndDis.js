@@ -11,9 +11,10 @@ disconnectBtn.addEventListener('click', () => {
   disconnect();
 });
 passwordBtn.addEventListener('click', () => {
-  console.log('Pass');
+  // console.log('Pass');
   let password = passwordElem.value;
-  let frame = `p${password};`;
+  let frame = `#p${password}q;`;
+  console.log(frame);
   sendDataToPort(frame);
-  window.location.href = '/public/index.html';
+   window.location.href = '/public/index.html';
 });
