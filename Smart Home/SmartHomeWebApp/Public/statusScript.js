@@ -29,8 +29,8 @@ const getStatusDataAPi = (data) => {
   lightStatus = data.lightStatus;
   autoLightStatus = data.autoLightStatus;
   currentDeviceStatus = data.deviceStatus;
-  lightIIntensityStatus = data.lightIIntensityStatus;
-  currentLightIntensity = data.lightIIntensityStatus;
+  //lightIIntensityStatus = data.lightIIntensityStatus;
+  //currentLightIntensity = data.lightIIntensityStatus;
   toggleSideBtn('door');
   toggleSideBtn('device');
   toggleBtn('fan');
@@ -57,5 +57,5 @@ const updateStatusSection = () => {
 
 setInterval(() => {
   updateStatusSection();
-}, 500);
+}, 2000);
 // updateStatusSection();

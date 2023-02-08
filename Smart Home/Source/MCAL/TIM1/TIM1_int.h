@@ -140,6 +140,13 @@ void TIM1_vSetTriggering (u8 A_u8Trigger);
  ***********************************************************************************************************/
 u16 TIM1_vGetIcr1Val ();
 
+
+/*For disconnecting the timer from OCR1B pin*/
+void TIM1_vOcr1bOff();
+
+/*For reconnecting the timer from OCR1B pin*/
+void TIM1_vOcr1bOn();
+
 /**
  * Description : Interface Function to set a delay for a specific timer
  * Outputs     : void

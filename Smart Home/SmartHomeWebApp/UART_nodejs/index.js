@@ -25,14 +25,18 @@ const hexToDecimal = (hex) => {
 };
 // Weather
 const getWeather = async () => {
-  const response = await superagent.get(
-    'http://api.weatherapi.com/v1/current.json?key=1e2e153b52cc4f3ca55212643222812&q=Cairo&aqi=no'
-  );
-  // console.log(response.body.current);
-  let temp = response.body.current.temp_c;
-  let hum = response.body.current.humidity;
-  statusObj.outdoorTemp = temp + '°';
-  statusObj.outdoorHum = hum + '%';
+  try
+  {
+      const response = await superagent.get(
+      'http://api.weatherapi.com/v1/current.json?key=1e2e153b52cc4f3ca55212643222812&q=Cairo&aqi=no'
+    );
+    // console.log(response.body.current);
+    let temp = response.body.current.temp_c;
+    let hum = response.body.current.humidity;
+    statusObj.outdoorTemp = temp + '°';
+    statusObj.outdoorHum = hum + '%';
+  }
+  catch(error){/* Do Nothing */ console.log("No Internet");}
 };
 getWeather();
 setInterval(() => {

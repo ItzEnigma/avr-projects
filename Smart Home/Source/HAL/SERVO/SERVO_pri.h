@@ -13,7 +13,6 @@
 
 static u8 G_u8OvfCounts = 0;
 static u8 G_u8State = STATE_0;
-static u8 G_u8ISRcounter = 0;
 static u8 G_u8CurrentOVf = 0;
 
 static void stateHandler();

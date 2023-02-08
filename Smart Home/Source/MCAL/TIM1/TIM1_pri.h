@@ -58,7 +58,7 @@
 
 
 /**************   TIMER1 MAX COUNT   **************/
-#define TIMER1_MAX_COUNT (u16) 65535
+#define TIMER1_MAX_COUNT 	65535UL
 
 /**************   TIMER STATES   **************/
 #define TIMER_ENABLE 	0

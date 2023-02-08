@@ -64,10 +64,11 @@ void SERVO_vSetAngle(u8 A_u8Angle){
 }
 
 static void stateHandler(){
+	static u8 G_u8ISRcounter = 0;
 	G_u8ISRcounter ++;
 	if(G_u8ISRcounter == G_u8OvfCounts){	/*End of High Pulse*/
 		DIO_vSetPinVal(SERVO_PORT, SERVO_PIN, VAL_LOW);
-		TIM2_vSetPreload(224 - G_u8CurrentOVf);		/*Preload for the whole period (20ms) 
+		TIM2_vSetPreload(224 - G_u8CurrentOVf);		/*Preload for the whole period (20ms)
 													  subtracting the starting preload for each state*/
 	}
 	if(G_u8ISRcounter == MAX_OVF){							/*End of 20ms period*/

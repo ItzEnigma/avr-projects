@@ -15,19 +15,21 @@ void DCM_vInit(){
 	//DIO_vSetPinDir(IN1_PORT, IN1_PIN, DIR_OUTPUT);
 	//DIO_vSetPinDir(IN2_PORT, IN2_PIN, DIR_OUTPUT);
 	TIM1_vInit();
+	TIM1_vSetIcr1Val((u16)65530);
 	TIM1_vSetDutyCycleOC1B(TIMER_DUTY_CYCLE_25);
 }
 void DCM_vTurnOn(){
 	//DIO_vSetPinVal(IN1_PORT, IN1_PIN, VAL_HIGH);
 	//DIO_vSetPinVal(IN2_PORT, IN2_PIN, VAL_LOW);
-
+	TIM1_vOcr1bOn();
 	TIM1_vTurnOn();
 }
 void DCM_vTurnOff(){
 	//DIO_vSetPinVal(IN1_PORT, IN1_PIN, VAL_LOW);
 	//DIO_vSetPinVal(IN2_PORT, IN2_PIN, VAL_LOW);
-
-	TIM1_vTurnOn();
+	TIM1_vTurnOff();
+	TIM1_vOcr1bOff();
+	DIO_vSetPinVal(PORTD_ID, PIN4_ID, VAL_LOW);
 }
 void DCM_vSetDirection(u8 A_u8Dir){
 	switch(A_u8Dir) {

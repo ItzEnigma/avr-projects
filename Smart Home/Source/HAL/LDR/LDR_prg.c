@@ -8,6 +8,7 @@
 #include "../../LIB/STD_TYPES.h"
 #include "../../LIB/BIT_MATH.h"
 #include "../../MCAL/ADC/ADC_int.h"
+#include "../../MCAL/DIO/DIO_int.h"
 #include "LDR_cfg.h"
 #include "LDR_int.h"
 

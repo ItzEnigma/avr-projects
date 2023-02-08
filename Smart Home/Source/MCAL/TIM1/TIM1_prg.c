@@ -54,6 +54,17 @@ void TIM1_vTurnOn (){
 void TIM1_vTurnOff	(){
 	TCCR1B &= TIMER1_CLK_SELECT_MASK;
 	TCCR1B |= TIMER1_PRESCALER_NO_CLK;
+	DIO_vSetPinVal(OC1B_PORT, OC1B_PIN, VAL_LOW);
+}
+
+void TIM1_vOcr1bOn(){
+	TCCR1A |= (1<<COM1B1);
+	TCCR1A &= ~(1<<COM1B0);
+}
+
+void TIM1_vOcr1bOff(){
+	TCCR1A &= ~(1<<COM1B1);
+	TCCR1A &= ~(1<<COM1B0);
 }
 
 /**********************************************************************************************************
