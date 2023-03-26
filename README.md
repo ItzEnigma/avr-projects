@@ -1,42 +1,43 @@
-# AVR-Applications
+# AVR Projects
 
-This repo contain various GUI projects based on ATmega32 microcontroller.
+This repo contains various projects and applications based on ATmega32 microcontroller and their corresponding web-applications.
 
+---
 # 1-Smart Home project
 
-A GUI based smart home that enable the user to monitor and control his home using the GUI.
+A GUI based smart home that enable the user to monitor and control his home remotely using web-application.
 
 ## Features
 
-### 1- GUI features
-a) User can monitor indoor temprature
+### 1- Web-Application Features
+__a)__ User can monitor indoor temprature
 
-b) User can monitor and control Door lock
+__b)__ User can monitor and control Door lock
 
-c) User can monitor and control Fan status
+__c)__ User can monitor and control Fan status
 
-d) User can change Door lock password
+__d)__ User can change Door lock password
 
-e) User can change light intensity of the home
+__e)__ User can change light intensity of the home
 
-f) User can control his electrical devices
+__f)__ User can control his electrical devices
 
-g) User can see the current weather status
+__g)__ User can see the current weather status
 
-### 2- Embedded systems features
-a) Communication is wirelessly using HC-12 module
+### 2- Embedded System Features
+__a)__ Communication is wirelessly using HC-12 module
 
-b) User can enter the door lock password using a keypad
+__b)__ User can enter the door lock password using a keypad
 
-c) User can interact using LCD 2*16
+__c)__ User can interact using LCD 2*16
 
-d) Fan can be manually controlled or automatically controlled using indoor temprature of the LM35 sensor. Speed is set using PWM of the timer
+__d)__ Fan can be manually controlled or automatically controlled using indoor temprature of the LM35 sensor. Speed is set using PWM of the timer
 
-e) Light can be manually controlled or automatically controlled using indoor light intensity of the LDR 
+__e)__ Light can be manually controlled or automatically controlled using indoor light intensity of the LDR 
 
-f) Electrical devices control is done by using a relay
+__f)__ Electrical devices control is done by using a relay
 
-g) Password is saved on the internal EEPROM of the microcontroller
+__g)__ Password is saved on the internal EEPROM of the microcontroller
 
 
 
