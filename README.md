@@ -8,6 +8,7 @@ Smart Home Project using ATmega32 drivers and web-application. In addition to im
 # 1-Smart Home project
 
 A GUI based smart home that enable the user to monitor and control his home remotely using web-application and only one microcontroller _(ATmega32)_.
+The smart home implemented has various features for both automatic and manual control (remotely).
 
 # 2-Computer Interface Experiments
 
@@ -20,7 +21,7 @@ Implementing various experiments with ATmega32 microcontroller and using a web-a
 ---
 # Smart Home project
 
-A GUI based smart home that enable the user to monitor and control his home remotely using web-application.
+A GUI based smart home that enable the user to monitor and control his home remotely using web-application and only one microcontroller _(ATmega32)_.
 
 ## Features
 
