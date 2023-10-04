@@ -1,7 +1,7 @@
 ---
 # Smart Home project
 
-A GUI based smart home that enable the user to monitor and control his home remotely using web-application.
+A GUI based smart home that enable the user to monitor and control his home remotely using web-application and only one microcontroller _(ATmega32)_.
 
 ## Features
 
