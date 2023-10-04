@@ -1,6 +1,9 @@
-# AVR Projects
+# Introduction
 
-This repo contains various projects and applications based on ATmega32 microcontroller and their corresponding web-applications.
+#### This Repo contains various projects and applications based on ATmega32 microcontroller and their corresponding web-applications.
+Smart Home Project using ATmega32 drivers and web-application. In addition to implementing various experiments such as Logic Analyzer & Oscilloscope, ...
+#### [AVR Experiments](https://github.com/ItzEnigma/avr-projects/tree/main/Experiments)
+#### [Smart Home](#1-smart-home-project)
 
 ---
 # 1-Smart Home project
@@ -24,8 +27,10 @@ __f)__ User can control his electrical devices
 
 __g)__ User can see the current weather status
 
+__h)__ User can use voice commands to control the house _(as a form of smart assistance)_
+
 ### 2- Embedded System Features
-__a)__ Communication is wirelessly using HC-12 module
+__a)__ Communication is wirelessly using HC-12 _(Half-Duplex Wiresless 433.4-473.0 MHz RF module)_
 
 __b)__ User can enter the door lock password using a keypad
 
@@ -35,10 +40,22 @@ __d)__ Fan can be manually controlled or automatically controlled using indoor t
 
 __e)__ Light can be manually controlled or automatically controlled using indoor light intensity of the LDR 
 
-__f)__ Electrical devices control is done by using a relay
+__f)__ Electrical devices control is done by using a relay, which are controlled remotely from the application.
 
 __g)__ Password is saved on the internal EEPROM of the microcontroller
 
+__h)__ Door can be locked/unlocked remotely using servo motor _(simulating door lock)_
+
+#### Interfacing With:
+|   LCD  	| Keypad 	|  Servo Motor 	|
+|:------:	|:------:	|:------------:	|
+|  **LM35**  	|   **LDR**  	|   **DC Motor**   	|
+| **Buzzer** 	|  **HC12**  	| **Relay & Lamp** 	|
+
+#### Peripherals:
+|  DIO 	| Timers 	| EEPROM 	| ADC 	|
+|:----:	|:------:	|:------:	|:---:	|
+| **EXTI** 	|  **UART**  	|   **WDT**  	|     	|
 
 
 
