@@ -1,18 +1,18 @@
 # Introduction
 
-#### This Repo contains various projects and applications based on ATmega32 microcontroller and their corresponding web-applications.
-Smart Home Project using ATmega32 drivers and web-application. In addition to implementing various experiments such as Logic Analyzer & Oscilloscope, ... **further details and the code are in the below links**
+#### This Repo contains various projects and applications based on the ATmega32 microcontroller and their corresponding web applications.
+Smart Home Project using ATmega32 drivers and web application. In addition to implementing various experiments such as Logic Analyzer & Oscilloscope, ... **further details and the code are in the below links**
 #### [Smart Home](https://github.com/ItzEnigma/avr-projects/tree/main/Smart%20Home)
 #### [AVR Experiments](https://github.com/ItzEnigma/avr-projects/tree/main/Experiments)
 ---
 # 1-Smart Home project
 
-A GUI based smart home that enable the user to monitor and control his home remotely using web-application and only one microcontroller _(ATmega32)_.
+A GUI-based smart home that enables the user to monitor and control his home remotely using a web application and only one microcontroller _(ATmega32)_.
 The smart home implemented has various features for both automatic and manual control (remotely).
 
 # 2-Computer Interface Experiments
 
-Implementing various experiments with ATmega32 microcontroller and using a web-application for visualization and control.
+Implementing various experiments with ATmega32 microcontroller and using a web application for visualization and control.
 
 - SW Debugger
 - Wave Generator
@@ -21,12 +21,12 @@ Implementing various experiments with ATmega32 microcontroller and using a web-a
 ---
 # Smart Home project
 
-A GUI based smart home that enable the user to monitor and control his home remotely using web-application and only one microcontroller _(ATmega32)_.
+A GUI-based smart home that enables the user to monitor and control his home remotely using a web application and only one microcontroller _(ATmega32)_.
 
 ## Features
 
 ### 1- Web-Application Features
-__a)__ User can monitor indoor temprature
+__a)__ User can monitor indoor temperature
 
 __b)__ User can monitor and control Door lock
 
@@ -43,15 +43,15 @@ __g)__ User can see the current weather status
 __h)__ User can use voice commands to control the house _(as a form of smart assistance)_
 
 ### 2- Embedded System Features
-__a)__ Communication is wirelessly using HC-12 _(Half-Duplex Wiresless 433.4-473.0 MHz RF module)_
+__a)__ Communication is wirelessly using HC-12 _(Half-Duplex Wireless 433.4-473.0 MHz RF module)_
 
 __b)__ User can enter the door lock password using a keypad
 
 __c)__ User can interact using LCD 2*16
 
-__d)__ Fan can be manually controlled or automatically controlled using indoor temprature of the LM35 sensor. Speed is set using PWM of the timer
+__d)__ Fan can be manually controlled or automatically controlled using the indoor temperature of the LM35 sensor. Speed is set using the PWM of the timer
 
-__e)__ Light can be manually controlled or automatically controlled using indoor light intensity of the LDR 
+__e)__ Light can be manually controlled or automatically controlled using the indoor light intensity of the LDR 
 
 __f)__ Electrical devices control is done by using a relay, which are controlled remotely from the application.
 
